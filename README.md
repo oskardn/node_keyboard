@@ -9,13 +9,13 @@ Projet destiné à envoyé des hotkeys à un ordinateur depuis son téléphone.
 Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 
 ```console
-    git clone https://github.com/oskardrevetnitschke/node_keyboard
+git clone https://github.com/oskardrevetnitschke/node_keyboard
 ```
 
 Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y le module node-key-sender avec la commande suivante:
 
 ```console
-    npm install
+npm install sendinput
 ```    
 
 ## Lancement de l'instance
@@ -25,11 +25,11 @@ Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et a
 Pour exécuter le programme rendez vous dans le dossier du projet et faites:
 
 ```console
-    node server.js
+node server.js
 ```
 
 ou 
 
 ```console
-    npm start
+npm start
 ```
