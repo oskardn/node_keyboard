@@ -16,7 +16,10 @@ Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et a
 
 ```console
 npm install sendinput
-```    
+```
+
+Pensez à lire les prérequis avant d'installer la librairie `sendinput` avant de lancer le script.
+[https://www.npmjs.com/package/node-gyp#installation](https://www.npmjs.com/package/node-gyp#installation)
 
 ## Lancement de l'instance
 
