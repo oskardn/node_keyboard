@@ -22,6 +22,8 @@ Pensez à lire les prérequis en fonction de votre système d'exploitation avant
 [Lien vers la documentation](https://www.npmjs.com/package/node-gyp#installation)  
   
 [Unix](https://www.npmjs.com/package/node-gyp#on-unix)
+[MacOS](https://www.npmjs.com/package/node-gyp#on-macos)
+[Windows](https://www.npmjs.com/package/node-gyp#on-windows)
 
 ## Lancement de l'instance
 
