@@ -1,6 +1,7 @@
 # node_keyboard
 
-Projet destiné à envoyé des hotkeys à un ordinateur depuis son téléphone.
+Projet destiné à envoyer des hotkeys à un ordinateur depuis son téléphone.  
+En cours de dev
 
 ## Installation
 
@@ -22,13 +23,17 @@ Pensez à lire les prérequis en fonction de votre système d'exploitation avant
   
 En effet la librairie [**sendinput**](https://www.npmjs.com/package/sendinput) est dépendante de [**node-gyp**](https://www.npmjs.com/package/node-gyp) qui nécessite une version de Python supérieure ou égale à 3.6 ainsi qu'un compilateur C/C++.  
   
-Python:  
+Python :  
 
-Windows: Soit vous téléchargez l'exécutable depuis le site officiel de [**Python**](https://www.python.org/downloads/). Soit vous téléchargez Python directement depuis le [**Microsoft Store**](ms-windows-store:).
+Windows: Soit vous téléchargez l'exécutable depuis le site officiel de [**Python**](https://www.python.org/downloads/). Soit vous téléchargez Python directement depuis le [**Microsoft Store**]().
 
-Pour plus d'explications vous retrouverez la documentation ci dessous:  
+Compilateur C/C++ :  
+
+Pour installer le compilateur C/C++, installez d'abord [**Visual Studio Community**](https://visualstudio.microsoft.com/fr/). Ensuite lors de l'installation ajoutez `Desktop development with C++` (ou `Développement Desktop en C++` si vous avez l'installateur français) dans les paramètres d'installation.  
+
+Une fois ces étapes suivies, vous devriez être en mesure d'utiliser le projet correctement. Si vous avez d'éventuelles questions, n'hésitez pas à lire la documentation ci dessous (attention elle est en anglais) :
      
-[**Windows**](https://www.npmjs.com/package/node-gyp#on-windows) 
+[**Documentation**](https://www.npmjs.com/package/node-gyp#on-windows) 
 
 ## Lancement de l'instance
 
@@ -50,27 +55,28 @@ npm start
 
 ---
 
-Pour Windows, vous pouvez retrouver la liste des keycodes à l'adresse suivante: [Lien](https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)  
+Pour Windows, vous pouvez retrouver la liste des keycodes à l'adresse suivante :  
+[Keycodes](https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)  
 
 Il vous suffit de soit prendre la valeur hexadecimale de type : `0xB1`, soit de convertir la valeur hexadecimale en décimale `0xB1 <-> 177`, ou encore créer une variable avec le code hexadecimal ou décimal :  
 
 Exemple:  
 
-Hex
+Hex :
 ```javascript
 sendInput.SendInput
 ([
     {val: 0xB1, type: 0 }
 ]);
 ```
-Dec
+Dec :
 ```javascript
 sendInput.SendInput
 ([
     {val: 177, type: 0 }
 ]);
 ```
-Hex & Dec
+Hex & Dec :
 ```javascript
 const INPUT_DEC = 177, INPUT_HEX = 0xB1;
 
@@ -84,3 +90,8 @@ sendInput.SendInput
     {val: INPUT_HEX, type: 0 }
 ]);
 ```
+
+## Contributeurs
+
+---
+[![](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
