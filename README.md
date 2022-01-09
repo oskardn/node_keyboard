@@ -30,6 +30,7 @@ Windows: Soit vous téléchargez l'exécutable depuis le site officiel de [**Pyt
 Compilateur C/C++ :  
 
 Pour installer le compilateur C/C++, installez d'abord [**Visual Studio Community**](https://visualstudio.microsoft.com/fr/). Ensuite lors de l'installation ajoutez `Desktop development with C++` (ou `Développement Desktop en C++` si vous avez l'installateur français) dans les paramètres d'installation.  
+![](https://sikelio.s-ul.eu/PScB0BZL)
 
 Une fois ces étapes suivies, vous devriez être en mesure d'utiliser le projet correctement. Si vous avez d'éventuelles questions, n'hésitez pas à lire la documentation ci dessous (attention elle est en anglais) :
      
