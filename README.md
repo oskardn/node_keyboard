@@ -13,8 +13,11 @@ Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 git clone https://github.com/oskardrevetnitschke/node_keyboard
 ```
 
-Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y le module node-key-sender avec la commande suivante:
+Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com) et [**sendinput**](https://www.npmjs.com/package/sendinput) avec les commandes suivantes :
 
+```console
+npm install express
+```
 ```console
 npm install sendinput
 ```
@@ -51,6 +54,19 @@ ou
 ```console
 npm start
 ```
+## Accéder à l'interface
+
+---
+
+Une fois le serveur lancé, rendez vous sur [localhost:3000](http://localhost:3000) sauf si vous avez changé le port dans le fichier `server.js`.  
+Vous devriez avoir une interface de ce style qui devrait s'afficher :  
+
+![](https://sikelio.s-ul.eu/bOPAmKH6)  
+Les boutons indique déjà les actions que vous pouvez faire.  
+
+Premier bouton : Piste audio précédente  
+Deuxième bouton : Mettre en plause ou continuer la piste audio  
+Troisième Bouton : Piste audio suivante
 
 ## Changer les macros
 
