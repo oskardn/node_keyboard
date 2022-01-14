@@ -1,31 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <title>Node Keyboard</title>
-    </head>
-    <body>
-        <style>
-            form {
-                display: inline;
-            }
-        </style>
-        <form action="/prev" method="post">
-            <button>
-                <span class="iconify-inline" data-icon="bx:bxs-skip-previous-circle" data-width="64" data-height="64"></span>
-            </button>
-        </form>
-        <form action="/playpause" method="post">
-            <button>
-                <span class="iconify-inline" data-icon="ant-design:play-circle-filled" data-width="64" data-height="64"></span>
-                <span class="iconify-inline" data-icon="ant-design:pause-circle-filled" data-width="64" data-height="64"></span>
-            </button>
-        </form>
-        <form action="/next" method="post">
-            <button>
-                <span class="iconify-inline" data-icon="bx:bxs-skip-next-circle" data-width="64" data-height="64"></span>
-            </button>
-        </form>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Node Keyboard Socket</title>
+</head>
+<body>
+    <style>
+        form {
+            display: inline;
+        }
+    </style>
+    <center>
+        <button id="prev" data-action="prev">
+            <span class="iconify-inline" data-icon="bx:bxs-skip-previous-circle" data-width="64" data-height="64"></span>
+        </button>
+        <button id="playpause" data-action="playpause">
+            <span class="iconify-inline" data-icon="ant-design:play-circle-filled" data-width="64" data-height="64"></span>
+            <span class="iconify-inline" data-icon="ant-design:pause-circle-filled" data-width="64" data-height="64"></span>
+        </button>
+        <button id="next" data-action="next">
+            <span class="iconify-inline" data-icon="bx:bxs-skip-next-circle" data-width="64" data-height="64"></span>
+        </button>
+    </center>
+</body>
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+       // let socket = io();
+
+        let buttons = document.getElementsByTagName('button');
+        for (let i = 0; i < buttons.length; i++) {
+            let button = buttons[i];
+            
+            button.addEventListener('click', (event) => {
+                console.error(button);
+            });
+        }
+
+
+
+        /*let prev = document.getElementById('previoussong');
+        let prevValue = document.getElementById('prev');
+
+        let playpause = document.getElementById('playpausesong');
+        let playpauseValue = document.getElementById('playpause');
+
+        let next = document.getElementById('nextsong');
+        let nextValue = document.getElementById('next');
+
+        prev.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (prevValue.value) {
+                socket.emit('action', prevValue.value);
+            }
+        });
+        playpause.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (playpauseValue.value) {
+                socket.emit('action', playpauseValue);
+            }
+        });
+        next.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (nextValue.value) {
+                socket.emit('action', nextValue);
+            }
+        });*/
+    </script>
 </html>

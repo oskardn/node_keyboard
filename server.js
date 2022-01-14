@@ -1,48 +1,45 @@
 let express = require('express');
-let path = require('path');
+let app = express();
+let http = require('http');
+let server = http.createServer(app);
+let { Server } = require('socket.io');
+let io = new Server(server);
 let sendInput = require('sendinput');
 
-let app = express();
 let port = 3000;
+const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
 
-/**
- * Variables
- */
-const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179; //MEDIA_STOP = 178,;
-
-/**
- * Redirection vers l'interface web
- */
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(__dirname + '/index.html');
 });
 
-/**
- * Envoi de données
- */
-app.post('/prev', (req, res) => {
-    sendInput.SendInput
-    ([
-        {val: MEDIA_PREV, type: 0 }
-    ]);
-    res.redirect('back');
-});
-app.post('/playpause', (req, res) => {
-    sendInput.SendInput
-    ([
-        {val: MEDIA_PLAY_PAUSE, type: 0 }
-    ]);
-    res.redirect('back');
-});
-app.post('/next', (req, res) => {
-    sendInput.SendInput
-    ([
-        {val: MEDIA_NEXT, type: 0 }
-    ]);
-    res.redirect('back');
+io.on('connection', (socket) => {
+    socket.on('action', (action) => {
+        let actionCode;
+        switch (action) {
+            case 'prev':
+                actionCode = MEDIA_PREV;
+                break;
+            case 'playpause':
+                actionCode = MEDIA_PLAY_PAUSE;
+                break;
+            case 'next':
+                actionCode = MEDIA_NEXT;
+                break;
+            default:
+                return;
+                break;
+                
+        }
+        sendInput.SendInput([
+            {
+                val: actionCode,
+                type: 0
+            }
+        ])
+    });
 });
 
-/**
- * Écoute du port
- */
-app.listen(port);
+server.listen(port, () => {
+    console.log(`Écoute sur le port localhost:${port}`);
+});

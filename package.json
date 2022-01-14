@@ -1,26 +1,16 @@
 {
+  "name": "node_keyboard_socket",
+  "version": "1.1.0",
+  "description": "node_keyboard projet but with websocket",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "author": "Sik'",
+  "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
-    "sendinput": "^0.2.0"
-  },
-  "scripts": {
-    "start": "node server.js"
-  },
-  "name": "node_keyboard",
-  "description": "Projet destiné à envoyé des hotkeys à un ordinateur depuis son téléphone.",
-  "version": "1.0.0",
-  "main": "server.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/oskardrevetnitschke/node_keyboard.git"
-  },
-  "author": "Oskar Drevet Nitschke",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/oskardrevetnitschke/node_keyboard/issues"
-  },
-  "homepage": "https://github.com/oskardrevetnitschke/node_keyboard#readme",
-  "devDependencies": {
-    "node-gyp": "^8.4.1"
+    "sendinput": "^0.2.0",
+    "socket.io": "^4.4.1"
   }
 }
