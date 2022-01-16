@@ -30,7 +30,7 @@
             <span class="iconify-inline" data-icon="bx:bxs-skip-next-circle" data-width="64" data-height="64"></span>
         </button>
         <br>
-        <input id="volume" type="range" min="0" max="100" step="5">
+        <input id="volume" type="range" min="0" max="100" step="1">
         <br>
         <input type="text" name="" id="volume_value" readonly>
         <span>Volume</span>
@@ -42,8 +42,8 @@
     <script>
         let socket = io();
 
-        socket.on('volume state', (volume_state) => {
-            $('#volume').val(volume_state);
+        socket.on('volume state', (val) => {
+            $('#volume').val(parseInt(val));
         })
 
         let buttons = document.getElementsByTagName('button');
@@ -61,7 +61,7 @@
 
             slider.addEventListener('change', (slide) => {
                 socket.emit('volume', slider.value);
-                $('#volume_value').val(slider.value);
+                $('#volume_value').val(parseInt(slider.value));
             })
         }      
     </script>

@@ -17,7 +17,6 @@ let audio = require('win-audio').speaker;
  * 2 - Keycodes Windows
  */
 let port = 3000;
-
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
 
 /**
