@@ -19,7 +19,6 @@ let audio = require('win-audio').speaker;
 let port = 3000;
 
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
-const VOLUME_UP = 175, VOLUME_DOWN = 174;
 
 /**
  * Redirection vers la page web
@@ -79,7 +78,8 @@ io.on('connection', (socket) => {
                 break;
             default:
                 if (volume >= 0 && volume <= 100) {
-                    console.log('Calcul à éffectuer');
+                    console.log(volume);
+                    audio.set(parseInt(volume));
                 } else {
                     return;
                 }

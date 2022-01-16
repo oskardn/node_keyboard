@@ -7,8 +7,15 @@
 </head>
 <body>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
         form {
             display: inline;
+        }
+        #volume_value {
+            text-align: center;
+            width: 2.5%;
         }
     </style>
     <center>
@@ -24,6 +31,9 @@
         </button>
         <br>
         <input id="volume" type="range" min="0" max="100" step="5">
+        <br>
+        <input type="text" name="" id="volume_value" readonly>
+        <span>Volume</span>
     </center>
 </body>
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
@@ -50,8 +60,8 @@
             let slider = sliders[i];
 
             slider.addEventListener('change', (slide) => {
-                console.error(slider.value);
                 socket.emit('volume', slider.value);
+                $('#volume_value').val(slider.value);
             })
         }      
     </script>
