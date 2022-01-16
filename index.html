@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Node Keyboard Socket</title>
+    <link rel="shortcut icon" href="https://nodejs.org/static/images/logo.svg" type="image/x-icon">
 </head>
 <body>
     <style>
@@ -21,50 +22,37 @@
         <button id="next" data-action="next">
             <span class="iconify-inline" data-icon="bx:bxs-skip-next-circle" data-width="64" data-height="64"></span>
         </button>
+        <br>
+        <input id="volume" type="range" min="0" max="100" step="5">
     </center>
 </body>
     <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-       // let socket = io();
+        let socket = io();
+
+        socket.on('volume state', (volume_state) => {
+            $('#volume').val(volume_state);
+        })
 
         let buttons = document.getElementsByTagName('button');
         for (let i = 0; i < buttons.length; i++) {
             let button = buttons[i];
             
             button.addEventListener('click', (event) => {
-                console.error(button);
+                socket.emit('action', button.dataset.action);
             });
         }
 
+        let sliders = document.getElementsByTagName('input');
+        for (let i = 0; i < sliders.length; i++) {
+            let slider = sliders[i];
 
-
-        /*let prev = document.getElementById('previoussong');
-        let prevValue = document.getElementById('prev');
-
-        let playpause = document.getElementById('playpausesong');
-        let playpauseValue = document.getElementById('playpause');
-
-        let next = document.getElementById('nextsong');
-        let nextValue = document.getElementById('next');
-
-        prev.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (prevValue.value) {
-                socket.emit('action', prevValue.value);
-            }
-        });
-        playpause.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (playpauseValue.value) {
-                socket.emit('action', playpauseValue);
-            }
-        });
-        next.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (nextValue.value) {
-                socket.emit('action', nextValue);
-            }
-        });*/
+            slider.addEventListener('change', (slide) => {
+                console.error(slider.value);
+                socket.emit('volume', slider.value);
+            })
+        }      
     </script>
 </html>

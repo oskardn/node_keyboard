@@ -1,7 +1,7 @@
 # node_keyboard
 
-Projet destiné à envoyer des hotkeys à un ordinateur depuis son téléphone.  
-En cours de dev
+Projet destiné à pouvoir controller l'audio de son pc depuis son téléphone.  
+Ce projet fonctionne seulement sur Windows, puisque la librairie utilisée pour l'envois de macros est utilisatble uniquement par Windows.
 
 ## Installation
 
@@ -13,22 +13,19 @@ Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 git clone https://github.com/oskardrevetnitschke/node_keyboard
 ```
 
-Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com) et [**sendinput**](https://www.npmjs.com/package/sendinput) avec les commandes suivantes :
+Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**]() et [**win-audio**]() avec la commandes suivante :
 
 ```console
-npm install express
-```
-```console
-npm install sendinput
+npm install express sendinput socket.io win-audio
 ```
 
-Pensez à lire les prérequis en fonction de votre système d'exploitation avant d'installer la librairie [**sendinput**](https://www.npmjs.com/package/sendinput) avant de lancer le script.  
+Pensez à lire les prérequis en fonction de votre système d'exploitation avant d'installer les librairies.  
   
-En effet la librairie [**sendinput**](https://www.npmjs.com/package/sendinput) est dépendante de [**node-gyp**](https://www.npmjs.com/package/node-gyp) qui nécessite une version de Python supérieure ou égale à 3.6 ainsi qu'un compilateur C/C++.  
+En effet certaines librairies sont dépendantes de [**node-gyp**](https://www.npmjs.com/package/node-gyp) qui nécessite une version de Python supérieure ou égale à 3.6 ainsi qu'un compilateur C/C++.  
   
 Python :  
 
-Windows: Soit vous téléchargez l'exécutable depuis le site officiel de [**Python**](https://www.python.org/downloads/). Soit vous téléchargez Python directement depuis le [**Microsoft Store**]().
+Soit vous téléchargez l'exécutable depuis le site officiel de [**Python**](https://www.python.org/downloads/). Soit vous téléchargez Python directement depuis le [**Microsoft Store**]().
 
 Compilateur C/C++ :  
 
@@ -73,7 +70,7 @@ Troisième Bouton : Piste audio suivante
 
 ---
 
-Pour Windows, vous pouvez retrouver la liste des keycodes à l'adresse suivante :  
+Vous pouvez retrouver la liste des keycodes à l'adresse suivante :  
 [Keycodes](https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes)  
 
 Il vous suffit de soit prendre la valeur hexadecimale de type : `0xB1`, soit de convertir la valeur hexadecimale en décimale `0xB1 <-> 177`, ou encore créer une variable avec le code hexadecimal ou décimal :  
@@ -112,4 +109,4 @@ sendInput.SendInput
 ## Contributeurs
 
 ---
-[![](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
+[![Sikelio, Anthony Bosco](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
