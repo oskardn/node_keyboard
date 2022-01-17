@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/nodejs-14.17.0-brightgreen) ![](https://img.shields.io/badge/npm-6.14.13-brightgreen)  
+![](https://img.shields.io/badge/node_keyboard-1.1.0-blue)  
 ![](https://img.shields.io/badge/express-4.17.2-red) ![](https://img.shields.io/badge/sendinput-0.2.0-red) ![](https://img.shields.io/badge/socket.io-4.4.1-red) ![](https://img.shields.io/badge/winaudio-2.0.2-red)
 
 # node_keyboard

@@ -29,6 +29,9 @@
         <button id="next" data-action="next">
             <span class="iconify-inline" data-icon="bx:bxs-skip-next-circle" data-width="64" data-height="64"></span>
         </button>
+        <button id="quit" data-action="quit">
+            <span class="iconify-inline" data-icon="emojione-monotone:cross-mark" data-width="64" data-height="64"></span>
+        </button>
         <br>
         <input id="volume" type="range" min="0" max="100" step="1">
         <br>
@@ -42,9 +45,11 @@
     <script>
         let socket = io();
 
-        socket.on('volume state', (val) => {
-            $('#volume').val(parseInt(val));
-        })
+        socket.on('volume change', (volchange) => {
+            console.log(volchange);
+            $('#volume_value').val(volchange);
+            $('#volume').val(volchange);
+        });
 
         let buttons = document.getElementsByTagName('button');
         for (let i = 0; i < buttons.length; i++) {
@@ -53,7 +58,7 @@
             button.addEventListener('click', (event) => {
                 socket.emit('action', button.dataset.action);
             });
-        }
+        };
 
         let sliders = document.getElementsByTagName('input');
         for (let i = 0; i < sliders.length; i++) {
@@ -62,7 +67,7 @@
             slider.addEventListener('change', (slide) => {
                 socket.emit('volume', slider.value);
                 $('#volume_value').val(parseInt(slider.value));
-            })
-        }      
+            });
+        };
     </script>
 </html>

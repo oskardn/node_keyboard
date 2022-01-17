@@ -16,7 +16,7 @@ let audio = require('win-audio').speaker;
  * 1 - Port
  * 2 - Keycodes Windows
  */
-let port = 3000;
+const PORT = 3000;
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
 
 /**
@@ -42,11 +42,14 @@ io.on('connection', (socket) => {
             case 'next':
                 actionCode = MEDIA_NEXT;
                 break;
+            case 'quit':
+                process.exit();
+                break;
             default:
                 return;
                 break;
                 
-        }
+        };
         sendInput.SendInput([
             {
                 val: actionCode,
@@ -62,7 +65,7 @@ io.on('connection', (socket) => {
     audio.polling(200);
 
     audio.events.on('change', (val) => {
-        socket.emit('volume state', val.new);
+        socket.emit('volume change', val.new);
     });
 
     /**
@@ -83,13 +86,13 @@ io.on('connection', (socket) => {
                     return;
                 }
                 break;
-        }
+        };
     });
 });
 
 /**
  * Port sur lequel écouter
  */
-server.listen(port, () => {
-    console.log(`Écoute sur le port: ${port}`);
+server.listen(PORT, () => {
+    console.log(`Écoute sur le port: ${PORT}`);
 });
