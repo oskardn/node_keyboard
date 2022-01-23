@@ -42,9 +42,6 @@ io.on('connection', (socket) => {
             case 'next':
                 actionCode = MEDIA_NEXT;
                 break;
-            case 'quit':
-                process.exit();
-                break;
             default:
                 return;
                 break;
