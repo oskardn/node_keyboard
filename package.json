@@ -10,12 +10,13 @@
   "author": "Oskar Drevet Nitschke",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "sendinput": "^0.2.0",
     "socket.io": "^4.4.1",
     "win-audio": "^2.0.2"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/oskardrevetnitschke/node_keyboard.git"

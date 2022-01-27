@@ -1,23 +1,37 @@
 /**
  * Librairie à importer
  */
-let express = require('express');
-let app = express();
-let http = require('http');
-let server = http.createServer(app);
-let { Server } = require('socket.io');
-let io = new Server(server);
-let sendInput = require('sendinput');
-let audio = require('win-audio').speaker;
+require('dotenv').config()
+
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server);
+const jwt = require('jsonwebtoken');
+const sendInput = require('sendinput');
+const audio = require('win-audio').speaker;
 
 /**
  * Variables
  * 
  * 1 - Port
  * 2 - Keycodes Windows
+ * 3 - Token
  */
 const PORT = 3000;
+
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
+
+let token = jwt.sign({
+        oskar: process.env.JWT_PASS
+    },
+    process.env.JWT_SALT, {
+        expiresIn: 60
+    });
+
+let decoded = jwt.verify(token, process.env.JWT_SALT);
 
 /**
  * Redirection vers la page web
@@ -27,9 +41,19 @@ app.get('/', (req, res) => {
 });
 
 /**
- * Écoute de l'action des boutons prev/play/pause/next
+ * Verification token
+ */
+jwt.verify(token, process.env.JWT_SALT, (err, decoded) => {
+    console.log(token);
+});
+
+/**
+ * Écoute des évenement lorsque quelqu'un est connecté
  */
 io.on('connection', (socket) => {
+    /**
+     * Écoute de l'action des boutons prev/play/pause/next
+     */
     socket.on('action', (action) => {
         let actionCode;
         switch (action) {
@@ -77,7 +101,6 @@ io.on('connection', (socket) => {
                 break;
             default:
                 if (volume >= 0 && volume <= 100) {
-                    console.log(volume);
                     audio.set(parseInt(volume));
                 } else {
                     return;
