@@ -41,28 +41,42 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         let socket = io();
+        let token;
+
+        socket.emit('token', token);
+
+        socket.on('auth', () => {
+            window.location.href = '/auth'
+        })
 
         socket.on('volume change', (volchange) => {
-            console.log(volchange);
             $('#volume_value').val(volchange);
             $('#volume').val(volchange);
         });
 
-        let buttons = document.getElementsByTagName('button');
+        let buttons = $('button');
         for (let i = 0; i < buttons.length; i++) {
             let button = buttons[i];
             
             button.addEventListener('click', (event) => {
-                socket.emit('action', button.dataset.action);
+                socket.emit('action', 
+                {
+                    "action": button.dataset.action,
+                    "token": token
+                });
             });
         };
 
-        let sliders = document.getElementsByTagName('input');
+        let sliders = $('input');
         for (let i = 0; i < sliders.length; i++) {
             let slider = sliders[i];
 
             slider.addEventListener('change', (slide) => {
-                socket.emit('volume', slider.value);
+                socket.emit('volume',
+                {
+                    "volume": slider.value,
+                    "token": token
+                });
                 $('#volume_value').val(parseInt(slider.value));
             });
         };
