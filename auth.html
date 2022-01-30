@@ -7,11 +7,16 @@
     <title>Auth</title>
 </head>
 <body>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
     <span>Vous n'avez le bon token</span>
     <br><br>
-    <form action="/" method="post">
+    <form action="/token" method="post">
         <label for="token">Token</label>
-        <input type="text" name="token">
+        <input type="password" name="token">
         <input type="submit" value="Envoyer">
     </form>
 </body>

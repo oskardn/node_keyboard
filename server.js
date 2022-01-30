@@ -9,10 +9,12 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(server);
+
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+
 const sendInput = require('sendinput');
 const audio = require('win-audio').speaker;
-const res = require('express/lib/response');
 
 /**
  * Variables
@@ -25,14 +27,17 @@ const PORT = process.env.APP_PORT;
 
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
 
-let token = jwt.sign({
-        oskar: process.env.JWT_PASS
+let tokencrypt = jwt.sign(
+    {
+        token: process.env.JWT_PASS
     },
-    process.env.JWT_SALT, {
-        expiresIn: 60*60
-    });
+    process.env.JWT_SALT,
+    {
+        expiresIn: 60
+    }
+);
 
-let decoded = jwt.verify(token, process.env.JWT_SALT);
+let decoded = jwt.verify(tokencrypt, process.env.JWT_SALT);
 
 /**
  * Redirection vers la page web
@@ -45,13 +50,18 @@ app.get('/auth', (req, res) => {
     res.sendFile(__dirname + '/auth.html');
 });
 
-/**
- * Verification token
- */
-/*jwt.verify(token, process.env.JWT_SALT, (err, decoded) => {
-    console.log(token);
-    console.log(decoded);
-});*/
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.post('/token', (req, res) => {
+    let tokenSend = req.body.token;
+    if (tokenSend == process.env.JWT_PASS) {
+        res.redirect(`/?token=${tokencrypt}`);
+    } else {
+        res.redirect('/auth');
+    }
+});
 
 /**
  * Écoute des évenement lorsque quelqu'un est connecté
@@ -59,10 +69,9 @@ app.get('/auth', (req, res) => {
 io.on('connection', (socket) => {
 
     socket.on('token', (token) => {
-        if (token == process.env.JWT_PASS) {
-            console.log('GOOD');
+        if (token == process.env.JWT_PASS || token == decoded.token) {
+            // Tache fini
         } else {
-            console.log('BAD');
             socket.emit('auth')
         }
     });
