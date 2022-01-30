@@ -1,16 +1,42 @@
 {
-  "name": "node_keyboard_socket",
-  "version": "1.1.0",
+  "name": "node_keyboard",
+  "version": "1.1.1",
   "description": "node_keyboard projet but with websocket",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js"
+    "test": "node server.js",
+    "start": "node server.js"
   },
-  "author": "Sik'",
+  "author": "Oskar Drevet Nitschke",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.1",
+    "dotenv": "^14.3.2",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "sendinput": "^0.2.0",
-    "socket.io": "^4.4.1"
-  }
+    "socket.io": "^4.4.1",
+    "win-audio": "^2.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oskardrevetnitschke/node_keyboard.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "noed",
+    "expressjs",
+    "macros",
+    "key",
+    "node-js",
+    "macro",
+    "keysender",
+    "audio",
+    "node-audio"
+  ],
+  "bugs": {
+    "url": "https://github.com/oskardrevetnitschke/node_keyboard/issues"
+  },
+  "homepage": "https://github.com/oskardrevetnitschke/node_keyboard#readme"
 }
