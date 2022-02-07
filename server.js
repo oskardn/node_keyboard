@@ -15,6 +15,7 @@ const bodyParser = require('body-parser');
 
 const sendInput = require('sendinput');
 const audio = require('win-audio').speaker;
+const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
 
 /**
  * Variables
@@ -22,6 +23,7 @@ const audio = require('win-audio').speaker;
  * 1 - Port
  * 2 - Keycodes Windows
  * 3 - Token
+ * 4 - Audio
  */
 const PORT = process.env.APP_PORT;
 
@@ -36,8 +38,11 @@ let tokencrypt = jwt.sign(
         expiresIn: 60*60 // 1 heure
     }
 );
-
 let decoded = jwt.verify(tokencrypt, process.env.JWT_SALT);
+
+const sessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
+console.log(sessions.length);
+console.log(sessions);
 
 /**
  * Redirection vers la page web

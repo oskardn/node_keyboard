@@ -71,6 +71,7 @@ for (let i = 0; i < sliders.length; i++) {
     slider.addEventListener('change', (slide) => {
         socket.emit('volume',
         {
+            "action": slider.dataset.vol,
             "volume": slider.value,
             "token": token,
             "exp": decrypJwt.exp

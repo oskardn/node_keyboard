@@ -16,7 +16,7 @@ Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 git clone https://github.com/oskardrevetnitschke/node_keyboard
 ```
 
-Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**](https://socket.io/) et [**win-audio**](https://www.npmjs.com/package/win-audio) avec la commande suivante :
+Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**body-parser**](https://www.npmjs.com/package/body-parser), [**dotenv**](https://www.npmjs.com/package/dotenv), [**expressjs**](https://expressjs.com), [**jsonwebtoken**](https://www.npmjs.com/package/jsonwebtoken), [**node-audio-volume-mixer**](https://www.npmjs.com/package/node-audio-volume-mixer), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**](https://socket.io/) et [**win-audio**](https://www.npmjs.com/package/win-audio) avec la commande suivante :
 
 ```console
 npm install
@@ -50,7 +50,7 @@ npm start
 Une fois le serveur lancé, rendez vous sur [localhost:3000](http://localhost:3000) sauf si vous avez changé le port dans le fichier `server.js`.  
 Vous devriez avoir une interface de ce style qui devrait s'afficher :  
 
-![](https://sikelio.s-ul.eu/RJJN6hCW)  
+![](https://sikelio.s-ul.eu/6oXZmtAM)  
 Les boutons indiquent déjà les actions que vous pouvez faire.  
 
 Premier bouton : Piste audio précédente  
@@ -62,4 +62,4 @@ Une barre de volume qui va de 1 en 1 avec un indicateur du niveau actuel.
 ## Contributeurs
 
 ---
-[![Sikelio, Anthony Bosco](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
+[![Oskar DN, Anthony Bosco](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
