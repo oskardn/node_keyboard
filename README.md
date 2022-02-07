@@ -16,10 +16,10 @@ Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 git clone https://github.com/oskardrevetnitschke/node_keyboard
 ```
 
-Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**](https://socket.io/) et [**win-audio**](https://www.npmjs.com/package/win-audio) avec la commandes suivante :
+Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**](https://socket.io/) et [**win-audio**](https://www.npmjs.com/package/win-audio) avec la commande suivante :
 
 ```console
-npm install express sendinput socket.io win-audio
+npm install
 ```
 
 Pensez à lire les prérequis en fonction de votre système d'exploitation avant d'installer les librairies.  

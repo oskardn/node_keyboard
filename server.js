@@ -1,7 +1,7 @@
 /**
  * Librairie à importer
  */
-require('dotenv').config()
+require('dotenv').config();
 
 const express = require('express');
 const app = express();
@@ -54,13 +54,15 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(express.static('public'));
+
 app.post('/token', (req, res) => {
     let tokenSend = req.body.token;
     if (tokenSend == process.env.JWT_PASS) {
         res.redirect(`/?token=${tokencrypt}`);
     } else {
         res.redirect('/auth');
-    }
+    };
 });
 
 /**
@@ -68,18 +70,24 @@ app.post('/token', (req, res) => {
  */
 io.on('connection', (socket) => {
 
+    let ip = socket.handshake;
+    console.log(ip.headers.host);
+    
     socket.on('token', (token) => {
         if (token == process.env.JWT_PASS || token == decoded.token) {
             // Tache fini
         } else {
             socket.emit('auth')
-        }
+        };
     });
 
     /**
      * Écoute de l'action des boutons prev/play/pause/next
      */
+    let dateTimestamp = Math.round(new Date().getTime() / 1000);
+
     socket.on('action', (action) => {
+        console.log(dateTimestamp);
         if (action.token == process.env.JWT_PASS) {
             let actionCode;
             switch (action.action) {
@@ -101,10 +109,10 @@ io.on('connection', (socket) => {
                     val: actionCode,
                     type: 0
                 }
-            ])
+            ]);
         } else {
-            return;
-        }
+            socket.emit('auth')
+        };
     });
 
     /**

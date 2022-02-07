@@ -2,19 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Node Keyboard Socket</title>
     <link rel="shortcut icon" href="https://nodejs.org/static/images/logo.svg" type="image/x-icon">
+    <link rel="stylesheet" href="/files/index.css">
 </head>
 <body>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        #volume_value {
-            text-align: center;
-            width: 2.5%;
-        }
-    </style>
     <center>
         <button id="prev" data-action="prev">
             <i class="fas fa-backward fa-5x"></i>
@@ -36,75 +30,5 @@
     <script src="https://kit.fontawesome.com/6756ad2bc3.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        function parseJwt(token) {
-            let base64Url = token.split('.')[1];
-            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            let jsonURL = decodeURIComponent(atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-
-            return JSON.parse(jsonURL);
-        };
-
-        let token;
-        let decrypJwt;
-        let queryString = window.location.search;
-
-        let urlParams = new URLSearchParams(queryString);
-        let tokenSearch = urlParams.get('token');
-
-        if (tokenSearch == null) {
-            window.location.href = '/auth';
-        } else {
-            decrypJwt = parseJwt(tokenSearch);
-            token = decrypJwt.token;
-        }
-
-        //let decrypJwt = parseJwt(tokenSearch);
-
-        let socket = io();
-
-        socket.emit('token', token);
-
-        socket.on('auth', () => {
-            window.location.href = '/auth';
-        });
-
-        socket.on('authtoken', (newtoken) => {
-            token = newtoken;
-        });
-
-        socket.on('volume change', (volchange) => {
-            $('#volume_value').val(volchange);
-            $('#volume').val(volchange);
-        });
-
-        let buttons = $('button');
-        for (let i = 0; i < buttons.length; i++) {
-            let button = buttons[i];
-            
-            button.addEventListener('click', (event) => {
-                socket.emit('action', 
-                {
-                    "action": button.dataset.action,
-                    "token": token
-                });
-            });
-        };
-
-        let sliders = $('input');
-        for (let i = 0; i < sliders.length; i++) {
-            let slider = sliders[i];
-
-            slider.addEventListener('change', (slide) => {
-                socket.emit('volume',
-                {
-                    "volume": slider.value,
-                    "token": token
-                });
-                $('#volume_value').val(parseInt(slider.value));
-            });
-        };
-    </script>
+    <script src="/files/app.js"></script>
 </html>
