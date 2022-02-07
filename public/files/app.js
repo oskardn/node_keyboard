@@ -1,3 +1,5 @@
+let socket = io();
+
 function parseJwt(token) {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -15,21 +17,21 @@ let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
 let tokenSearch = urlParams.get('token');
 
-if (tokenSearch == null) {
-    window.location.href = '/auth';
+if (tokenSearch == null || tokenSearch === "") {
+    socket.on('cryptedtoken', (tokencrypt) => {
+        if (tokenSearch != tokencrypt) {
+            window.location.href = '/auth';
+        }
+    });
 } else {
     decrypJwt = parseJwt(tokenSearch);
     token = decrypJwt.token;
     sessionStorage.setItem("token", token);
-}
+};
 
-console.error(decrypJwt);
-
-let socket = io();
-
-if (Date.now() > decrypJwt.exp * 1000) {
+if ((new Date().getTime() / 1000) > decrypJwt.exp) {
     socket.emit('newtoken');
-    console.log("Token expiré");
+    window.alert("Token expiré")
     window.location.href = '/auth';
 };
 
@@ -44,7 +46,7 @@ socket.on('authtoken', (newtoken) => {
 });
 
 socket.on('volume change', (volchange) => {
-    $('#volume_value').val(volchange);
+    $('#volume_value').text(volchange);
     $('#volume').val(volchange);
 });
 
@@ -73,6 +75,6 @@ for (let i = 0; i < sliders.length; i++) {
             "token": token,
             "exp": decrypJwt.exp
         });
-        $('#volume_value').val(parseInt(slider.value));
+        $('#volume_value').text(parseInt(slider.value));
     });
 };

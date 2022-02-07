@@ -33,7 +33,7 @@ let tokencrypt = jwt.sign(
     },
     process.env.JWT_SALT,
     {
-        expiresIn: 60
+        expiresIn: 60*60 // 1 heure
     }
 );
 
@@ -73,6 +73,8 @@ io.on('connection', (socket) => {
     let ip = socket.handshake;
     console.log(ip.headers.host);
     
+    socket.emit('cryptedtoken', (tokencrypt));
+
     socket.on('token', (token) => {
         if (token == process.env.JWT_PASS || token == decoded.token) {
             // Tache fini
@@ -87,31 +89,32 @@ io.on('connection', (socket) => {
     let dateTimestamp = Math.round(new Date().getTime() / 1000);
 
     socket.on('action', (action) => {
-        console.log(dateTimestamp);
         if (action.token == process.env.JWT_PASS) {
-            let actionCode;
-            switch (action.action) {
-                case 'prev':
-                    actionCode = MEDIA_PREV;
-                    break;
-                case 'playpause':
-                    actionCode = MEDIA_PLAY_PAUSE;
-                    break;
-                case 'next':
-                    actionCode = MEDIA_NEXT;
-                    break;
-                default:
-                    return;
-                    break;
+            if (action.exp < (Math.round(new Date().getTime() / 1000)) ) {
+                socket.emit('auth');
+            } else {
+                let actionCode;
+                switch (action.action) {
+                    case 'prev':
+                        actionCode = MEDIA_PREV;
+                        break;
+                    case 'playpause':
+                        actionCode = MEDIA_PLAY_PAUSE;
+                        break;
+                    case 'next':
+                        actionCode = MEDIA_NEXT;
+                        break;
+                    default:
+                        return;
+                        break;
+                };
+                sendInput.SendInput([
+                    {
+                        val: actionCode,
+                        type: 0
+                    }
+                ]);
             };
-            sendInput.SendInput([
-                {
-                    val: actionCode,
-                    type: 0
-                }
-            ]);
-        } else {
-            socket.emit('auth')
         };
     });
 
