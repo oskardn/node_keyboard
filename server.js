@@ -139,7 +139,6 @@ io.on('connection', (socket) => {
                     break;
                 default:
                     if (volume.volume >= 0 && volume.volume <= 100) {
-                        console.log(volume.volume/100);
                         switch (volume.action.vol) {
                             case 'master':
                                 audio.set(parseInt(volume.volume));

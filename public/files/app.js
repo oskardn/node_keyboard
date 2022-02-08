@@ -68,7 +68,7 @@ let sliders = $('input');
 for (let i = 0; i < sliders.length; i++) {
     let slider = sliders[i];
 
-    slider.addEventListener('change', (slide) => {
+    slider.addEventListener('mousemove', (slide) => {
         socket.emit('volume',
         {
             "action": slider.dataset,
@@ -76,6 +76,15 @@ for (let i = 0; i < sliders.length; i++) {
             "token": token,
             "exp": decrypJwt.exp
         });
-        $('#volume_value').text(parseInt(slider.value));
+        $('#volume_value').text(parseInt($('input.master').val()));
+    });
+    slider.addEventListener('touchmove', (slide) => {
+        socket.emit('volume',
+        {
+            "action": slider.dataset,
+            "volume": slider.value,
+            "token": token,
+            "exp": decrypJwt.exp
+        });
     });
 };
