@@ -15,16 +15,13 @@ const bodyParser = require('body-parser');
 
 const sendInput = require('sendinput');
 const audio = require('win-audio').speaker;
-const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
 
-/**
- * Variables
- * 
- * 1 - Port
- * 2 - Keycodes Windows
- * 3 - Token
- * 4 - Audio
- */
+const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
+const sessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
+const session = sessions.find((value) => {
+    return value.name === "firefox.exe";
+});
+
 const PORT = process.env.APP_PORT;
 
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
@@ -39,10 +36,6 @@ let tokencrypt = jwt.sign(
     }
 );
 let decoded = jwt.verify(tokencrypt, process.env.JWT_SALT);
-
-const sessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
-console.log(sessions.length);
-console.log(sessions);
 
 /**
  * Redirection vers la page web
@@ -76,7 +69,7 @@ app.post('/token', (req, res) => {
 io.on('connection', (socket) => {
 
     let ip = socket.handshake;
-    console.log(ip.headers.host);
+    //console.log(ip.headers.host);
     
     socket.emit('cryptedtoken', (tokencrypt));
 
@@ -146,7 +139,18 @@ io.on('connection', (socket) => {
                     break;
                 default:
                     if (volume.volume >= 0 && volume.volume <= 100) {
-                        audio.set(parseInt(volume.volume));
+                        console.log(volume.volume/100);
+                        switch (volume.action.vol) {
+                            case 'master':
+                                audio.set(parseInt(volume.volume));
+                                break;
+                            case 'firefox':
+                                NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(session.pid, volume.volume / 100);
+                                break;
+                            default:
+                                return;
+                                break;
+                        }
                     } else {
                         return;
                     }
