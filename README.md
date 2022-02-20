@@ -1,5 +1,13 @@
 ![](https://img.shields.io/badge/node_keyboard-1.1.0-blue)  
-![](https://img.shields.io/badge/express-4.17.2-red) ![](https://img.shields.io/badge/sendinput-0.2.0-red) ![](https://img.shields.io/badge/socket.io-4.4.1-red) ![](https://img.shields.io/badge/winaudio-2.0.2-red)
+
+![](https://img.shields.io/badge/bodyparser-1.19.1-red)
+![](https://img.shields.io/badge/dotenv-14.3.2-red)
+![](https://img.shields.io/badge/express-4.17.2-red)
+![](https://img.shields.io/badge/jsonwebtoken-8.5.1-red)
+![](https://img.shields.io/badge/nodeaudiovolumemixer-2.0.2-red)
+![](https://img.shields.io/badge/sendinput-0.2.0-red)
+![](https://img.shields.io/badge/socket.io-4.4.1-red)
+![](https://img.shields.io/badge/winaudio-2.0.2-red)  
 
 # node_keyboard
 
@@ -16,10 +24,10 @@ Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 git clone https://github.com/oskardrevetnitschke/node_keyboard
 ```
 
-Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**expressjs**](https://expressjs.com), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**](https://socket.io/) et [**win-audio**](https://www.npmjs.com/package/win-audio) avec la commandes suivante :
+Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les modules [**body-parser**](https://www.npmjs.com/package/body-parser), [**dotenv**](https://www.npmjs.com/package/dotenv), [**expressjs**](https://expressjs.com), [**jsonwebtoken**](https://www.npmjs.com/package/jsonwebtoken), [**node-audio-volume-mixer**](https://www.npmjs.com/package/node-audio-volume-mixer), [**sendinput**](https://www.npmjs.com/package/sendinput), [**socket.io**](https://socket.io/) et [**win-audio**](https://www.npmjs.com/package/win-audio) avec la commande suivante :
 
 ```console
-npm install express sendinput socket.io win-audio
+npm install
 ```
 
 Pensez à lire les prérequis en fonction de votre système d'exploitation avant d'installer les librairies.  
@@ -50,7 +58,7 @@ npm start
 Une fois le serveur lancé, rendez vous sur [localhost:3000](http://localhost:3000) sauf si vous avez changé le port dans le fichier `server.js`.  
 Vous devriez avoir une interface de ce style qui devrait s'afficher :  
 
-![](https://sikelio.s-ul.eu/RJJN6hCW)  
+![](https://sikelio.s-ul.eu/6oXZmtAM)  
 Les boutons indiquent déjà les actions que vous pouvez faire.  
 
 Premier bouton : Piste audio précédente  
@@ -62,4 +70,4 @@ Une barre de volume qui va de 1 en 1 avec un indicateur du niveau actuel.
 ## Contributeurs
 
 ---
-[![Sikelio, Anthony Bosco](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
+[![Oskar DN, Anthony Bosco](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
