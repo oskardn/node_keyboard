@@ -1,6 +1,3 @@
-/**
- * Librairie à importer
- */
 require('dotenv').config();
 
 const express = require('express');
@@ -22,24 +19,32 @@ const session = sessions.find((value) => {
     return value.name === "firefox.exe";
 });
 
-const PORT = process.env.APP_PORT;
+let PORT = process.env.APP_PORT, SALT = process.env.JWT_SALT, TOKEN = process.env.JWT_PASS;
+
+if (PORT == undefined) {
+    PORT = 3000;
+};
+if (SALT == undefined) {
+    SALT = "YouHaveToAddSaltToEnvFile";
+};
+if (TOKEN == undefined) {
+    console.error("Aucun token n'a été renseigné dans les paramètres de l'application.\nRajoutez le dans fichier .env");
+    process.exit();
+}
 
 const MEDIA_NEXT = 176, MEDIA_PREV = 177, MEDIA_PLAY_PAUSE = 179;
 
 let tokencrypt = jwt.sign(
     {
-        token: process.env.JWT_PASS
+        token: TOKEN
     },
-    process.env.JWT_SALT,
+    SALT,
     {
         expiresIn: 60*60 // 1 heure
     }
 );
-let decoded = jwt.verify(tokencrypt, process.env.JWT_SALT);
+let decoded = jwt.verify(tokencrypt, SALT);
 
-/**
- * Redirection vers la page web
- */
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
@@ -56,38 +61,31 @@ app.use(express.static('public'));
 
 app.post('/token', (req, res) => {
     let tokenSend = req.body.token;
-    if (tokenSend == process.env.JWT_PASS) {
+    if (tokenSend == TOKEN) {
         res.redirect(`/?token=${tokencrypt}`);
     } else {
         res.redirect('/auth');
     };
 });
 
-/**
- * Écoute des évenement lorsque quelqu'un est connecté
- */
 io.on('connection', (socket) => {
 
     let ip = socket.handshake;
-    //console.log(ip.headers.host);
     
     socket.emit('cryptedtoken', (tokencrypt));
 
     socket.on('token', (token) => {
-        if (token == process.env.JWT_PASS || token == decoded.token) {
+        if (token == TOKEN || token == decoded.token) {
             // Tache fini
         } else {
             socket.emit('auth')
         };
     });
 
-    /**
-     * Écoute de l'action des boutons prev/play/pause/next
-     */
     let dateTimestamp = Math.round(new Date().getTime() / 1000);
 
     socket.on('action', (action) => {
-        if (action.token == process.env.JWT_PASS) {
+        if (action.token == TOKEN) {
             if (action.exp < (Math.round(new Date().getTime() / 1000)) ) {
                 socket.emit('auth');
             } else {
@@ -116,23 +114,14 @@ io.on('connection', (socket) => {
         };
     });
 
-    /**
-     * Taux de rafraichissement de la demande du son actuel
-     * Envois du volume actuel vers la page web
-     */
     audio.polling(200);
 
     audio.events.on('change', (val) => {
         socket.emit('volume change', val.new);
     });
 
-    /**
-     * Vérifier si l'entré est différent d'un string
-     * 
-     * Écoute de l'action du slider
-     */
     socket.on('volume', (volume) => {
-        if (volume.token == process.env.JWT_PASS) {
+        if (volume.token == TOKEN) {
             switch (volume.volume) {
                 case isNaN:
                     return;
@@ -161,9 +150,6 @@ io.on('connection', (socket) => {
     });
 });
 
-/**
- * Port sur lequel écouter
- */
 server.listen(PORT, () => {
     console.log(`Écoute sur le port: ${PORT}`);
 });
