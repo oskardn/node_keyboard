@@ -19,15 +19,11 @@ const session = sessions.find((value) => {
     return value.name === "firefox.exe";
 });
 
-let PORT = process.env.APP_PORT, SALT = process.env.JWT_SALT, TOKEN = process.env.JWT_PASS;
+let PORT = process.env.APP_PORT || 3000;
+let SALT = process.env.JWT_SALT || "YouHaveToAddSaltToEnvFile";
+let TOKEN = process.env.JWT_PASS;
 
-if (PORT == undefined) {
-    PORT = 3000;
-};
-if (SALT == undefined) {
-    SALT = "YouHaveToAddSaltToEnvFile";
-};
-if (TOKEN == undefined) {
+if (typeof TOKEN === undefined) {
     console.error("Aucun token n'a été renseigné dans les paramètres de l'application.\nRajoutez le dans fichier .env");
     process.exit();
 }
