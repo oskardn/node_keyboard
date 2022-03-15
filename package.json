@@ -5,10 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
-  "author": "Oskar Drevet Nitschke",
-  "license": "ISC",
+  "author": "Oskar DN",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.1",
     "dotenv": "^14.3.2",
@@ -21,12 +23,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/oskardrevetnitschke/node_keyboard.git"
+    "url": "git+https://github.com/oskardn/node_keyboard.git"
   },
   "keywords": [
     "nodejs",
     "express",
-    "noed",
+    "node",
     "expressjs",
     "macros",
     "key",
@@ -37,7 +39,11 @@
     "node-audio"
   ],
   "bugs": {
-    "url": "https://github.com/oskardrevetnitschke/node_keyboard/issues"
+    "url": "https://github.com/oskardn/node_keyboard/issues"
   },
-  "homepage": "https://github.com/oskardrevetnitschke/node_keyboard#readme"
+  "homepage": "https://github.com/oskardn/node_keyboard#readme",
+  "devDependencies": {
+    "electron": "^17.1.1",
+    "electron-builder": "^22.14.13"
+  }
 }
