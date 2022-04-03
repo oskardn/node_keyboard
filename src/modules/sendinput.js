@@ -1,3 +1,4 @@
+require('dotenv').config();
 const vSendInput = require('sendinput');
 
 const vNext = 176, vPrevious = 177, vPlayPause = 179;
@@ -9,28 +10,34 @@ class SendInput {
 
     constructor(value = null) {};
 
-    vInputs(vActions) {
-        switch (vActions.action) {
-            case 'vPrevious':
-                vActionCode = vPrevious;
-                break;
-            case 'vPlayPause':
-                vActionCode = vPlayPause;
-                break;
-            case 'vNext':
-                vActionCode = vNext;
-                break;
-            default:
-                return;
-                break;
-        };
+    vInputs(ioActions, sPassword) {
+        const sEnvPassword = process.env.TOKEN;
 
-        vSendInput.SendInput([
-            {
-                val: vActionCode,
-                type: 0
-            }
-        ]);
+        if (sPassword == sEnvPassword) {
+            switch (ioActions.action) {
+                case 'vPrevious':
+                    vActionCode = vPrevious;
+                    break;
+                case 'vPlayPause':
+                    vActionCode = vPlayPause;
+                    break;
+                case 'vNext':
+                    vActionCode = vNext;
+                    break;
+                default:
+                    return;
+                    break;
+            };
+
+            vSendInput.SendInput([
+                {
+                    val: vActionCode,
+                    type: 0
+                }
+            ]);
+        } else {
+            return;
+        };
     }
 }
 
