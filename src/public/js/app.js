@@ -15,10 +15,6 @@ vIo.on('vWindowsActualVolume', (vWindowsActualVolume) => {
     $('#vMaster').val(vWindowsActualVolume);
 });
 
-// vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
-//     console.log(vRefreshSliderValue);
-// });
-
 vIo.on('vWindowsVolumeChange', (vWindowsVolumeChange) => {
     $('#vVolumeValue').text(vWindowsVolumeChange);
     $('#vMaster').val(vWindowsVolumeChange);
@@ -29,14 +25,33 @@ vIo.on('aSessions', (aSessions) => {
         vIo.on('oAppBlacklist', (oAppBlacklist) => {
             if (oVal.name) {
                 if (oAppBlacklist[`${oVal.name}`] == undefined || oAppBlacklist[`${oVal.name}`] == true) {
-                    $('.vOtherSliders').append(`<br> <label for="${oVal.name}">${oVal.name}</label> <input class="vApp" id="vApp" type="range" min="0" max="100" step="1" name="${oVal.name}" data-vol="${oVal.name}">`);
-        
-                    let vOtherSlider = $(`[name="${oVal.name}"]`);
-        
+                    $('.vOtherSliders table tbody').append(`
+                        <tr>
+                            <td>
+                                <label for="${oVal.name}">${oVal.name}</label>
+                            </td>
+                            <td>
+                                <input class="vApp" id="vApp" type="range" min="0" max="100" step="1" name="${oVal.name}" data-vol="${oVal.name}">
+                            </td>
+                            <td>
+                                <button class="vApp vMute">
+                                    <i class="fas fa-volume-mute fa-2x" data-icon="${oVal.name}"></i>
+                                </button>
+                            </td>
+                        </tr>`
+                    );
+
                     /**
-                     * Attention pour tester sur odinateur il faut simuler
-                     * un toucher comme sur un smartphone
+                     * Attention pour tester sur ordinateur il faut simuler
+                     * un toucher comme sur un smartphone ou tablette
                      */
+                    let vOtherSlider = $(`[name="${oVal.name}"]`);
+                    let vMuteButtons = $('button.vMute')
+
+                    vMuteButtons.unbind().click(() => {
+                        alert("Bouton en cours de développement\nMerci à toi de patienter :)");
+                    });
+
                     vOtherSlider.on('touchmove', function() {
                         vIo.emit('ioVolumeApps', 
                         {
