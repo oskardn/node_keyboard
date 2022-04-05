@@ -15,14 +15,9 @@ vIo.on('vWindowsActualVolume', (vWindowsActualVolume) => {
     $('#vMaster').val(vWindowsActualVolume);
 });
 
-let aAppList = [];
-
-vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
-    // console.log(vRefreshSliderValue);
-    aAppList.push(vRefreshSliderValue)
-    console.log(aAppList);
-
-});
+// vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
+//     console.log(vRefreshSliderValue);
+// });
 
 vIo.on('vWindowsVolumeChange', (vWindowsVolumeChange) => {
     $('#vVolumeValue').text(vWindowsVolumeChange);
@@ -38,13 +33,25 @@ vIo.on('aSessions', (aSessions) => {
         
                     let vOtherSlider = $(`[name="${oVal.name}"]`);
         
-                    vOtherSlider.on('mousemove', function() {
+                    /**
+                     * Attention pour tester sur odinateur il faut simuler
+                     * un toucher comme sur un smartphone
+                     */
+                    vOtherSlider.on('touchmove', function() {
                         vIo.emit('ioVolumeApps', 
                         {
                             action: $(this).data('vol'),
                             volume: $(this).val()
                         });
                     });
+
+                    vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
+                        if (oAppBlacklist[`${vRefreshSliderValue.sAppName}`] == undefined || oAppBlacklist[`${vRefreshSliderValue.sAppName}`] == true) {
+                            if (vRefreshSliderValue.sAppName == oVal.name) {
+                                $(`[name="${oVal.name}"]`).val(vRefreshSliderValue.vRefreshSliderValue  )
+                            }
+                        }
+                    })
                 };
             };
         });
@@ -69,7 +76,7 @@ let eSliders = $('input');
 for (let i = 0; i < eSliders.length; i++) {
     let eSlider = eSliders[i];
 
-    eSlider.addEventListener('mousemove', (slide) => {
+    eSlider.addEventListener('touchmove', (slide) => {
         vIo.emit('ioVolumeMaster',
         {
             "action": eSlider.dataset,

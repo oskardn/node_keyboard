@@ -33,8 +33,6 @@ class NodeAudio {
                 }));
             };
         });
-
-        // console.log(NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(eSession.pid));
     }
 }
 
