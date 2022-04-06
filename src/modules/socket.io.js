@@ -39,8 +39,20 @@ class SockerIO {
 
         vSocket.on('ioVolumeApps', (ioVolumeApps) => {
             vNodeAudio.vShowProcessList(ioVolumeApps);
-        })
+        });
+
+        vSocket.on('vMuteButton', (vMuteButton) => {
+            vNodeAudio.vNodeAppMute(vMuteButton);
+        });
     }
+
+    // vSocketIsMuted(vApp) {
+    //     console.log(vApp);
+    // }
+
+    // vSocketIsUnMuted(vApp) {
+    //     console.log(vApp);
+    // }
 }
 
 module.exports = SockerIO;

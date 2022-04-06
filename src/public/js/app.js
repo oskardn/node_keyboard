@@ -34,8 +34,11 @@ vIo.on('aSessions', (aSessions) => {
                                 <input class="vApp" id="vApp" type="range" min="0" max="100" step="1" name="${oVal.name}" data-vol="${oVal.name}">
                             </td>
                             <td>
-                                <button class="vApp vMute">
-                                    <i class="fas fa-volume-mute fa-2x" data-icon="${oVal.name}"></i>
+                                <span id="${oVal.name}"></span>
+                            </td>
+                            <td>
+                                <button class="vApp vMute" data-btn="${oVal.name}">
+                                    <i class="fas fa-volume-mute fa-2x"></i>
                                 </button>
                             </td>
                         </tr>`
@@ -48,12 +51,18 @@ vIo.on('aSessions', (aSessions) => {
                     let vOtherSlider = $(`[name="${oVal.name}"]`);
                     let vMuteButtons = $('button.vMute')
 
-                    vMuteButtons.unbind().click(() => {
-                        alert("Bouton en cours de développement\nMerci à toi de patienter :)");
-                        window.location.href = "https://bit.ly/3x7indr"
+                    vMuteButtons.unbind().click(function() {
+                        console.error($(this).data('btn'));
+                        vIo.emit('vMuteButton', 
+                        {
+                            vApp: $(this).data('btn')
+                        });
+                        // alert("Bouton en cours de développement\nMerci à toi de patienter :)");
+                        // window.location.href = "https://bit.ly/3x7indr"
                     });
 
                     vOtherSlider.on('touchmove', function() {
+                        $(`[id="${ $(this).data('vol') }"]`).text($(this).val());
                         vIo.emit('ioVolumeApps', 
                         {
                             action: $(this).data('vol'),
@@ -64,7 +73,8 @@ vIo.on('aSessions', (aSessions) => {
                     vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
                         if (oAppBlacklist[`${vRefreshSliderValue.sAppName}`] == undefined || oAppBlacklist[`${vRefreshSliderValue.sAppName}`] == true) {
                             if (vRefreshSliderValue.sAppName == oVal.name) {
-                                $(`[name="${oVal.name}"]`).val(vRefreshSliderValue.vRefreshSliderValue  )
+                                $(`[name="${oVal.name}"]`).val(vRefreshSliderValue.vRefreshSliderValue);
+                                $(`[id="${oVal.name}"]`).text(Math.round(vRefreshSliderValue.vRefreshSliderValue))
                             }
                         }
                     })

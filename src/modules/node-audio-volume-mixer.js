@@ -1,4 +1,4 @@
-const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
+const { NodeAudioVolumeMixer } = require('node-audio-volume-mixer');
 
 class NodeAudio {
     #vPrivateVar;
@@ -16,12 +16,7 @@ class NodeAudio {
     }
 
     vRefreshSliderValue(vSocket) {
-        // vSocket.emit('test');
-
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
-        const eSession = aSessions.find((aValue) => {
-            return aValue.name === "firefox.exe";
-        });
 
         aSessions.forEach(eElement => {
             if (eElement.name) {
@@ -33,6 +28,19 @@ class NodeAudio {
                 }));
             };
         });
+    }
+
+    vNodeAppMute(vMuteButton) {
+        const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
+        const eSession = aSessions.find((aValue) => {
+            return aValue.name === vMuteButton.vApp;
+        });
+
+        if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == false) {
+            NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, true);
+        } else if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == true) {
+            NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, false);
+        };
     }
 }
 
