@@ -50,6 +50,7 @@ vIo.on('aSessions', (aSessions) => {
 
                     vMuteButtons.unbind().click(() => {
                         alert("Bouton en cours de développement\nMerci à toi de patienter :)");
+                        window.location.href = "https://bit.ly/3x7indr"
                     });
 
                     vOtherSlider.on('touchmove', function() {
