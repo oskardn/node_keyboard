@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node Keyboard</title>
+    <link rel="icon" href=""/>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+    <center>
+        <button id="vPrevious" data-action="vPrevious">
+            <i class="fas fa-backward fa-5x"></i>
+        </button>
+        <button id="vPlayPause" data-action="vPlayPause">
+            <i class="fas fa-pause fa-5x"></i>
+            <i class="fas fa-play fa-5x"></i>
+        </button>
+        <button id="vNext" data-action="vNext">
+            <i class="fas fa-forward fa-5x"></i>
+        </button>
+        <br>
+        <input class="vMaster" id="vMaster" type="range" min="0" max="100" step="1" data-vol="vMaster">
+        <br>
+        <span>Volume :</span>
+        <span id="vVolumeValue"></span>
+    </center>
+
+    <center class="vOtherSliders">
+        <br>
+        <table>
+            <tbody></tbody>
+        </table>
+    </center>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="/js/jquery-3.6.0.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
