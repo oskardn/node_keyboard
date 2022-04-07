@@ -52,7 +52,6 @@ vIo.on('aSessions', (aSessions) => {
                     let vMuteButtons = $('button.vMute')
 
                     vMuteButtons.unbind().click(function() {
-                        console.error($(this).data('btn'));
                         vIo.emit('vMuteButton', 
                         {
                             vApp: $(this).data('btn')
@@ -61,7 +60,7 @@ vIo.on('aSessions', (aSessions) => {
                         // window.location.href = "https://bit.ly/3x7indr"
                     });
 
-                    vOtherSlider.on('touchmove', function() {
+                    vOtherSlider.on('touchmove mousemove', function() {
                         $(`[id="${ $(this).data('vol') }"]`).text($(this).val());
                         vIo.emit('ioVolumeApps', 
                         {
@@ -84,32 +83,29 @@ vIo.on('aSessions', (aSessions) => {
     });
 });
 
-let eButtons = $('button');
-for (let i = 0; i < eButtons.length; i++) {
-    let eButton = eButtons[i];
-    
-    eButton.addEventListener('click', (event) => {
+$('button').on('click', function() {
+    if ($(this).data('action') != 'vMuteMaster') {
         vIo.emit('ioActions', 
         {
-            "action": eButton.dataset.action,
+            "action": $(this).data('action'),
             // "token": token,
             // "exp": decrypJwt.exp
         });
-    });
-};
-
-let eSliders = $('input');
-for (let i = 0; i < eSliders.length; i++) {
-    let eSlider = eSliders[i];
-
-    eSlider.addEventListener('touchmove', (slide) => {
-        vIo.emit('ioVolumeMaster',
+    } else if ($(this).data('action') == 'vMuteMaster') {
+        vIo.emit('ioMasterMute', 
         {
-            "action": eSlider.dataset,
-            "volume": eSlider.value,
-            // "token": token,
-            // "exp": decrypJwt.exp
+            "action": $(this).data('action'),
         });
-        $('#vVolumeValue').text(parseInt($('input.vMaster').val()));
+    };
+});
+
+$('input').on('touchmove mousemove', function() {
+    vIo.emit('ioVolumeMaster',
+    {
+        "action": $(this).data(),
+        "volume": $(this).val(),
+        // "token": token,
+        // "exp": decrypJwt.exp
     });
-};
+    $('#vVolumeValue').text(parseInt($('input.vMaster').val()));
+});

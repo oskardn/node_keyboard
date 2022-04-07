@@ -29,6 +29,18 @@ class WinAudio {
             return;
         };
     }
+
+    vMuteMasterVolume(ioMasterMute, sPassword) {
+        const sEnvPassword = process.env.TOKEN;
+
+        if (sPassword == sEnvPassword) {
+            if (vAudio.isMuted() == false) {
+                vAudio.mute();
+            } else if (vAudio.isMuted() == true) {
+                vAudio.unmute();
+            };
+        };
+    }
 }
 
 module.exports = WinAudio;
