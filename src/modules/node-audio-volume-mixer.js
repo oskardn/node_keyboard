@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { NodeAudioVolumeMixer } = require('node-audio-volume-mixer');
 
 class NodeAudio {
@@ -6,13 +7,17 @@ class NodeAudio {
 
     constructor(value = null) {};
 
-    vShowProcessList(ioVolumeApps) {
+    vShowProcessList(ioVolumeApps, sPassword) {
+        const sEnvPassword = process.env.TOKEN;
+
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         const eSession = aSessions.find((aValue) => {
             return aValue.name === ioVolumeApps.action;
         });
 
-        NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(eSession.pid, ioVolumeApps.volume / 100);
+        if (sPassword == sEnvPassword) {
+            NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(eSession.pid, ioVolumeApps.volume / 100);
+        };
     }
 
     vRefreshSliderValue(vSocket) {
@@ -30,16 +35,20 @@ class NodeAudio {
         });
     }
 
-    vNodeAppMute(vMuteButton) {
+    vNodeAppMute(vMuteButton, sPassword) {
+        const sEnvPassword = process.env.TOKEN;
+        
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         const eSession = aSessions.find((aValue) => {
             return aValue.name === vMuteButton.vApp;
         });
 
-        if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == false) {
-            NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, true);
-        } else if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == true) {
-            NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, false);
+        if (sPassword == sEnvPassword) {
+            if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == false) {
+                NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, true);
+            } else if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == true) {
+                NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, false);
+            };
         };
     }
 }

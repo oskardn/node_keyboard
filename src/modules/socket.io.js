@@ -38,11 +38,11 @@ class SockerIO {
         });
 
         vSocket.on('ioVolumeApps', (ioVolumeApps) => {
-            vNodeAudio.vShowProcessList(ioVolumeApps);
+            vNodeAudio.vShowProcessList(ioVolumeApps, sPassword);
         });
 
         vSocket.on('vMuteButton', (vMuteButton) => {
-            vNodeAudio.vNodeAppMute(vMuteButton);
+            vNodeAudio.vNodeAppMute(vMuteButton, sPassword);
         });
     }
 
