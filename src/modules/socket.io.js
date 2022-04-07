@@ -4,7 +4,6 @@ const NodeAudio = require('./node-audio-volume-mixer');
 
 const vAudio = require('win-audio').speaker;
 const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
-const fs = require('fs');
 
 const vWinAudio = new WinAudio();
 const vSendInput = new SendInput();
@@ -37,9 +36,17 @@ class SockerIO {
             vWinAudio.vChangeMasterVolume(ioVolumeMaster, sPassword);
         });
 
+        vSocket.on('ioMasterMute', (ioMasterMute) => {
+            vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword);
+        });
+
         vSocket.on('ioVolumeApps', (ioVolumeApps) => {
-            vNodeAudio.vShowProcessList(ioVolumeApps);
-        })
+            vNodeAudio.vShowProcessList(ioVolumeApps, sPassword);
+        });
+
+        vSocket.on('vMuteButton', (vMuteButton) => {
+            vNodeAudio.vNodeAppMute(vMuteButton, sPassword);
+        });
     }
 }
 
