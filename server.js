@@ -11,6 +11,7 @@
  */
 require('dotenv').config();
 
+const Electron = require('./src/modules/electron');
 const Express = require('./src/modules/express');
 const SockerIO = require('./src/modules/socket.io');
 const NodeAudio = require('./src/modules/node-audio-volume-mixer');
@@ -18,10 +19,12 @@ const NodeAudio = require('./src/modules/node-audio-volume-mixer');
 const vHttp = require('http');
 const { Server } = require('socket.io');
 
+const vElectron = new Electron();
 const vExpress = new Express();
 const vSocketIO = new SockerIO();
 const vNodeAudio = new NodeAudio();
 
+vElectron.vGenerateWindows();
 vExpress.vCallExpress();
 
 const vHttpServer = vHttp.createServer(vExpress.vHttpServer());

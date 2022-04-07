@@ -19,7 +19,7 @@ class Express {
 
     #vStartExpress() {
         vApp.get('/', (req, res) => {
-            res.sendFile(process.cwd() + '/src/public/vue/index.html');
+            res.sendFile(path.join(__dirname, '../public/vue/index.html'));
         });
 
         vApp.use(vExpress.static(path.join(__dirname, '../public')));
