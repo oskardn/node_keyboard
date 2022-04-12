@@ -9,7 +9,7 @@ const vWinAudio = new WinAudio();
 const vSendInput = new SendInput();
 const vNodeAudio = new NodeAudio();
 
-const oAppBlacklist = require('../public/data/blacklist.json');
+const oAppBlocklist = require('../public/data/blocklist.json');
 
 class SockerIO {
     #vPrivateVar;
@@ -26,7 +26,7 @@ class SockerIO {
 
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         vSocket.emit('aSessions', aSessions);
-        vSocket.emit('oAppBlacklist', oAppBlacklist);
+        vSocket.emit('oAppBlocklist', oAppBlocklist);
 
         vSocket.on('ioActions', (ioActions) => {
             vSendInput.vInputs(ioActions, sPassword);

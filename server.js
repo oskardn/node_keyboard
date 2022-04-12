@@ -9,8 +9,8 @@
  * s  -> string
  * v  -> void
  */
-require('dotenv').config();
 
+const oConfig = require('./src/public/data/config.json');
 const Electron = require('./src/modules/electron');
 const Express = require('./src/modules/express');
 const SockerIO = require('./src/modules/socket.io');
@@ -24,7 +24,6 @@ const vExpress = new Express();
 const vSocketIO = new SockerIO();
 const vNodeAudio = new NodeAudio();
 
-vElectron.vGenerateWindows();
 vExpress.vCallExpress();
 
 const vHttpServer = vHttp.createServer(vExpress.vHttpServer());
@@ -37,8 +36,10 @@ vIo.on('connection', (vSocket) => {
     vNodeAudio.vRefreshSliderValue(vSocket);
 });
 
-const nPort = process.env.APP_PORT;
+const nPort = oConfig.APP_PORT;
 
 vHttpServer.listen((nPort || 3000), () => {
     console.log('Server started');
 });
+
+vElectron.vGenerateWindows();

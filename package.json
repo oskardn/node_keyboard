@@ -1,7 +1,7 @@
 {
-  "name": "node_keyboard",
+  "name": "nodekeyboard",
   "version": "1.1.1",
-  "description": "node_keyboard project but with websocket",
+  "description": "Audio controller",
   "main": "server.js",
   "scripts": {
     "test": "node server.js",
@@ -50,7 +50,7 @@
   },
   "build": {
     "appId": "fr.sik.nodekeyboard",
-    "nodeGypRebuild": true,
+    "nodeGypRebuild": false,
     "mac": {
       "category": "audio controller"
     }

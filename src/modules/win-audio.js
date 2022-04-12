@@ -1,4 +1,4 @@
-require('dotenv').config();
+const oConfig = require('../public/data/config.json');
 const vAudio = require('win-audio').speaker;
 
 vAudio.polling(200);
@@ -10,7 +10,7 @@ class WinAudio {
     constructor(value = null) {};
 
     vChangeMasterVolume(ioVolumeMaster, sPassword) {
-        const sEnvPassword = process.env.TOKEN;
+        const sEnvPassword = oConfig.TOKEN;
 
         if (sPassword == sEnvPassword) {
             switch (ioVolumeMaster) {
@@ -31,7 +31,7 @@ class WinAudio {
     }
 
     vMuteMasterVolume(ioMasterMute, sPassword) {
-        const sEnvPassword = process.env.TOKEN;
+        const sEnvPassword = oConfig.TOKEN;
 
         if (sPassword == sEnvPassword) {
             if (vAudio.isMuted() == false) {

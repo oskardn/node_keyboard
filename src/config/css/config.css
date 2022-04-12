@@ -1,0 +1,21 @@
+body {
+    background-color: #222222;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}
+
+.cache {
+    display: none;
+}
+
+.vFirstColumn {
+    min-width: 100px;
+}
+
+.vThirdColumn {
+    min-width: 100px;
+}
+
+.vSaveConfig {
+    width: 100%;
+}
