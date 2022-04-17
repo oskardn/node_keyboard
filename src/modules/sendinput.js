@@ -5,11 +5,6 @@ const vNext = 176, vPrevious = 177, vPlayPause = 179;
 let vActionCode;
 
 class SendInput {
-    #vPrivateVar;
-    vPublicVar;
-
-    constructor(value = null) {};
-
     vInputs(ioActions, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
 

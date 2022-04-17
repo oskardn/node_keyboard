@@ -12,11 +12,6 @@ const vNodeAudio = new NodeAudio();
 const oAppBlocklist = require('../public/data/blocklist.json');
 
 class SockerIO {
-    #vPrivateVar;
-    vPublicVar;
-
-    constructor(value = null) {};
-
     vSocketEvents(vSocket, sPassword) {
         vSocket.emit('vWindowsActualVolume', vAudio.get());
 

@@ -1,5 +1,5 @@
 const oConfig = require('../public/data/config.json');
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('path');
 
 class Electron {
@@ -14,11 +14,9 @@ class Electron {
                     preload: path.join(__dirname, '../config/js/preload.js')
                 }
             });
-    
+
+            win.loadFile('./src/home/vue/index.html');
             // win.loadURL(`http://localhost:${nPort}`);
-            win.removeMenu();
-            // win.loadFile('./src/config/vue/index.html');
-            win.loadURL('http://localhost:3000');
         };
 
         app.whenReady().then(() => {

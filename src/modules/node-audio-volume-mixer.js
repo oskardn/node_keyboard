@@ -2,11 +2,6 @@ const oConfig = require('../public/data/config.json');
 const { NodeAudioVolumeMixer } = require('node-audio-volume-mixer');
 
 class NodeAudio {
-    #vPrivateVar;
-    vPublicVar;
-
-    constructor(value = null) {};
-
     vShowProcessList(ioVolumeApps, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
 

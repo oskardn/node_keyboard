@@ -4,11 +4,6 @@ const vAudio = require('win-audio').speaker;
 vAudio.polling(200);
 
 class WinAudio {
-    #vPrivateVar;
-    vPublicVar;
-
-    constructor(value = null) {};
-
     vChangeMasterVolume(ioVolumeMaster, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
 

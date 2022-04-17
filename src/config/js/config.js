@@ -1,3 +1,7 @@
+$('button.accueil').on('click', function() {
+    window.location.href = '../../home/vue/index.html';
+})
+
 $('.vPasswordVisibility').on('click', function() {
     if ($('#sToken').attr('type') == 'password') {
         $('#sToken').attr('type', 'text');
