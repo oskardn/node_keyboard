@@ -9,22 +9,20 @@
  * s  -> string
  * v  -> void
  */
-require('dotenv').config();
 
-const Express = require('./src/modules/express');
+const oConfig = require('./src/public/data/config.json');
+const Electron = require('./src/modules/electron');
 const SockerIO = require('./src/modules/socket.io');
 const NodeAudio = require('./src/modules/node-audio-volume-mixer');
 
 const vHttp = require('http');
 const { Server } = require('socket.io');
 
-const vExpress = new Express();
+const vElectron = new Electron();
 const vSocketIO = new SockerIO();
 const vNodeAudio = new NodeAudio();
 
-vExpress.vCallExpress();
-
-const vHttpServer = vHttp.createServer(vExpress.vHttpServer());
+const vHttpServer = vHttp.createServer();
 const vIo = new Server(vHttpServer);
 
 vIo.on('connection', (vSocket) => {
@@ -34,8 +32,10 @@ vIo.on('connection', (vSocket) => {
     vNodeAudio.vRefreshSliderValue(vSocket);
 });
 
-const nPort = process.env.APP_PORT;
+const nPort = oConfig.APP_PORT;
 
 vHttpServer.listen((nPort || 3000), () => {
     console.log('Server started');
 });
+
+vElectron.vGenerateWindows();

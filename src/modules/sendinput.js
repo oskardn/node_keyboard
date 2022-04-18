@@ -1,17 +1,12 @@
-require('dotenv').config();
+const oConfig = require('../public/data/config.json');
 const vSendInput = require('sendinput');
 
 const vNext = 176, vPrevious = 177, vPlayPause = 179;
 let vActionCode;
 
 class SendInput {
-    #vPrivateVar;
-    vPublicVar;
-
-    constructor(value = null) {};
-
     vInputs(ioActions, sPassword) {
-        const sEnvPassword = process.env.TOKEN;
+        const sEnvPassword = oConfig.TOKEN;
 
         if (sPassword == sEnvPassword) {
             switch (ioActions.action) {

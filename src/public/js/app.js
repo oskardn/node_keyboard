@@ -1,4 +1,8 @@
-let vSocket = io({
+$('button.accueil').on('click', function() {
+    window.location.href = '../../home/vue/index.html';
+});
+
+let vSocket = io("ws://localhost:3000", {
     auth: {
         token: '1234'
     }
@@ -22,9 +26,9 @@ vIo.on('vWindowsVolumeChange', (vWindowsVolumeChange) => {
 
 vIo.on('aSessions', (aSessions) => {
     $.each(aSessions, (nIndex, oVal) => {
-        vIo.on('oAppBlacklist', (oAppBlacklist) => {
+        vIo.on('oAppBlocklist', (oAppBlocklist) => {
             if (oVal.name) {
-                if (oAppBlacklist[`${oVal.name}`] == undefined || oAppBlacklist[`${oVal.name}`] == true) {
+                if (oAppBlocklist[`${oVal.name}`] == undefined || oAppBlocklist[`${oVal.name}`] == true) {
                     $('.vOtherSliders table tbody').append(`
                         <tr>
                             <td>
@@ -70,7 +74,7 @@ vIo.on('aSessions', (aSessions) => {
                     });
 
                     vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
-                        if (oAppBlacklist[`${vRefreshSliderValue.sAppName}`] == undefined || oAppBlacklist[`${vRefreshSliderValue.sAppName}`] == true) {
+                        if (oAppBlocklist[`${vRefreshSliderValue.sAppName}`] == undefined || oAppBlocklist[`${vRefreshSliderValue.sAppName}`] == true) {
                             if (vRefreshSliderValue.sAppName == oVal.name) {
                                 $(`[name="${oVal.name}"]`).val(vRefreshSliderValue.vRefreshSliderValue);
                                 $(`[id="${oVal.name}"]`).text(Math.round(vRefreshSliderValue.vRefreshSliderValue))

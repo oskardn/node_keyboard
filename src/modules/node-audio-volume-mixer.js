@@ -1,14 +1,9 @@
-require('dotenv').config();
+const oConfig = require('../public/data/config.json');
 const { NodeAudioVolumeMixer } = require('node-audio-volume-mixer');
 
 class NodeAudio {
-    #vPrivateVar;
-    vPublicVar;
-
-    constructor(value = null) {};
-
     vShowProcessList(ioVolumeApps, sPassword) {
-        const sEnvPassword = process.env.TOKEN;
+        const sEnvPassword = oConfig.TOKEN;
 
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         const eSession = aSessions.find((aValue) => {
@@ -36,7 +31,7 @@ class NodeAudio {
     }
 
     vNodeAppMute(vMuteButton, sPassword) {
-        const sEnvPassword = process.env.TOKEN;
+        const sEnvPassword = oConfig.TOKEN;
         
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         const eSession = aSessions.find((aValue) => {
