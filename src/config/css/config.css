@@ -4,6 +4,10 @@ body {
     color: #ffffff;
 }
 
+input, .vPasswordVisibility {
+    padding: 7.5px;
+}
+
 .cache {
     display: none;
 }
@@ -75,6 +79,7 @@ body {
 }
 
 button.vSaveConfig {
+    cursor: pointer;
     position: relative;
     padding: 19px 36px;
     display: block;
@@ -83,6 +88,7 @@ button.vSaveConfig {
     overflow: hidden;
     border-radius: 40px;
     border: none;
+    border: solid 1.5px #ffffff;
 }
 
 button span {

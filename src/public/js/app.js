@@ -1,4 +1,8 @@
-let vSocket = io({
+$('button.accueil').on('click', function() {
+    window.location.href = '../../home/vue/index.html';
+});
+
+let vSocket = io("ws://localhost:3000", {
     auth: {
         token: '1234'
     }

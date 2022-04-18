@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="../css/config.css" />
-        <title>Document</title>
-    </head>
-    <body>
-        <button class="accueil">
-            <span>Retour à l'accueil</span>
-            <svg viewBox="0 0 13 10" height="10px" width="15px">
-                <path d="M1,5 L11,5"></path>
-                <polyline points="8 1 12 5 8 9"></polyline>
-            </svg>
-        </button>
-        <center>
-            <h3>Update server configuration</h3>
 
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/config.css" />
+    <title>Node Keyboard - Config</title>
+</head>
+
+<body>
+    <button class="accueil">
+        <span>Retour à l'accueil</span>
+        <svg viewBox="0 0 13 10" height="10px" width="15px">
+            <path d="M1,5 L11,5"></path>
+            <polyline points="8 1 12 5 8 9"></polyline>
+        </svg>
+    </button>
+    <center>
+        <h3>Mettre à jour la configuration du serveur</h3>
+
+        <form action="#" id="apConfig">
             <table>
                 <tbody>
                     <tr>
@@ -53,18 +56,23 @@
                             <center>
                                 <br />
                                 <button class="vSaveConfig">
-                                    <span>Save</span>
+                                    <span>Enregistrer</span>
                                     <div class="liquid"></div>
                                 </button>
+                                <input id="submit" type="submit" value="submit">
                             </center>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </center>
+        </form>
 
-        <script src="../../public/js/jquery-3.6.0.js"></script>
-        <script src="../../public/js/font-awesome.js"></script>
-        <script src="../js/config.js"></script>
-    </body>
+        <p id="response"></p>
+    </center>
+
+    <script src="../../global/js/jquery-3.6.0.js"></script>
+    <script src="../../global/js/font-awesome.js"></script>
+    <script src="../js/config.js"></script>
+</body>
+
 </html>

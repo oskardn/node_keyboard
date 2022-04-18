@@ -2,7 +2,6 @@
 
 ![](https://img.shields.io/badge/bodyparser-1.19.1-red)
 ![](https://img.shields.io/badge/dotenv-14.3.2-red)
-![](https://img.shields.io/badge/express-4.17.2-red)
 ![](https://img.shields.io/badge/jsonwebtoken-8.5.1-red)
 ![](https://img.shields.io/badge/nodeaudiovolumemixer-2.0.2-red)
 ![](https://img.shields.io/badge/sendinput-0.2.0-red)

@@ -1,14 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node Keyboard</title>
-    <link rel="icon" href=""/>
-    <link rel="stylesheet" href="/css/app.css">
+    <title>Node Keyboard - App</title>
+    <link rel="icon" href="" />
+    <link rel="stylesheet" href="../css/app.css">
 </head>
+
 <body>
+    <button class="accueil">
+        <span>Retour à l'accueil</span>
+        <svg viewBox="0 0 13 10" height="10px" width="15px">
+            <path d="M1,5 L11,5"></path>
+            <polyline points="8 1 12 5 8 9"></polyline>
+        </svg>
+    </button>
+
     <center>
         <button id="vPrevious" data-action="vPrevious">
             <i class="fas fa-backward fa-5x"></i>
@@ -37,9 +47,10 @@
         </table>
     </center>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/font-awesome.js" crossorigin="anonymous"></script>
-    <script src="/js/jquery-3.6.0.js"></script>
-    <script src="/js/app.js"></script>
+    <script src="../../global/js/socket.io.js"></script>
+    <script src="../../global/js/jquery-3.6.0.js"></script>
+    <script src="../../global/js/font-awesome.js" crossorigin="anonymous"></script>
+    <script src="../js/app.js"></script>
 </body>
+
 </html>

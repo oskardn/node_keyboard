@@ -3,7 +3,8 @@ $('button').on('click', function() {
 
     switch (vButtonAction) {
         case 'app':
-            window.location.href = "http://localhost:3000";
+            // window.location.href = 'http://localhost:3000';
+            window.location.href = '../../public/vue/index.html';
             break;
         case 'config':
             window.location.href = '../../config/vue/index.html';
