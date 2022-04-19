@@ -20,54 +20,49 @@
     <center>
         <h3>Mettre à jour la configuration du serveur</h3>
 
-        <form action="#" id="apConfig">
-            <table>
-                <tbody>
-                    <tr>
-                        <td class="vFirstColumn">
-                            <span>Port</span>
-                        </td>
-                        <td>
-                            <input type="text" name="nPort" id="nPort" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="vFirstColumn">
-                            <span>Token</span>
-                        </td>
-                        <td>
-                            <input type="password" name="sToken" id="sToken" />
-                        </td>
-                        <td class="vThirdColumn">
-                            <center>
-                                <button class="vPasswordVisibility">
-                                    <div class="vHide">
-                                        <i class="fas fa-eye-slash"></i>
-                                    </div>
-                                    <div class="vShow cache">
-                                        <i class="fas fa-eye"></i>
-                                    </div>
-                                </button>
-                            </center>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="3">
-                            <center>
-                                <br />
-                                <button class="vSaveConfig">
-                                    <span>Enregistrer</span>
-                                    <div class="liquid"></div>
-                                </button>
-                                <input id="submit" type="submit" value="submit">
-                            </center>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-
-        <p id="response"></p>
+        <table>
+            <tbody>
+                <tr>
+                    <td class="vFirstColumn">
+                        <span>Port</span>
+                    </td>
+                    <td>
+                        <input type="number" name="nPort" id="nPort" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="vFirstColumn">
+                        <span>Token</span>
+                    </td>
+                    <td>
+                        <input type="password" name="sToken" id="sToken" />
+                    </td>
+                    <td class="vThirdColumn">
+                        <center>
+                            <button class="vPasswordVisibility">
+                                <div class="vHide">
+                                    <i class="fas fa-eye-slash"></i>
+                                </div>
+                                <div class="vShow cache">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                            </button>
+                        </center>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <center>
+                            <br />
+                            <button class="vSaveConfig">
+                                <span>Enregistrer</span>
+                                <div class="liquid"></div>
+                            </button>
+                        </center>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </center>
 
     <script src="../../global/js/jquery-3.6.0.js"></script>

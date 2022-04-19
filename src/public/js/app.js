@@ -1,10 +1,12 @@
-$('button.accueil').on('click', function() {
+$('button.accueil').on('click', () => {
     window.location.href = '../../home/vue/index.html';
 });
 
-let vSocket = io("ws://localhost:3000", {
+const sToken = '1234', nPort = 3000;
+
+let vSocket = io(`ws://localhost:${nPort}`, {
     auth: {
-        token: '1234'
+        token: `${sToken}`
     }
 });
 
@@ -92,8 +94,6 @@ $('button').on('click', function() {
         vIo.emit('ioActions', 
         {
             "action": $(this).data('action'),
-            // "token": token,
-            // "exp": decrypJwt.exp
         });
     } else if ($(this).data('action') == 'vMuteMaster') {
         vIo.emit('ioMasterMute', 
@@ -108,8 +108,6 @@ $('input').on('touchmove mousemove', function() {
     {
         "action": $(this).data(),
         "volume": $(this).val(),
-        // "token": token,
-        // "exp": decrypJwt.exp
     });
     $('#vVolumeValue').text(parseInt($('input.vMaster').val()));
 });
