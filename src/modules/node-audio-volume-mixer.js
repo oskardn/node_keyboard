@@ -1,7 +1,8 @@
 const oConfig = require('../public/data/config.json');
+
 const { NodeAudioVolumeMixer } = require('node-audio-volume-mixer');
 
-class NodeAudio {
+class cNodeAudio {
     vShowProcessList(ioVolumeApps, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
 
@@ -21,10 +22,13 @@ class NodeAudio {
         aSessions.forEach(eElement => {
             if (eElement.name) {
                 let sAppName = eElement.name;
-                let vRefreshSliderValue = NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(eElement.pid)
+                let vRefreshSliderValue = NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(eElement.pid);
+                let vIsAppMute = NodeAudioVolumeMixer.isAudioSessionMuted(eElement.pid);
+
                 vSocket.emit('vRefreshSliderValue', ({
                     sAppName: sAppName,
-                    vRefreshSliderValue : vRefreshSliderValue * 100
+                    vRefreshSliderValue : vRefreshSliderValue * 100,
+                    vIsAppMute: vIsAppMute
                 }));
             };
         });
@@ -46,6 +50,8 @@ class NodeAudio {
             };
         };
     }
+
+    vIsAppMute(sPassword) {}
 }
 
-module.exports = NodeAudio;
+module.exports = cNodeAudio;

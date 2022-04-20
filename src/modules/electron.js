@@ -2,13 +2,13 @@ const oConfig = require('../public/data/config.json');
 const { app, BrowserWindow, dialog } = require('electron');
 const path = require('path');
 
-class Electron {
+class cElectron {
     vGenerateWindows() {
         const createWindow = () => {
             const win = new BrowserWindow({
                 width: 800,
                 height: 600,
-                icon: path.join(__dirname, '../global/img/icon.png')
+                // icon: path.join(__dirname, '../global/img/icon.png')
             });
 
             win.loadFile('./src/home/vue/index.html');
@@ -55,4 +55,4 @@ class Electron {
     }
 }
 
-module.exports = Electron;
+module.exports = cElectron;

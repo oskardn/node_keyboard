@@ -2,6 +2,7 @@ $('button.accueil').on('click', function () {
     window.location.href = '../../home/vue/index.html';
 });
 
+$('.vPasswordVisibility').unbind('click');
 $('.vPasswordVisibility').on('click', () => {
     if ($('#sToken').attr('type') == 'password') {
         $('#sToken').attr('type', 'text');
@@ -16,13 +17,24 @@ $('.vPasswordVisibility').on('click', () => {
     };
 });
 
-$('.vSaveConfig').on('click', () => {
-    let nPort = $('#nPort').val(), sToken = $('#sToken').val();
-
-    $.post('http://localhost:3000/settings',
+$('#nPortButton').unbind('click');
+$('#nPortButton').on('click', function() {
+    let nPort = $('#nPort').val();
+    
+    $.post(`http://localhost:3000/port`,
         {
-            token: sToken,
-            port: nPort
+            data: nPort
+        }
+    );
+});
+
+$('#sTokenButton').unbind('click');
+$('#sTokenButton').on('click', function() {
+    let sToken = $('#sToken').val();
+
+    $.post(`http://localhost:3000/token`,
+        {
+            data: sToken
         }
     );
 });

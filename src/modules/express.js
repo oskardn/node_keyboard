@@ -3,7 +3,7 @@ const vPath = require('path');
 
 const vApp = vExpress();
 
-class Express {
+class cExpress {
     vReturnApp() {
         return vApp;
     }
@@ -11,4 +11,4 @@ class Express {
     vRequestSettings() {}
 }
 
-module.exports = Express;
+module.exports = cExpress;
