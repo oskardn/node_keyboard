@@ -1,12 +1,12 @@
-let sToken, nPort;
+let sTokenJSON, nPortJSON;
 
 $.ajax({
     url: '../data/config.json',
     async: false,
     dataType: 'json',
     success: function (response) {
-        nPort = response.APP_PORT;
-        sToken = response.TOKEN
+        nPortJSON = response.APP_PORT;
+        sTokenJSON = response.TOKEN
     }
 });
 
@@ -14,9 +14,9 @@ $('button.accueil').on('click', () => {
     window.location.href = '../../home/vue/index.html';
 });
 
-let vSocket = io(`ws://localhost:${nPort}`, {
+let vSocket = io(`ws://localhost:${nPortJSON}`, {
     auth: {
-        token: `${sToken}`
+        token: `${sTokenJSON}`
     }
 });
 
