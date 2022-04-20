@@ -3,7 +3,7 @@ const vAudio = require('win-audio').speaker;
 
 vAudio.polling(200);
 
-class WinAudio {
+class cWinAudio {
     vChangeMasterVolume(ioVolumeMaster, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
 
@@ -36,6 +36,10 @@ class WinAudio {
             };
         };
     }
+
+    vIsMasterMute() {
+        return vAudio.isMuted();
+    }
 }
 
-module.exports = WinAudio;
+module.exports = cWinAudio;

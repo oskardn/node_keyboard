@@ -1,4 +1,8 @@
-build/*
+# Compiled app folder
 dist/*
+
+# Dependancies folder
 node_modules/*
+
+# Local config DON'T PSUH IT ONLINE !!!
 src/public/data/config_local.json

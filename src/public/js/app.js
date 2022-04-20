@@ -1,10 +1,22 @@
-$('button.accueil').on('click', function() {
+let sTokenJSON, nPortJSON;
+
+$.ajax({
+    url: '../data/config.json',
+    async: false,
+    dataType: 'json',
+    success: function (response) {
+        nPortJSON = response.APP_PORT;
+        sTokenJSON = response.TOKEN
+    }
+});
+
+$('button.accueil').on('click', () => {
     window.location.href = '../../home/vue/index.html';
 });
 
-let vSocket = io("ws://localhost:3000", {
+let vSocket = io(`ws://localhost:${nPortJSON}`, {
     auth: {
-        token: '1234'
+        token: `${sTokenJSON}`
     }
 });
 
@@ -13,6 +25,20 @@ let vIo = vSocket;
 vIo.on('connect_error', (err) => {
     console.log(err.message);
 });
+
+vIo.on('vIsMasterMute', (vIsMasterMute) => {
+    switch (vIsMasterMute) {
+        case true:
+            $('#vMuteMaster img').attr('src', '../../global/img/mute.png');
+            break;
+        case false:
+            $('#vMuteMaster img').attr('src', '../../global/img/unmute.png');
+            break;
+        default:
+            return;
+            break;
+    };
+}); 
 
 vIo.on('vWindowsActualVolume', (vWindowsActualVolume) => {
     $('#vVolumeValue').text(vWindowsActualVolume);
@@ -42,20 +68,28 @@ vIo.on('aSessions', (aSessions) => {
                             </td>
                             <td>
                                 <button class="vApp vMute" data-btn="${oVal.name}">
-                                    <i class="fas fa-volume-mute fa-2x"></i>
+                                    <img src="../../global/img/mute.png" alt="">
                                 </button>
                             </td>
                         </tr>`
                     );
 
-                    /**
-                     * Attention pour tester sur ordinateur il faut simuler
-                     * un toucher comme sur un smartphone ou tablette
-                     */
                     let vOtherSlider = $(`[name="${oVal.name}"]`);
                     let vMuteButtons = $('button.vMute')
 
                     vMuteButtons.unbind().click(function() {
+                        switch ($(this).find('img').attr('src')) {
+                            case '../../global/img/mute.png':
+                                $(this).find('img').attr('src', '../../global/img/unmute.png')
+                                break;
+                            case '../../global/img/unmute.png':
+                                $(this).find('img').attr('src', '../../global/img/mute.png')
+                                break;
+                            default:
+                                return;
+                                break;
+                        };
+
                         vIo.emit('vMuteButton', 
                         {
                             vApp: $(this).data('btn')
@@ -74,13 +108,28 @@ vIo.on('aSessions', (aSessions) => {
                     });
 
                     vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
+                        console.error(vRefreshSliderValue);
                         if (oAppBlocklist[`${vRefreshSliderValue.sAppName}`] == undefined || oAppBlocklist[`${vRefreshSliderValue.sAppName}`] == true) {
                             if (vRefreshSliderValue.sAppName == oVal.name) {
                                 $(`[name="${oVal.name}"]`).val(vRefreshSliderValue.vRefreshSliderValue);
-                                $(`[id="${oVal.name}"]`).text(Math.round(vRefreshSliderValue.vRefreshSliderValue))
-                            }
-                        }
-                    })
+                                $(`[id="${oVal.name}"]`).text(Math.round(vRefreshSliderValue.vRefreshSliderValue));
+
+                                let vMuteBtn = $(`[data-btn="${oVal.name}"]`);
+
+                                switch (vRefreshSliderValue.vIsAppMute) {
+                                    case true:
+                                        console.error(vMuteBtn.find('img').attr('src', '../../global/img/mute.png'));
+                                        break;
+                                    case false:
+                                        console.error(vMuteBtn.find('img').attr('src', '../../global/img/unmute.png'));
+                                        break;
+                                    default:
+                                        return;
+                                        break;
+                                };
+                            };
+                        };
+                    });
                 };
             };
         });
@@ -92,14 +141,24 @@ $('button').on('click', function() {
         vIo.emit('ioActions', 
         {
             "action": $(this).data('action'),
-            // "token": token,
-            // "exp": decrypJwt.exp
         });
     } else if ($(this).data('action') == 'vMuteMaster') {
         vIo.emit('ioMasterMute', 
         {
             "action": $(this).data('action'),
         });
+        
+        switch ($(this).find('img').attr('src')) {
+            case '../../global/img/mute.png':
+                $('#vMuteMaster img').attr('src', '../../global/img/unmute.png');
+                break;
+            case '../../global/img/unmute.png':
+                $('#vMuteMaster img').attr('src', '../../global/img/mute.png');
+                break;
+            default:
+                return;
+                break;
+        };
     };
 });
 
@@ -108,8 +167,6 @@ $('input').on('touchmove mousemove', function() {
     {
         "action": $(this).data(),
         "volume": $(this).val(),
-        // "token": token,
-        // "exp": decrypJwt.exp
     });
     $('#vVolumeValue').text(parseInt($('input.vMaster').val()));
 });

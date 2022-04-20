@@ -1,17 +1,14 @@
 const oConfig = require('../public/data/config.json');
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 const path = require('path');
 
-class Electron {
+class cElectron {
     vGenerateWindows() {
         const createWindow = () => {
             const win = new BrowserWindow({
                 width: 800,
                 height: 600,
-                // icon: path.join(__dirname, '../global/img/icon.png'),
-                webPreferences: {
-                    preload: path.join(__dirname, '../config/js/preload.js')
-                }
+                // icon: path.join(__dirname, '../global/img/icon.png')
             });
 
             win.loadFile('./src/home/vue/index.html');
@@ -33,6 +30,29 @@ class Electron {
             };
         });
     }
+
+    vAlertBox(vType, sTitre, sMessage, sDetail) {
+        const oOptions = {
+            type: vType,
+            buttons: ['OK'],
+            defaultId: 2,
+            title: sTitre,
+            message: sMessage,
+            detail: sDetail,
+            checkboxLabel: 'Se souvenir de mon choix',
+            checkboxChecked: false,
+        };
+        
+        dialog.showMessageBox(null, oOptions, (vResponse, vCheckboxChecked) => {
+            console.log(vResponse);
+            console.log(vCheckboxChecked);
+        });
+    }
+
+    vRelaunchApp() {
+        app.relaunch();
+        app.exit();
+    }
 }
 
-module.exports = Electron;
+module.exports = cElectron;

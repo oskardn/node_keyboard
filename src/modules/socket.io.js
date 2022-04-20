@@ -11,8 +11,10 @@ const vNodeAudio = new NodeAudio();
 
 const oAppBlocklist = require('../public/data/blocklist.json');
 
-class SockerIO {
+class cSockerIO {
     vSocketEvents(vSocket, sPassword) {
+        vSocket.emit('vIsMasterMute', vWinAudio.vIsMasterMute());
+
         vSocket.emit('vWindowsActualVolume', vAudio.get());
 
         vAudio.events.on('change', (vVal) => {
@@ -33,6 +35,7 @@ class SockerIO {
 
         vSocket.on('ioMasterMute', (ioMasterMute) => {
             vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword);
+            vWinAudio.vIsMasterMute();
         });
 
         vSocket.on('ioVolumeApps', (ioVolumeApps) => {
@@ -45,4 +48,4 @@ class SockerIO {
     }
 }
 
-module.exports = SockerIO;
+module.exports = cSockerIO;
