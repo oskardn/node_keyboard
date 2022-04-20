@@ -30,7 +30,7 @@ class cElectron {
                         label: 'Node Keyboard', click: () => {
                             vOpen('https://github.com/oskardn/node_keyboard');
                         },
-                        icon: vPath.join(__dirname, '../global/img/small-icon.png'),
+                        icon: vPath.join(__dirname, '../global/img/very-small-icon.png'),
                         enabled: true,
                     },
                     {
