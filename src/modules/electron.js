@@ -1,37 +1,82 @@
 const oConfig = require('../public/data/config.json');
-const { app, BrowserWindow, dialog } = require('electron');
-const path = require('path');
+
+const { app, BrowserWindow, dialog, Menu, Tray } = require('electron');
+const vPath = require('path');
+const vOpen = require('open');
 
 class cElectron {
     vGenerateWindows() {
-        const createWindow = () => {
-            const win = new BrowserWindow({
+        let vApp = app, vTrayInit = null;
+        let vBrowserWindow = BrowserWindow, vMenu = Menu, vTray = Tray;
+
+        const vCreateWindow = () => {
+            const vWin = new vBrowserWindow({
                 width: 800,
                 height: 600,
-                // icon: path.join(__dirname, '../global/img/icon.png')
+                icon: vPath.join(__dirname, '../global/img/small-icon.png')
             });
 
-            win.loadFile('./src/home/vue/index.html');
+            vWin.loadFile('./src/home/vue/index.html');
+
+            vWin.on('minimize', () => {
+                if (vTrayInit) {
+                    return vWin.hide();
+                };
+
+                vTrayInit = new vTray(vPath.join(__dirname, '../global/img/small-icon.png'));
+
+                const aTemplate = [
+                    {
+                        label: 'Node Keyboard', click: () => {
+                            vOpen('https://github.com/oskardn/node_keyboard');
+                        },
+                        icon: vPath.join(__dirname, '../global/img/small-icon.png'),
+                        enabled: true,
+                    },
+                    {
+                        type: 'separator',
+                    },
+                    {
+                        label: 'Afficher l\'application', click: () => {
+                            vWin.show();
+                        },
+                    },
+                    {
+                        label: 'Quitter l\'application', click: () => {
+                            vWin.close();
+                        },
+                    },
+                ];
+
+                const vContextMenu = vMenu.buildFromTemplate(aTemplate);
+
+                vTrayInit.setContextMenu(vContextMenu);
+                vTrayInit.setToolTip('Node Keyboard');
+
+                vWin.hide();
+            });
         };
 
-        app.whenReady().then(() => {
-            createWindow();
+        vApp.whenReady().then(() => {
+            vCreateWindow();
 
-            app.on('activate', () => {
-                if (BrowserWindow.getAllWindows().length === 0) {
-                    createWindow();
+            vApp.on('activate', () => {
+                if (vBrowserWindow.getAllWindows().length === 0) {
+                    vCreateWindow();
                 };
             });
         });
 
-        app.on('window-all-closed', () => {
+        vApp.on('window-all-closed', () => {
             if (process.platform !== 'darwin') {
-                app.quit();
+                vApp.quit();
             };
         });
     }
 
     vAlertBox(vType, sTitre, sMessage, sDetail) {
+        let vDialog = dialog;
+
         const oOptions = {
             type: vType,
             buttons: ['OK'],
@@ -43,15 +88,15 @@ class cElectron {
             checkboxChecked: false,
         };
         
-        dialog.showMessageBox(null, oOptions, (vResponse, vCheckboxChecked) => {
+        vDialog.showMessageBox(null, oOptions, (vResponse, vCheckboxChecked) => {
             console.log(vResponse);
             console.log(vCheckboxChecked);
         });
     }
 
     vRelaunchApp() {
-        app.relaunch();
-        app.exit();
+        vApp.relaunch();
+        vApp.exit();
     }
 }
 
