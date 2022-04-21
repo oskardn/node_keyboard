@@ -108,7 +108,6 @@ vIo.on('aSessions', (aSessions) => {
                     });
 
                     vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
-                        console.error(vRefreshSliderValue);
                         if (oAppBlocklist[`${vRefreshSliderValue.sAppName}`] == undefined || oAppBlocklist[`${vRefreshSliderValue.sAppName}`] == true) {
                             if (vRefreshSliderValue.sAppName == oVal.name) {
                                 $(`[name="${oVal.name}"]`).val(vRefreshSliderValue.vRefreshSliderValue);
@@ -118,10 +117,10 @@ vIo.on('aSessions', (aSessions) => {
 
                                 switch (vRefreshSliderValue.vIsAppMute) {
                                     case true:
-                                        console.error(vMuteBtn.find('img').attr('src', '../../global/img/mute.png'));
+                                        vMuteBtn.find('img').attr('src', '../../global/img/mute.png');
                                         break;
                                     case false:
-                                        console.error(vMuteBtn.find('img').attr('src', '../../global/img/unmute.png'));
+                                        vMuteBtn.find('img').attr('src', '../../global/img/unmute.png');
                                         break;
                                     default:
                                         return;
