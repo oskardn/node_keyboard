@@ -4,7 +4,7 @@ const vSendInput = require('sendinput');
 const vNext = 176, vPrevious = 177, vPlayPause = 179;
 let vActionCode;
 
-class SendInput {
+class cSendInput {
     vInputs(ioActions, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
 
@@ -36,4 +36,4 @@ class SendInput {
     }
 }
 
-module.exports = SendInput;
+module.exports = cSendInput;
