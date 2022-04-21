@@ -4,9 +4,11 @@ const { app, BrowserWindow, dialog, Menu, Tray } = require('electron');
 const vPath = require('path');
 const vOpen = require('open');
 
+let vApp = app;
+
 class cElectron {
     vGenerateWindows() {
-        let vApp = app, vTrayInit = null;
+        let vTrayInit = null;
         let vBrowserWindow = BrowserWindow, vMenu = Menu, vTray = Tray;
 
         const vCreateWindow = () => {
@@ -40,11 +42,13 @@ class cElectron {
                         label: 'Afficher l\'application', click: () => {
                             vWin.show();
                         },
+                        icon: vPath.join(__dirname, '../global/img/show.png')
                     },
                     {
                         label: 'Quitter l\'application', click: () => {
                             vWin.close();
                         },
+                        icon: vPath.join(__dirname, '../global/img/quit.png')
                     },
                 ];
 

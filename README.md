@@ -48,8 +48,11 @@ Une fois l'application lancée, vous accéderez à l'interface suivante :
 ![](https://sikelio.s-ul.eu/XacVa10S)  
 
 Vous pouvez choisir entre "App" et "Config"?  
- - App : Permet d'accéder à une interface permettant de controller le son de votre ordinateur. ![](https://sikelio.s-ul.eu/uZhHxiYE)
- - Config : Permet de changer les paramètres de connection au serveur comme le mot de passe d'accès ainsi que le port. ![](https://sikelio.s-ul.eu/OXTGV6zx)
+ - App : Permet d'accéder à une interface permettant de controller le son de votre ordinateur.  
+ ![](https://sikelio.s-ul.eu/uZhHxiYE)
+
+ - Config : Permet de changer les paramètres de connection au serveur comme le mot de passe d'accès ainsi que le port.  
+ ![](https://sikelio.s-ul.eu/OXTGV6zx)  
 
 ## Contributeurs
 
