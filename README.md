@@ -54,6 +54,22 @@ Vous pouvez choisir entre "App" et "Config"?
  - Config : Permet de changer les paramètres de connection au serveur comme le mot de passe d'accès ainsi que le port.  
  ![](https://sikelio.s-ul.eu/OXTGV6zx)  
 
+## Type de variables
+
+---
+Chacune des varibales possède un attribut qui définit le type du contenu :  
+
+| Attritut |    Type    |      Définition     |
+|----------|------------|---------------------|
+| a        | Array      | Tableau             |
+| c        | Class      | Classe              |
+| e        | Element    | Objjet DOM          |
+| io       | Socket.IO  | Requête Socket.IO   |
+| n        | Number     | Nombre              |
+| o        | Object     | JSON                |
+| s        | String     | Chaine de caractère |
+| v        | Void       | Pas de typage       |
+
 ## Contributeurs
 
 ---
