@@ -1,6 +1,6 @@
 {
-    "name": "node-keyboard-app",
-    "productName": "Node Keyboard",
+    "name": "sikontrol-app",
+    "productName": "Sikontrol",
     "version": "1.0.0",
     "description": "Audio controller for Windows",
     "main": "server.js",
@@ -15,7 +15,7 @@
         "url": "https://github.com/oskardn/"
     },
     "build": {
-        "appId": "fr.sik.node-keyboard-app",
+        "appId": "fr.sik.sikontrol-app",
         "nodeGypRebuild": false
     },
     "license": "MIT",
@@ -28,11 +28,12 @@
         "open": "^8.4.0",
         "sendinput": "^0.2.0",
         "socket.io": "^4.4.1",
+        "sqlite3": "^5.0.6",
         "win-audio": "^2.0.2"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/oskardn/node_keyboard.git"
+        "url": "git+https://github.com/oskardn/sikontrol.git"
     },
     "keywords": [
         "nodejs",
@@ -48,9 +49,9 @@
         "node controller"
     ],
     "bugs": {
-        "url": "https://github.com/oskardn/node_keyboard/issues"
+        "url": "https://github.com/oskardn/sikontrol/issues"
     },
-    "homepage": "https://github.com/oskardn/node_keyboard#readme",
+    "homepage": "https://github.com/oskardn/sikontrol#readme",
     "devDependencies": {
         "electron": "^17.1.1",
         "electron-builder": "^22.14.13"

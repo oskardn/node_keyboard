@@ -27,7 +27,7 @@ class cNodeAudio {
 
                 vSocket.emit('vRefreshSliderValue', ({
                     sAppName: sAppName,
-                    vRefreshSliderValue : vRefreshSliderValue * 100,
+                    vRefreshSliderValue: vRefreshSliderValue * 100,
                     vIsAppMute: vIsAppMute
                 }));
             };
@@ -36,7 +36,7 @@ class cNodeAudio {
 
     vNodeAppMute(vMuteButton, sPassword) {
         const sEnvPassword = oConfig.TOKEN;
-        
+
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         const eSession = aSessions.find((aValue) => {
             return aValue.name === vMuteButton.vApp;
@@ -51,7 +51,7 @@ class cNodeAudio {
         };
     }
 
-    vIsAppMute(sPassword) {}
+    vIsAppMute(sPassword) { }
 }
 
 module.exports = cNodeAudio;

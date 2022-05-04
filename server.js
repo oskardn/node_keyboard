@@ -20,9 +20,11 @@ const vApp = vExpress.vReturnApp();
 const vHttpServer = vHttp.createServer(vApp);
 const vIo = new Server(vHttpServer);
 
+vSettings.vInitConfig();
+
 vIo.on('connection', (vSocket) => {
     const sPassword = vSocket.handshake.auth.token;
-    
+
     vSocketIO.vSocketEvents(vSocket, sPassword);
     vNodeAudio.vRefreshSliderValue(vSocket);
 });
@@ -37,13 +39,13 @@ vApp.get('/', (req, res) => {
 
 vApp.post('/port', (req, res) => {
     let oResponse = req.body;
-    
+
     vSettings.vChangeServerPort(oResponse);
 });
 
 vApp.post('/token', (req, res) => {
     let oResponse = req.body;
-    
+
     vSettings.vChangeServerToken(oResponse);
 });
 

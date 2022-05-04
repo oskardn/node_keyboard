@@ -29,8 +29,8 @@ class cElectron {
 
                 const aTemplate = [
                     {
-                        label: 'Node Keyboard', click: () => {
-                            vOpen('https://github.com/oskardn/node_keyboard');
+                        label: 'Sikontrol', click: () => {
+                            vOpen('https://github.com/oskardn/sikontrol');
                         },
                         icon: vPath.join(__dirname, '../global/img/very-small-icon.png'),
                         enabled: true,
@@ -55,7 +55,7 @@ class cElectron {
                 const vContextMenu = vMenu.buildFromTemplate(aTemplate);
 
                 vTrayInit.setContextMenu(vContextMenu);
-                vTrayInit.setToolTip('Node Keyboard');
+                vTrayInit.setToolTip('Sikontrol');
 
                 vWin.hide();
             });
@@ -91,7 +91,7 @@ class cElectron {
             checkboxLabel: 'Se souvenir de mon choix',
             checkboxChecked: false,
         };
-        
+
         vDialog.showMessageBox(null, oOptions, (vResponse, vCheckboxChecked) => {
             console.log(vResponse);
             console.log(vCheckboxChecked);

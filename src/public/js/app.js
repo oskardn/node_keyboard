@@ -38,7 +38,7 @@ vIo.on('vIsMasterMute', (vIsMasterMute) => {
             return;
             break;
     };
-}); 
+});
 
 vIo.on('vWindowsActualVolume', (vWindowsActualVolume) => {
     $('#vVolumeValue').text(vWindowsActualVolume);
@@ -77,7 +77,7 @@ vIo.on('aSessions', (aSessions) => {
                     let vOtherSlider = $(`[name="${oVal.name}"]`);
                     let vMuteButtons = $('button.vMute')
 
-                    vMuteButtons.unbind().click(function() {
+                    vMuteButtons.unbind().click(function () {
                         switch ($(this).find('img').attr('src')) {
                             case '../../global/img/mute.png':
                                 $(this).find('img').attr('src', '../../global/img/unmute.png')
@@ -90,21 +90,21 @@ vIo.on('aSessions', (aSessions) => {
                                 break;
                         };
 
-                        vIo.emit('vMuteButton', 
-                        {
-                            vApp: $(this).data('btn')
-                        });
+                        vIo.emit('vMuteButton',
+                            {
+                                vApp: $(this).data('btn')
+                            });
                         // alert("Bouton en cours de développement\nMerci à toi de patienter :)");
                         // window.location.href = "https://bit.ly/3x7indr"
                     });
 
-                    vOtherSlider.on('touchmove mousemove', function() {
-                        $(`[id="${ $(this).data('vol') }"]`).text($(this).val());
-                        vIo.emit('ioVolumeApps', 
-                        {
-                            action: $(this).data('vol'),
-                            volume: $(this).val()
-                        });
+                    vOtherSlider.on('touchmove mousemove', function () {
+                        $(`[id="${$(this).data('vol')}"]`).text($(this).val());
+                        vIo.emit('ioVolumeApps',
+                            {
+                                action: $(this).data('vol'),
+                                volume: $(this).val()
+                            });
                     });
 
                     vIo.on('vRefreshSliderValue', (vRefreshSliderValue) => {
@@ -135,18 +135,18 @@ vIo.on('aSessions', (aSessions) => {
     });
 });
 
-$('button').on('click', function() {
+$('button').on('click', function () {
     if ($(this).data('action') != 'vMuteMaster') {
-        vIo.emit('ioActions', 
-        {
-            "action": $(this).data('action'),
-        });
+        vIo.emit('ioActions',
+            {
+                "action": $(this).data('action'),
+            });
     } else if ($(this).data('action') == 'vMuteMaster') {
-        vIo.emit('ioMasterMute', 
-        {
-            "action": $(this).data('action'),
-        });
-        
+        vIo.emit('ioMasterMute',
+            {
+                "action": $(this).data('action'),
+            });
+
         switch ($(this).find('img').attr('src')) {
             case '../../global/img/mute.png':
                 $('#vMuteMaster img').attr('src', '../../global/img/unmute.png');
@@ -161,11 +161,11 @@ $('button').on('click', function() {
     };
 });
 
-$('input').on('touchmove mousemove', function() {
+$('input').on('touchmove mousemove', function () {
     vIo.emit('ioVolumeMaster',
-    {
-        "action": $(this).data(),
-        "volume": $(this).val(),
-    });
+        {
+            "action": $(this).data(),
+            "volume": $(this).val(),
+        });
     $('#vVolumeValue').text(parseInt($('input.vMaster').val()));
 });

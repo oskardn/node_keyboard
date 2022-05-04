@@ -1,6 +1,6 @@
-![](https://img.shields.io/badge/node_keyboard-1.0.0-blue)  
+![](https://img.shields.io/badge/sikontrol-1.0.0-blue)  
 
-# Node Keyboard
+# Sikontrol
 
 Projet destiné à pouvoir controller l'audio de son pc depuis son téléphone (Une application pour téléphone est actuellement en cours de développement).  
 Ce projet fonctionne seulement sur Windows, puisque la librairie utilisée pour l'envois de macros est utilisatble uniquement par Windows.
@@ -12,7 +12,7 @@ Ce projet fonctionne seulement sur Windows, puisque la librairie utilisée pour 
 Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
 
 ```console
-git clone https://github.com/oskardn/node_keyboard.git
+git clone https://github.com/oskardn/sikontrol.git
 ```
 
 Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les dépendance avec la commande suivante :
@@ -73,4 +73,4 @@ Chacune des varibales possède un attribut qui définit le type du contenu :
 ## Contributeurs
 
 ---
-[![Sik', AnthoDingo](https://contrib.rocks/image?repo=oskardrevetnitschke/node_keyboard)](https://github.com/oskardrevetnitschke/node_keyboard/graphs/contributors)
+[![Sik', AnthoDingo](https://contrib.rocks/image?repo=oskardrevetnitschke/sikontrol)](https://github.com/oskardrevetnitschke/sikontrol/graphs/contributors)

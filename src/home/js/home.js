@@ -1,4 +1,4 @@
-$('button').on('click', function() {
+$('button').on('click', function () {
     const vButtonAction = $(this).attr('data-home');
 
     switch (vButtonAction) {
