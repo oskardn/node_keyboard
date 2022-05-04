@@ -5,6 +5,7 @@ const cElectron = require('./src/modules/electron');
 const cExpress = require('./src/modules/express');
 const cSockerIO = require('./src/modules/socket.io');
 const cNodeAudio = require('./src/modules/node-audio-volume-mixer');
+const cStartup = require('./src/modules/startup');
 
 const vHttp = require('http');
 const { Server } = require('socket.io');
@@ -15,6 +16,7 @@ const vExpress = new cExpress();
 const vSettings = new cSettings();
 const vSocketIO = new cSockerIO();
 const vNodeAudio = new cNodeAudio();
+const vStartup = new cStartup();
 
 const vApp = vExpress.vReturnApp();
 const vHttpServer = vHttp.createServer(vApp);
@@ -52,8 +54,7 @@ vApp.post('/token', (req, res) => {
 const nPort = oConfig.APP_PORT;
 
 vHttpServer.listen((nPort || 3000), () => {
-    console.log('Websocket server started');
-    console.log('Express server started');
+    vStartup.vAsciiLogo();
 });
 
 vElectron.vGenerateWindows();

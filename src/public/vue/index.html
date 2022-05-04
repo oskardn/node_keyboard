@@ -1,59 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Sikontrol - App</title>
+        <link rel="icon" href="" />
+        <link rel="stylesheet" href="../css/app.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sikontrol - App</title>
-    <link rel="icon" href="" />
-    <link rel="stylesheet" href="../css/app.css">
-</head>
-
-<body>
-    <button class="accueil">
-        <span>Retour à l'accueil</span>
-        <svg viewBox="0 0 13 10" height="10px" width="15px">
-            <path d="M1,5 L11,5"></path>
-            <polyline points="8 1 12 5 8 9"></polyline>
-        </svg>
-    </button>
-
-    <br><br>
-
-    <center>
-        <button id="vPrevious" data-action="vPrevious">
-            <img src="../../global/img/previous.png" alt="">
+    <body>
+        <button class="accueil">
+            <span>Retour à l'accueil</span>
+            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+            </svg>
         </button>
-        <button id="vPlayPause" data-action="vPlayPause">
-            <img src="../../global/img/pause.png" alt="">
-            <img src="../../global/img/play.png" alt="">
-        </button>
-        <button id="vNext" data-action="vNext">
-            <img src="../../global/img/next.png" alt="">
-        </button>
-        <br>
-        <input class="vMaster" id="vMaster" type="range" min="0" max="100" step="1" data-vol="vMaster">
-        <br>
-        <span>Volume :</span>
-        <span id="vVolumeValue"></span>
-        <button id="vMuteMaster" data-action="vMuteMaster">
-            <img src="../../global/img/mute.png" alt="">
-        </button>
-    </center>
 
-    <center class="vOtherSliders">
-        <br>
-        <table>
-            <tbody></tbody>
-        </table>
-    </center>
+        <br /><br />
 
-    <script src="../../global/js/socket.io.js"></script>
-    <script src="../../global/js/jquery-3.6.0.js"></script>
-    <script src="../../global/js/font-awesome.js" crossorigin="anonymous"></script>
-    <script src="../../global/js/sql-wasm.js"></script>
-    <script src="../js/app.js"></script>
-</body>
+        <center>
+            <button id="vPrevious" data-action="vPrevious">
+                <img src="../../global/img/previous.png" alt="" />
+            </button>
+            <button id="vPlayPause" data-action="vPlayPause">
+                <img src="../../global/img/pause.png" alt="" />
+                <img src="../../global/img/play.png" alt="" />
+            </button>
+            <button id="vNext" data-action="vNext">
+                <img src="../../global/img/next.png" alt="" />
+            </button>
+            <br />
+            <input
+                class="vMaster"
+                id="vMaster"
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                data-vol="vMaster"
+            />
+            <br />
+            <span>Volume :</span>
+            <span id="vVolumeValue"></span>
+            <button id="vMuteMaster" data-action="vMuteMaster">
+                <img src="../../global/img/mute.png" alt="" />
+            </button>
+        </center>
 
+        <center class="vOtherSliders">
+            <br />
+            <table>
+                <tbody></tbody>
+            </table>
+        </center>
+
+        <script src="../../global/js/socket.io.js"></script>
+        <script src="../../global/js/jquery-3.6.0.js"></script>
+        <script
+            src="../../global/js/font-awesome.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="../../global/js/sql-wasm.js"></script>
+        <script src="../js/app.js"></script>
+    </body>
 </html>
