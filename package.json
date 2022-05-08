@@ -16,7 +16,21 @@
     },
     "build": {
         "appId": "fr.sik.sikontrol-app",
-        "nodeGypRebuild": false
+        "nodeGypRebuild": false,
+        "win": {
+            "target" : [
+                "nsis"
+            ],
+            "icon": ""
+        },
+        "nsis": {
+            "oneClick": false,
+            "installerIcon": "src/global/img/icon.ico",
+            "uninstallerIcon": "src/global/img/icon.ico",
+            "uninstallDisplayName": "sikontrol-app",
+            "license": "LICENSE.md",
+            "allowToChangeInstallationDirectory": true
+        }
     },
     "license": "MIT",
     "dependencies": {
