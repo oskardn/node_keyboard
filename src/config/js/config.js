@@ -29,9 +29,9 @@ $('.vPasswordVisibility').on('click', () => {
 });
 
 $('#nPortButton').unbind('click');
-$('#nPortButton').on('click', function() {
+$('#nPortButton').on('click', function () {
     let nPort = $('#nPort').val();
-    
+
     $.post(`http://localhost:${nPortJSON}/port`,
         {
             data: nPort
@@ -40,7 +40,7 @@ $('#nPortButton').on('click', function() {
 });
 
 $('#sTokenButton').unbind('click');
-$('#sTokenButton').on('click', function() {
+$('#sTokenButton').on('click', function () {
     let sToken = $('#sToken').val();
 
     $.post(`http://localhost:${nPortJSON}/token`,

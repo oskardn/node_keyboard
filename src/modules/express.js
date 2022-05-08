@@ -7,8 +7,6 @@ class cExpress {
     vReturnApp() {
         return vApp;
     }
-
-    vRequestSettings() {}
 }
 
 module.exports = cExpress;

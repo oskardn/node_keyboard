@@ -17,7 +17,7 @@ class cWinAudio {
                         vAudio.set(parseInt(ioVolumeMaster.volume));
                     } else {
                         return;
-                    }
+                    };
                     break;
             };
         } else {
