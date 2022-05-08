@@ -13,6 +13,7 @@ const sDbName = "config.local.db";
 
 class cSettings {
     vInitConfig() {
+        console.log("avant");
         const vDb = new vSQLite3.Database(sDbName, (vError) => {
             if (vError) {
                 throw vError;
@@ -27,17 +28,18 @@ class cSettings {
                     );
                 `);
 
-            vDb.all("SELECT * FROM config", (vError, oData) => {
+            vDb.all('SELECT port, token FROM config', (vError, oData) => {
                 if (vError) {
                     return;
-                }
+                };
 
                 if (oData == "") {
                     this.#vCreateConfig();
                 } else {
-                    console.log(oData[0].valeur);
-                    console.log(oData[1].valeur);
-                }
+                    console.log(oData);
+                    // console.log(oData[0].valeur);
+                    // console.log(oData[1].valeur);
+                };
             });
         });
     }
