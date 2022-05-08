@@ -1,7 +1,5 @@
 const Electron = require("./electron");
 
-const vPath = require("path");
-const vEditJsonFile = require("edit-json-file");
 const vDetectPort = require("detect-port");
 const vSQLite3 = require("sqlite3").verbose();
 
@@ -10,56 +8,11 @@ const vElectron = new Electron();
 const oConfig = require("../public/data/config.json");
 
 const sDbName = "config.local.db";
+const vDb = new vSQLite3.Database(sDbName);
 
 class cSettings {
-    vInitConfig() {
-        console.log("avant");
-        const vDb = new vSQLite3.Database(sDbName, (vError) => {
-            if (vError) {
-                throw vError;
-            }
-
-            vDb.run(`
-                    CREATE TABLE IF NOT EXISTS config(
-                        id INTEGER,
-                        libelle TEXT,
-                        valeur TEXT,
-                        PRIMARY KEY(id)
-                    );
-                `);
-
-            vDb.all('SELECT port, token FROM config', (vError, oData) => {
-                if (vError) {
-                    return;
-                };
-
-                if (oData == "") {
-                    this.#vCreateConfig();
-                } else {
-                    console.log(oData);
-                    // console.log(oData[0].valeur);
-                    // console.log(oData[1].valeur);
-                };
-            });
-        });
-    }
-
-    #vCreateConfig() {
-        const vDb = new vSQLite3.Database(sDbName, (vError) => {
-            vDb.run(
-                'INSERT INTO config (libelle, valeur) VALUES ("port", 3000)'
-            );
-            vDb.run(
-                'INSERT INTO config (libelle, valeur) VALUES ("token", 1234)'
-            );
-        });
-    }
-
     vChangeServerPort(oResponse) {
         let nPort = oResponse.data;
-        let vFile = vEditJsonFile(
-            vPath.join(__dirname, "../public/data/config.json")
-        );
 
         if (!nPort) {
             const vType = "warning",
@@ -86,8 +39,9 @@ class cSettings {
                         }
 
                         if (nPort == vOtherPort) {
-                            vFile.set("APP_PORT", parseInt(nPort));
-                            vFile.save();
+                            vDb.run(
+                                `UPDATE config SET valeur = ${nPort} WHERE libelle = "port"`
+                            );
                             vElectron.vRelaunchApp();
                         } else {
                             const vType = "error",
@@ -117,7 +71,6 @@ class cSettings {
 
     vChangeServerToken(oResponse) {
         let sToken = oResponse.data;
-        // let vFile = vEditJsonFile(vPath.join(__dirname, '../public/data/config.json'));
 
         if (!sToken) {
             const vType = "warning",
@@ -128,21 +81,12 @@ class cSettings {
 
             vElectron.vAlertBox(vType, sTitre, sMessage, sDetail);
         } else {
-            // this.#vUpdateConfig();
-            // vFile.set('TOKEN', sToken);
-            // vFile.save();
-            // vElectron.vRelaunchApp();
+            console.log(sToken);
+            vDb.run(
+                `UPDATE config SET valeur = ${sToken} WHERE libelle = "token"`
+            );
+            vElectron.vRelaunchApp();
         }
-    }
-
-    #vUpdateConfig() {
-        const vDb = new vSQLite3.Database(sDbName, (vError) => {
-            if (vError) {
-                throw vError;
-            }
-
-            // vDb.run('PRAGMA database_list');
-        });
     }
 }
 

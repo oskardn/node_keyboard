@@ -1,8 +1,8 @@
-const cSettings = require('./settings');
+const cSettings = require("./settings");
 
-const vExpress = require('express');
-const vPath = require('path');
-const vBodyParser = require('body-parser');
+const vExpress = require("express");
+const vPath = require("path");
+const vBodyParser = require("body-parser");
 
 const vSettings = new cSettings();
 
@@ -21,20 +21,20 @@ class cExpress {
         vApp.use(vBodyParser.json());
         vApp.use(vBodyParser.urlencoded());
         vApp.use(vBodyParser.urlencoded({ extended: true }));
-        
-        vApp.get('/', (req, res) => {
+
+        vApp.get("/", (req, res) => {
             res.sendStatus(404);
         });
-        
-        vApp.post('/port', (req, res) => {
+
+        vApp.post("/port", (req, res) => {
             let oResponse = req.body;
-        
+
             vSettings.vChangeServerPort(oResponse);
         });
-        
-        vApp.post('/token', (req, res) => {
+
+        vApp.post("/token", (req, res) => {
             let oResponse = req.body;
-        
+
             vSettings.vChangeServerToken(oResponse);
         });
     }

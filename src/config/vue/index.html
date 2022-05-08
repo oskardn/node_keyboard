@@ -1,92 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../css/config.css" />
+        <title>Sikontrol - Config</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/config.css" />
-    <title>Sikontrol - Config</title>
-</head>
+    <body>
+        <button class="accueil">
+            <span>Retour à l'accueil</span>
+            <svg viewBox="0 0 13 10" height="10px" width="15px">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+            </svg>
+        </button>
+        <center>
+            <h3>Mettre à jour la configuration du serveur</h3>
 
-<body>
-    <button class="accueil">
-        <span>Retour à l'accueil</span>
-        <svg viewBox="0 0 13 10" height="10px" width="15px">
-            <path d="M1,5 L11,5"></path>
-            <polyline points="8 1 12 5 8 9"></polyline>
-        </svg>
-    </button>
-    <center>
-        <h3>Mettre à jour la configuration du serveur</h3>
-
-        <table>
-            <tbody>
-                <tr>
-                    <td>Port</td>
-                    <td>Token</td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="number" name="nPort" id="nPort" />
-                    </td>
-                    <td>
-                        <input type="password" name="sToken" id="sToken" />
-                        <button class="vPasswordVisibility">
-                            <div class="vHide">
-                                <i class="fas fa-eye-slash"></i>
-                            </div>
-                            <div class="vShow cache">
-                                <i class="fas fa-eye"></i>
-                            </div>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <center>
-                            <button class="vSaveConfig" id="nPortButton">
-                                <div class="svg-wrapper-1">
-                                    <div class="svg-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                            height="24">
-                                            <path fill="none" d="M0 0h24v24H0z"></path>
-                                            <path fill="currentColor"
-                                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                                            </path>
-                                        </svg>
-                                    </div>
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Port</td>
+                        <td>Token</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" name="nPort" id="nPort" />
+                        </td>
+                        <td>
+                            <input type="password" name="sToken" id="sToken" />
+                            <button class="vPasswordVisibility">
+                                <div class="vHide">
+                                    <i class="fas fa-eye-slash"></i>
                                 </div>
-                                <span>Port</span>
-                            </button>
-                        </center>
-                    </td>
-                    <td>
-                        <center>
-                            <button class="vSaveConfig" id="sTokenButton">
-                                <div class="svg-wrapper-1">
-                                    <div class="svg-wrapper">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
-                                            height="24">
-                                            <path fill="none" d="M0 0h24v24H0z"></path>
-                                            <path fill="currentColor"
-                                                d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z">
-                                            </path>
-                                        </svg>
-                                    </div>
+                                <div class="vShow cache">
+                                    <i class="fas fa-eye"></i>
                                 </div>
-                                <span>Token</span>
                             </button>
-                        </center>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <center>
+                                <button class="vSaveConfig" id="nPortButton">
+                                    <div class="svg-wrapper-1">
+                                        <div class="svg-wrapper">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                            >
+                                                <path
+                                                    fill="none"
+                                                    d="M0 0h24v24H0z"
+                                                ></path>
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>Port</span>
+                                </button>
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                <button class="vSaveConfig" id="sTokenButton">
+                                    <div class="svg-wrapper-1">
+                                        <div class="svg-wrapper">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                width="24"
+                                                height="24"
+                                            >
+                                                <path
+                                                    fill="none"
+                                                    d="M0 0h24v24H0z"
+                                                ></path>
+                                                <path
+                                                    fill="currentColor"
+                                                    d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <span>Token</span>
+                                </button>
+                            </center>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
 
-    <script src="../../global/js/jquery-3.6.0.js"></script>
-    <script src="../../global/js/font-awesome.js"></script>
-    <script src="../js/config.js"></script>
-</body>
-
+        <script src="../../global/js/jquery-3.6.0.js"></script>
+        <script src="../../global/js/font-awesome.js"></script>
+        <script src="../js/config.js"></script>
+    </body>
 </html>

@@ -1,7 +1,9 @@
-const oConfig = require('../public/data/config.json');
-const vSendInput = require('sendinput');
+const oConfig = require("../public/data/config.json");
+const vSendInput = require("sendinput");
 
-const vNext = 176, vPrevious = 177, vPlayPause = 179;
+const vNext = 176,
+    vPrevious = 177,
+    vPlayPause = 179;
 let vActionCode;
 
 class cSendInput {
@@ -10,29 +12,29 @@ class cSendInput {
 
         if (sPassword == sEnvPassword) {
             switch (ioActions.action) {
-                case 'vPrevious':
+                case "vPrevious":
                     vActionCode = vPrevious;
                     break;
-                case 'vPlayPause':
+                case "vPlayPause":
                     vActionCode = vPlayPause;
                     break;
-                case 'vNext':
+                case "vNext":
                     vActionCode = vNext;
                     break;
                 default:
                     return;
                     break;
-            };
+            }
 
             vSendInput.SendInput([
                 {
                     val: vActionCode,
-                    type: 0
-                }
+                    type: 0,
+                },
             ]);
         } else {
             return;
-        };
+        }
     }
 }
 

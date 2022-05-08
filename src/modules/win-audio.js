@@ -1,5 +1,5 @@
-const oConfig = require('../public/data/config.json');
-const vAudio = require('win-audio').speaker;
+const oConfig = require("../public/data/config.json");
+const vAudio = require("win-audio").speaker;
 
 vAudio.polling(200);
 
@@ -13,16 +13,19 @@ class cWinAudio {
                     return;
                     break;
                 default:
-                    if (ioVolumeMaster.volume >= 0 && ioVolumeMaster.volume <= 100) {
+                    if (
+                        ioVolumeMaster.volume >= 0 &&
+                        ioVolumeMaster.volume <= 100
+                    ) {
                         vAudio.set(parseInt(ioVolumeMaster.volume));
                     } else {
                         return;
-                    };
+                    }
                     break;
-            };
+            }
         } else {
             return;
-        };
+        }
     }
 
     vMuteMasterVolume(ioMasterMute, sPassword) {
@@ -33,8 +36,8 @@ class cWinAudio {
                 vAudio.mute();
             } else if (vAudio.isMuted() == true) {
                 vAudio.unmute();
-            };
-        };
+            }
+        }
     }
 
     vIsMasterMute() {

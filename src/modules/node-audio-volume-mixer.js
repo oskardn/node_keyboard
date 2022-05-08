@@ -1,6 +1,6 @@
-const oConfig = require('../public/data/config.json');
+const oConfig = require("../public/data/config.json");
 
-const { NodeAudioVolumeMixer } = require('node-audio-volume-mixer');
+const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
 
 class cNodeAudio {
     vShowProcessList(ioVolumeApps, sPassword) {
@@ -12,25 +12,33 @@ class cNodeAudio {
         });
 
         if (sPassword == sEnvPassword) {
-            NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(eSession.pid, ioVolumeApps.volume / 100);
-        };
+            NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(
+                eSession.pid,
+                ioVolumeApps.volume / 100
+            );
+        }
     }
 
     vRefreshSliderValue(vSocket) {
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
 
-        aSessions.forEach(eElement => {
+        aSessions.forEach((eElement) => {
             if (eElement.name) {
                 let sAppName = eElement.name;
-                let vRefreshSliderValue = NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(eElement.pid);
-                let vIsAppMute = NodeAudioVolumeMixer.isAudioSessionMuted(eElement.pid);
+                let vRefreshSliderValue =
+                    NodeAudioVolumeMixer.getAudioSessionVolumeLevelScalar(
+                        eElement.pid
+                    );
+                let vIsAppMute = NodeAudioVolumeMixer.isAudioSessionMuted(
+                    eElement.pid
+                );
 
-                vSocket.emit('vRefreshSliderValue', ({
+                vSocket.emit("vRefreshSliderValue", {
                     sAppName: sAppName,
                     vRefreshSliderValue: vRefreshSliderValue * 100,
-                    vIsAppMute: vIsAppMute
-                }));
-            };
+                    vIsAppMute: vIsAppMute,
+                });
+            }
         });
     }
 
@@ -43,15 +51,19 @@ class cNodeAudio {
         });
 
         if (sPassword == sEnvPassword) {
-            if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == false) {
+            if (
+                NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == false
+            ) {
                 NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, true);
-            } else if (NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == true) {
+            } else if (
+                NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == true
+            ) {
                 NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, false);
-            };
-        };
+            }
+        }
     }
 
-    vIsAppMute(sPassword) { }
+    vIsAppMute(sPassword) {}
 }
 
 module.exports = cNodeAudio;

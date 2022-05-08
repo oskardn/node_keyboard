@@ -1,3 +1,5 @@
+const oPackageJSON = require('../../package.json');
+
 class cStartup {
     vAsciiLogo() {
         console.log("\n");
@@ -21,10 +23,14 @@ class cStartup {
         console.log("             @@@@@@@@@@@@@@@@@@@@@@@@@");
         console.log("                  @@@@@@@@@@@@@@@");
 
-        console.log("\n                 Sikontrol  v1.0.0\n");
+        console.log(`\n                 ${oPackageJSON.productName}  v${oPackageJSON.version}`);
+        console.log(`                      by ${oPackageJSON.author.name}\n`);
 
-        console.log("Websocket server started");
-        console.log("Express server started");
+        const nSocketIOVersion = oPackageJSON.dependencies['socket.io'];
+        const nExpressVersion = oPackageJSON.dependencies['express'];
+
+        console.log(`Socket.IO v${nSocketIOVersion.replace('^', '')} server started`);
+        console.log(`ExpressJS v${nExpressVersion.replace('^', '')} server started`);
     }
 }
 
