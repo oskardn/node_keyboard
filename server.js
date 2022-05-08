@@ -9,7 +9,6 @@ const cStartup = require('./src/modules/startup');
 
 const vHttp = require('http');
 const { Server } = require('socket.io');
-const vBodyParser = require('body-parser');
 
 const vElectron = new cElectron();
 const vExpress = new cExpress();
@@ -23,32 +22,13 @@ const vHttpServer = vHttp.createServer(vApp);
 const vIo = new Server(vHttpServer);
 
 vSettings.vInitConfig();
+vExpress.vStartExpress();
 
 vIo.on('connection', (vSocket) => {
     const sPassword = vSocket.handshake.auth.token;
 
     vSocketIO.vSocketEvents(vSocket, sPassword);
     vNodeAudio.vRefreshSliderValue(vSocket);
-});
-
-vApp.use(vBodyParser.json());
-vApp.use(vBodyParser.urlencoded());
-vApp.use(vBodyParser.urlencoded({ extended: true }));
-
-vApp.get('/', (req, res) => {
-    res.sendStatus(404);
-});
-
-vApp.post('/port', (req, res) => {
-    let oResponse = req.body;
-
-    vSettings.vChangeServerPort(oResponse);
-});
-
-vApp.post('/token', (req, res) => {
-    let oResponse = req.body;
-
-    vSettings.vChangeServerToken(oResponse);
 });
 
 const nPort = oConfig.APP_PORT;
