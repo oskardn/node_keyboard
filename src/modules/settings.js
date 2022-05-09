@@ -77,13 +77,12 @@ class cSettings {
                 sTitre = "Avertissement",
                 sMessage = "Token non renseigné";
             const sDetail =
-                "Vous devez renseinger le token pour pouvoir le changer.";
+                "Vous devez renseigner le token pour pouvoir le changer.";
 
             vElectron.vAlertBox(vType, sTitre, sMessage, sDetail);
         } else {
-            console.log(sToken);
             vDb.run(
-                `UPDATE config SET valeur = ${sToken} WHERE libelle = "token"`
+                `UPDATE config SET valeur = "${sToken}" WHERE libelle = "token"`
             );
             vElectron.vRelaunchApp();
         }

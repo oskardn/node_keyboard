@@ -114,9 +114,9 @@ vIo.on("aSessions", (aSessions) => {
                     vIo.on("vRefreshSliderValue", (vRefreshSliderValue) => {
                         if (
                             oAppBlocklist[`${vRefreshSliderValue.sAppName}`] ==
-                                undefined ||
+                            undefined ||
                             oAppBlocklist[`${vRefreshSliderValue.sAppName}`] ==
-                                true
+                            true
                         ) {
                             if (vRefreshSliderValue.sAppName == oVal.name) {
                                 $(`[name="${oVal.name}"]`).val(
