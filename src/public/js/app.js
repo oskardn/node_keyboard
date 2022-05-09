@@ -50,7 +50,7 @@ vIo.on("vWindowsVolumeChange", (vWindowsVolumeChange) => {
     $("#vMaster").val(vWindowsVolumeChange);
 });
 
-vIo.on("aSessions", (aSessions) => {
+vIo.once("aSessions", (aSessions) => {
     $.each(aSessions, (nIndex, oVal) => {
         vIo.on("oAppBlocklist", (oAppBlocklist) => {
             if (oVal.name) {
@@ -64,7 +64,7 @@ vIo.on("aSessions", (aSessions) => {
                                 <label for="${oVal.name}">${oVal.name}</label>
                             </td>
                             <td>
-                                <input class="vApp" id="vApp" type="range" min="0" max="100" step="1" name="${oVal.name}" data-vol="${oVal.name}">
+                                <input class="vApp" id="vApp" type="range" min="0" max="1" step="0.01" name="${oVal.name}" data-vol="${oVal.name}">
                             </td>
                             <td>
                                 <span id="${oVal.name}"></span>
@@ -103,20 +103,25 @@ vIo.on("aSessions", (aSessions) => {
                         // window.location.href = "https://bit.ly/3x7indr"
                     });
 
-                    vOtherSlider.on("touchmove mousemove", function () {
-                        $(`[id="${$(this).data("vol")}"]`).text($(this).val());
-                        vIo.emit("ioVolumeApps", {
-                            action: $(this).data("vol"),
-                            volume: $(this).val(),
-                        });
+                    vOtherSlider.on("mousemove", function () {
+                        if ($(this).val() >= 0 && $(this).val() <= 1) {
+                            $(`[id="${$(this).data("vol")}"]`).text(Math.round($(this).val() * 100));
+
+                            console.log();
+
+                            vIo.emit("ioVolumeApps", {
+                                action: $(this).data("vol"),
+                                volume: Number($(this).val()),
+                            });
+                        }
                     });
 
                     vIo.on("vRefreshSliderValue", (vRefreshSliderValue) => {
                         if (
                             oAppBlocklist[`${vRefreshSliderValue.sAppName}`] ==
-                            undefined ||
+                                undefined ||
                             oAppBlocklist[`${vRefreshSliderValue.sAppName}`] ==
-                            true
+                                true
                         ) {
                             if (vRefreshSliderValue.sAppName == oVal.name) {
                                 $(`[name="${oVal.name}"]`).val(
@@ -125,7 +130,7 @@ vIo.on("aSessions", (aSessions) => {
                                 $(`[id="${oVal.name}"]`).text(
                                     Math.round(
                                         vRefreshSliderValue.vRefreshSliderValue
-                                    )
+                                    ) * 100
                                 );
 
                                 let vMuteBtn = $(`[data-btn="${oVal.name}"]`);
