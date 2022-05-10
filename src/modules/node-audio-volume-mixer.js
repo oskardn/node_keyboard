@@ -11,12 +11,14 @@ class cNodeAudio {
 			return aValue.name === ioVolumeApps.action;
 		});
 
-		if (sPassword == sEnvPassword) {
-			if (ioVolumeApps.volume >= 0 || ioVolumeApps.volume <= 1) {
-				NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(
-					Number(eSession.pid),
-					ioVolumeApps.volume
-				);
+		if (ioVolumeApps.action) {
+			if (sPassword == sEnvPassword) {
+				if (ioVolumeApps.volume >= 0 || ioVolumeApps.volume <= 1) {
+					NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(
+						Number(eSession.pid),
+						ioVolumeApps.volume
+					);
+				}
 			}
 		}
 	}
