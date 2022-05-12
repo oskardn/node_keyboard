@@ -32,7 +32,7 @@ class cSettings {
 
                 vElectron.vAlertBox(vType, sTitre, sMessage, sDetail);
             } else {
-                if (nPort >= 0 && nPort <= 65535) {
+                if (nPort >= 1 && nPort <= 65535) {
                     vDetectPort(nPort, (vError, vOtherPort) => {
                         if (vError) {
                             console.log(vError);

@@ -48,7 +48,7 @@ input,
     left: 0;
     display: block;
     border-radius: 50px;
-    background: #66cc33;
+    background: #2e6abb;
     width: 45px;
     height: 45px;
     transition: all 0.3s ease;
@@ -78,7 +78,7 @@ input,
 
 .accueil:hover:before {
     width: 100%;
-    background: #66cc33;
+    background: #2e6abb;
 }
 
 .accueil:hover svg {
@@ -92,7 +92,7 @@ input,
 button.vSaveConfig {
     cursor: pointer;
     font-family: inherit;
-    background: #66cc33;
+    background: #2e6abb;
     color: white;
     padding: 0.7em 1em;
     padding-left: 0.9em;
