@@ -42,7 +42,7 @@ class cSockerIO {
             vNodeAudio.vShowProcessList(ioVolumeApps, sPassword);
         });
 
-        vSocket.on("vMuteButton", (vMuteButton) => {
+        vSocket.on("ioMuteButton", (vMuteButton) => {
             vNodeAudio.vNodeAppMute(vMuteButton, sPassword);
         });
     }

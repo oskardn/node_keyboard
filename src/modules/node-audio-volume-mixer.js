@@ -54,15 +54,25 @@ class cNodeAudio {
 			return aValue.name === vMuteButton.vApp;
 		});
 
-		if (sPassword == sEnvPassword) {
-			if (
-				NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == false
-			) {
-				NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, true);
-			} else if (
-				NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) == true
-			) {
-				NodeAudioVolumeMixer.setAudioSessionMute(eSession.pid, false);
+		if (vMuteButton.vApp) {
+			if (sPassword == sEnvPassword) {
+				if (
+					NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) ==
+					false
+				) {
+					NodeAudioVolumeMixer.setAudioSessionMute(
+						eSession.pid,
+						true
+					);
+				} else if (
+					NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) ==
+					true
+				) {
+					NodeAudioVolumeMixer.setAudioSessionMute(
+						eSession.pid,
+						false
+					);
+				}
 			}
 		}
 	}

@@ -96,7 +96,7 @@ vIo.once("aSessions", (aSessions) => {
                                 break;
                         }
 
-                        vIo.emit("vMuteButton", {
+                        vIo.emit("ioMuteButton", {
                             vApp: $(this).data("btn"),
                         });
                         // alert("Bouton en cours de développement\nMerci à toi de patienter :)");
