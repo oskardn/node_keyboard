@@ -9,8 +9,6 @@ const vWinAudio = new WinAudio();
 const vSendInput = new SendInput();
 const vNodeAudio = new NodeAudio();
 
-const oAppBlocklist = require("../public/data/blocklist.json");
-
 class cSockerIO {
     vSocketEvents(vSocket, sPassword) {
         vSocket.emit("vIsMasterMute", vWinAudio.vIsMasterMute());
@@ -23,7 +21,6 @@ class cSockerIO {
 
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
         vSocket.emit("aSessions", aSessions);
-        vSocket.emit("oAppBlocklist", oAppBlocklist);
 
         vSocket.on("ioActions", (ioActions) => {
             vSendInput.vInputs(ioActions, sPassword);
