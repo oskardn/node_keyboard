@@ -1,6 +1,3 @@
-const oConfig = require("./src/global/config.json");
-
-const cSettings = require("./src/modules/settings");
 const cElectron = require("./src/modules/electron");
 const cExpress = require("./src/modules/express");
 const cSockerIO = require("./src/modules/socket.io");
@@ -10,9 +7,12 @@ const cStartup = require("./src/modules/startup");
 const vHttp = require("http");
 const { Server } = require("socket.io");
 
+const vSQLite3 = require("sqlite3").verbose();
+const sDbName = "config.local.db";
+const vDb = new vSQLite3.Database(sDbName);
+
 const vElectron = new cElectron();
 const vExpress = new cExpress();
-const vSettings = new cSettings();
 const vSocketIO = new cSockerIO();
 const vNodeAudio = new cNodeAudio();
 const vStartup = new cStartup();
@@ -24,16 +24,24 @@ const vIo = new Server(vHttpServer);
 vExpress.vStartExpress();
 
 vIo.on("connection", (vSocket) => {
-    const sPassword = vSocket.handshake.auth.token;
+	const sPassword = vSocket.handshake.auth.token;
 
-    vSocketIO.vSocketEvents(vSocket, sPassword);
-    vNodeAudio.vRefreshSliderValue(vSocket);
+	vSocketIO.vSocketEvents(vSocket, sPassword);
+	vNodeAudio.vRefreshSliderValue(vSocket);
 });
 
-const nPort = oConfig.APP_PORT;
+vStartServer();
 
-vHttpServer.listen(nPort || 3000, () => {
-    vStartup.vAsciiLogo();
-});
+function vStartServer() {
+	vDb.get("SELECT * FROM config WHERE libelle = 'port';", (vError, oRows) => {
+		if (vError) {
+			console.error(vError);
+		} else {
+			vHttpServer.listen(oRows.valeur || 3000, () => {
+				vStartup.vAsciiLogo(oRows.valeur);
+			});
 
-vElectron.vGenerateWindows();
+            vElectron.vGenerateWindows();
+		}
+	});
+}

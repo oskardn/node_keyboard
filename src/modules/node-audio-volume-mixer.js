@@ -76,8 +76,6 @@ class cNodeAudio {
 			}
 		}
 	}
-
-	vIsAppMute(sPassword) {}
 }
 
 module.exports = cNodeAudio;
