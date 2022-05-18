@@ -69,11 +69,13 @@ Chacune des varibales possède un attribut qui définit le type du contenu :
 | -------- | --------- | ------------------- |
 | a        | Array     | Tableau             |
 | c        | Class     | Classe              |
-| e        | Element   | Objjet DOM          |
+| e        | Element   | Objet DOM           |
+| f        | Float     | Nombre Décimal      |
 | io       | Socket.IO | Requête Socket.IO   |
 | n        | Number    | Nombre              |
 | o        | Object    | JSON                |
 | s        | String    | Chaine de caractère |
+| sql      | Database  | SQL                 |
 | v        | Void      | Pas de typage       |
 
 ## Contributeurs

@@ -29,13 +29,13 @@ class cExpress {
         vApp.post("/port", (req, res) => {
             let oResponse = req.body;
 
-            vSettings.vChangeServerPort(oResponse);
+            vSettings.sqlChangeServerPort(oResponse);
         });
 
         vApp.post("/token", (req, res) => {
             let oResponse = req.body;
 
-            vSettings.vChangeServerToken(oResponse);
+            vSettings.sqlChangeServerToken(oResponse);
         });
     }
 }

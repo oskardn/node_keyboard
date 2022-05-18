@@ -11,7 +11,7 @@ const sDbName = "config.local.db";
 const vDb = new vSQLite3.Database(sDbName);
 
 class cSettings {
-    vChangeServerPort(oResponse) {
+    sqlChangeServerPort(oResponse) {
         let nPort = oResponse.data;
 
         if (!nPort) {
@@ -69,7 +69,7 @@ class cSettings {
         }
     }
 
-    vChangeServerToken(oResponse) {
+    sqlChangeServerToken(oResponse) {
         let sToken = oResponse.data;
 
         if (!sToken) {

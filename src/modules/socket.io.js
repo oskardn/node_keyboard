@@ -11,12 +11,12 @@ const vNodeAudio = new NodeAudio();
 
 class cSockerIO {
     vSocketEvents(vSocket, sPassword) {
-        vSocket.emit("vIsMasterMute", vWinAudio.vIsMasterMute());
+        vSocket.emit("ioIsMasterMute", vWinAudio.vIsMasterMute());
 
-        vSocket.emit("vWindowsActualVolume", vAudio.get());
+        vSocket.emit("ioWindowsActualVolume", vAudio.get());
 
         vAudio.events.on("change", (vVal) => {
-            vSocket.emit("vWindowsVolumeChange", vVal.new);
+            vSocket.emit("ioWindowsVolumeChange", vVal.new);
         });
 
         const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
