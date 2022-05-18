@@ -1,3 +1,5 @@
+const oConfig = require("./src/global/config.json")
+
 const cElectron = require("./src/modules/electron");
 const cExpress = require("./src/modules/express");
 const cSockerIO = require("./src/modules/socket.io");
@@ -30,18 +32,8 @@ vIo.on("connection", (vSocket) => {
 	vNodeAudio.vRefreshSliderValue(vSocket);
 });
 
-vStartServer();
+vHttpServer.listen(oConfig.APP_PORT || 3000, () => {
+	vStartup.vAsciiLogo();
+});
 
-function vStartServer() {
-	vDb.get("SELECT * FROM config WHERE libelle = 'port';", (vError, oRows) => {
-		if (vError) {
-			console.error(vError);
-		} else {
-			vHttpServer.listen(oRows.valeur || 3000, () => {
-				vStartup.vAsciiLogo(oRows.valeur);
-			});
-
-            vElectron.vGenerateWindows();
-		}
-	});
-}
+vElectron.vGenerateWindows();

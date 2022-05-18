@@ -27,7 +27,7 @@
             "oneClick": false,
             "installerIcon": "src/global/img/icon.ico",
             "uninstallerIcon": "src/global/img/icon.ico",
-            "uninstallDisplayName": "sikontrol-app",
+            "uninstallDisplayName": "Sikontrol",
             "license": "LICENSE.md",
             "allowToChangeInstallationDirectory": true
         }

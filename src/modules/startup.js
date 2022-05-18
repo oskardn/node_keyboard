@@ -1,8 +1,8 @@
 const oPackageJSON = require('../../package.json');
 
 class cStartup {
-    vAsciiLogo(nPort) {
-        console.log(`\nStarting Sikontrol server on port ${nPort}\n`);
+    vAsciiLogo() {
+        console.log("\n");
         console.log("                  @@@@@@@@@@@@@@@");
         console.log("             @@@@@@@@@@@@@@@@@@@@@@@@@");
         console.log("         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");

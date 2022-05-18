@@ -1,6 +1,8 @@
 const Electron = require("./electron");
 
 const vDetectPort = require("detect-port");
+const { app } = require("electron");
+const vFs = require('fs');
 const vSQLite3 = require("sqlite3").verbose();
 
 const vElectron = new Electron();
@@ -9,6 +11,7 @@ const oConfig = require("../global/config.json");
 
 const sDbName = "config.local.db";
 const vDb = new vSQLite3.Database(sDbName);
+const vApp = app;
 
 class cSettings {
     sqlChangeServerPort(oResponse) {
