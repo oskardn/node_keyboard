@@ -1,7 +1,7 @@
 let nPortJSON;
 
 $.ajax({
-    url: "../../public/data/config.json",
+    url: "../../global/config.json",
     async: false,
     dataType: "json",
     success: function (response) {

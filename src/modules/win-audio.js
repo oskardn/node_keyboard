@@ -1,4 +1,4 @@
-const oConfig = require("../public/data/config.json");
+const oConfig = require("../global/config.json");
 const vAudio = require("win-audio").speaker;
 
 vAudio.polling(200);

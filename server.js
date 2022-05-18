@@ -1,4 +1,4 @@
-const oConfig = require("./src/public/data/config.json");
+const oConfig = require("./src/global/config.json");
 
 const cSettings = require("./src/modules/settings");
 const cElectron = require("./src/modules/electron");

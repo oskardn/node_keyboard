@@ -1,4 +1,4 @@
-const oConfig = require("../public/data/config.json");
+const oConfig = require("../global/config.json");
 
 const { app, BrowserWindow, dialog, Menu, Tray } = require("electron");
 const vPath = require("path");

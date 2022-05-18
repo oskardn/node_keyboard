@@ -5,7 +5,7 @@ const vSQLite3 = require("sqlite3").verbose();
 
 const vElectron = new Electron();
 
-const oConfig = require("../public/data/config.json");
+const oConfig = require("../global/config.json");
 
 const sDbName = "config.local.db";
 const vDb = new vSQLite3.Database(sDbName);
