@@ -1,10 +1,14 @@
-const oConfig = require("../global/config.json");
-
 const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
+const { app } = require("electron");
+const path = require("path");
+
+const oConfigLocation = app.getAppPath();
+const vConfigPath = path.join(oConfigLocation, "\\..\\..");
+const oConfig = require(`${vConfigPath}\\config.json`);
 
 class cNodeAudio {
 	vShowProcessList(ioVolumeApps, sPassword) {
-		const sEnvPassword = oConfig.TOKEN;
+		const sPasswordJSON = oConfig.APP_TOKEN;
 
 		const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
 		const eSession = aSessions.find((aValue) => {
@@ -12,7 +16,7 @@ class cNodeAudio {
 		});
 
 		if (ioVolumeApps.action) {
-			if (sPassword == sEnvPassword) {
+			if (sPassword == sPasswordJSON) {
 				if (ioVolumeApps.volume >= 0 || ioVolumeApps.volume <= 1) {
 					NodeAudioVolumeMixer.setAudioSessionVolumeLevelScalar(
 						Number(eSession.pid),
@@ -47,7 +51,7 @@ class cNodeAudio {
 	}
 
 	vNodeAppMute(vMuteButton, sPassword) {
-		const sEnvPassword = oConfig.TOKEN;
+		const sPasswordJSON = oConfig.APP_TOKEN;
 
 		const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
 		const eSession = aSessions.find((aValue) => {
@@ -55,7 +59,7 @@ class cNodeAudio {
 		});
 
 		if (vMuteButton.vApp) {
-			if (sPassword == sEnvPassword) {
+			if (sPassword == sPasswordJSON) {
 				if (
 					NodeAudioVolumeMixer.isAudioSessionMuted(eSession.pid) ==
 					false

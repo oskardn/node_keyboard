@@ -75,7 +75,6 @@ Chacune des varibales possède un attribut qui définit le type du contenu :
 | n        | Number    | Nombre              |
 | o        | Object    | JSON                |
 | s        | String    | Chaine de caractère |
-| sql      | Database  | SQL                 |
 | v        | Void      | Pas de typage       |
 
 ## Contributeurs

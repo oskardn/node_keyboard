@@ -10,39 +10,39 @@ const vSendInput = new SendInput();
 const vNodeAudio = new NodeAudio();
 
 class cSockerIO {
-    vSocketEvents(vSocket, sPassword) {
-        vSocket.emit("ioIsMasterMute", vWinAudio.vIsMasterMute());
+	vSocketEvents(vSocket, sPassword) {
+		vSocket.emit("ioIsMasterMute", vWinAudio.vIsMasterMute());
 
-        vSocket.emit("ioWindowsActualVolume", vAudio.get());
+		vSocket.emit("ioWindowsActualVolume", vAudio.get());
 
-        vAudio.events.on("change", (vVal) => {
-            vSocket.emit("ioWindowsVolumeChange", vVal.new);
-        });
+		vAudio.events.on("change", (vVal) => {
+			vSocket.emit("ioWindowsVolumeChange", vVal.new);
+		});
 
-        const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
-        vSocket.emit("aSessions", aSessions);
+		const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
+		vSocket.emit("aSessions", aSessions);
 
-        vSocket.on("ioActions", (ioActions) => {
-            vSendInput.vInputs(ioActions, sPassword);
-        });
+		vSocket.on("ioActions", (ioActions) => {
+			vSendInput.vInputs(ioActions, sPassword);
+		});
 
-        vSocket.on("ioVolumeMaster", (ioVolumeMaster) => {
-            vWinAudio.vChangeMasterVolume(ioVolumeMaster, sPassword);
-        });
+		vSocket.on("ioVolumeMaster", (ioVolumeMaster) => {
+			vWinAudio.vChangeMasterVolume(ioVolumeMaster, sPassword);
+		});
 
-        vSocket.on("ioMasterMute", (ioMasterMute) => {
-            vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword);
-            vWinAudio.vIsMasterMute();
-        });
+		vSocket.on("ioMasterMute", (ioMasterMute) => {
+			vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword);
+			vWinAudio.vIsMasterMute();
+		});
 
-        vSocket.on("ioVolumeApps", (ioVolumeApps) => {
-            vNodeAudio.vShowProcessList(ioVolumeApps, sPassword);
-        });
+		vSocket.on("ioVolumeApps", (ioVolumeApps) => {
+			vNodeAudio.vShowProcessList(ioVolumeApps, sPassword);
+		});
 
-        vSocket.on("ioMuteButton", (vMuteButton) => {
-            vNodeAudio.vNodeAppMute(vMuteButton, sPassword);
-        });
-    }
+		vSocket.on("ioMuteButton", (vMuteButton) => {
+			vNodeAudio.vNodeAppMute(vMuteButton, sPassword);
+		});
+	}
 }
 
 module.exports = cSockerIO;
