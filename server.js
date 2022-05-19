@@ -1,5 +1,3 @@
-const oConfig = require("./src/global/config.json")
-
 const cElectron = require("./src/modules/electron");
 const cExpress = require("./src/modules/express");
 const cSockerIO = require("./src/modules/socket.io");
@@ -8,10 +6,19 @@ const cStartup = require("./src/modules/startup");
 
 const vHttp = require("http");
 const { Server } = require("socket.io");
+const { app } = require("electron");
+const vFs = require("fs");
 
-const vSQLite3 = require("sqlite3").verbose();
-const sDbName = "config.local.db";
-const vDb = new vSQLite3.Database(sDbName);
+const oConfigLocation = app.getAppPath("userData");
+if (vFs.existsSync(`${oConfigLocation}\\config.json`) == false) {
+	vFs.writeFileSync(`${oConfigLocation}\\config.json`, "{\"APP_PORT\": 3000, \"APP_TOKEN\": \"1234\"}", (err) => {
+		if (err) {
+			console.error(err);
+		}
+	})
+}
+
+const oConfig = require(`${oConfigLocation}\\config.json`);
 
 const vElectron = new cElectron();
 const vExpress = new cExpress();

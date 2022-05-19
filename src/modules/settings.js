@@ -2,16 +2,12 @@ const Electron = require("./electron");
 
 const vDetectPort = require("detect-port");
 const { app } = require("electron");
-const vFs = require('fs');
-const vSQLite3 = require("sqlite3").verbose();
+const vEditJSON = require("edit-json-file");
 
 const vElectron = new Electron();
 
-const oConfig = require("../global/config.json");
-
-const sDbName = "config.local.db";
-const vDb = new vSQLite3.Database(sDbName);
-const vApp = app;
+const oConfigLocation = app.getAppPath("userData");
+const vFile = vEditJSON(`${oConfigLocation}\\config.json`);
 
 class cSettings {
     sqlChangeServerPort(oResponse) {
@@ -42,10 +38,8 @@ class cSettings {
                         }
 
                         if (nPort == vOtherPort) {
-                            vDb.run(
-                                `UPDATE config SET valeur = ${nPort} WHERE libelle = "port"`
-                            );
-                            vElectron.vRelaunchApp();
+                            vFile.set("APP_PORT", Number(nPort));
+                            vFile.save();
                         } else {
                             const vType = "error",
                                 sTitre = "Erreur",
@@ -84,9 +78,9 @@ class cSettings {
 
             vElectron.vAlertBox(vType, sTitre, sMessage, sDetail);
         } else {
-            vDb.run(
-                `UPDATE config SET valeur = "${sToken}" WHERE libelle = "token"`
-            );
+            vFile.set("APP_TOKEN", sToken);
+            vFile.save();
+
             vElectron.vRelaunchApp();
         }
     }
