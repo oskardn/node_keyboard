@@ -3,7 +3,3 @@ dist/*
 
 # Dependancies folder
 node_modules/*
-
-# Local config DON'T PUSH IT ONLINE !!!
-config.local.db
-src/public/data/config_local.json

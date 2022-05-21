@@ -1,60 +1,57 @@
-const oConfig = require('./src/public/data/config.json');
+const cElectron = require("./src/modules/electron");
 
-const cSettings = require('./src/modules/settings');
-const cElectron = require('./src/modules/electron');
-const cExpress = require('./src/modules/express');
-const cSockerIO = require('./src/modules/socket.io');
-const cNodeAudio = require('./src/modules/node-audio-volume-mixer');
-const cStartup = require('./src/modules/startup');
-
-const vHttp = require('http');
-const { Server } = require('socket.io');
-const vBodyParser = require('body-parser');
+const vHttp = require("http");
+const { Server } = require("socket.io");
+const vFs = require("fs");
+const { app } = require("electron");
+const path = require("path");
 
 const vElectron = new cElectron();
-const vExpress = new cExpress();
-const vSettings = new cSettings();
-const vSocketIO = new cSockerIO();
-const vNodeAudio = new cNodeAudio();
-const vStartup = new cStartup();
 
-const vApp = vExpress.vReturnApp();
-const vHttpServer = vHttp.createServer(vApp);
-const vIo = new Server(vHttpServer);
+const oConfigLocation = app.getAppPath();
+const vConfigPath = path.join(oConfigLocation, "\\..\\..");
 
-vSettings.vInitConfig();
+if (vFs.existsSync(`${vConfigPath}\\config.json`) == false) {
+	vFs.writeFileSync(
+		`${vConfigPath}\\config.json`,
+		'{"APP_PORT": 3000, "APP_TOKEN": "1234"}',
+		(err) => {
+			if (err) {
+				console.error(err);
+			}
+		}
+	);
 
-vIo.on('connection', (vSocket) => {
-    const sPassword = vSocket.handshake.auth.token;
+	vElectron.vRelaunchApp();
+} else {
+	const cExpress = require("./src/modules/express");
+	const cSockerIO = require("./src/modules/socket.io");
+	const cNodeAudio = require("./src/modules/node-audio-volume-mixer");
+	const cStartup = require("./src/modules/startup");
 
-    vSocketIO.vSocketEvents(vSocket, sPassword);
-    vNodeAudio.vRefreshSliderValue(vSocket);
-});
+	const vExpress = new cExpress();
+	const vSocketIO = new cSockerIO();
+	const vNodeAudio = new cNodeAudio();
+	const vStartup = new cStartup();
 
-vApp.use(vBodyParser.json());
-vApp.use(vBodyParser.urlencoded());
-vApp.use(vBodyParser.urlencoded({ extended: true }));
+	const oConfig = require(`${vConfigPath}\\config.json`);
 
-vApp.get('/', (req, res) => {
-    res.sendStatus(404);
-});
+	const vApp = vExpress.vReturnApp();
+	const vHttpServer = vHttp.createServer(vApp);
+	const vIo = new Server(vHttpServer);
 
-vApp.post('/port', (req, res) => {
-    let oResponse = req.body;
+	vExpress.vStartExpress();
 
-    vSettings.vChangeServerPort(oResponse);
-});
+	vIo.on("connection", (vSocket) => {
+		const sPassword = vSocket.handshake.auth.token;
 
-vApp.post('/token', (req, res) => {
-    let oResponse = req.body;
+		vSocketIO.vSocketEvents(vSocket, sPassword);
+		vNodeAudio.vRefreshSliderValue(vSocket);
+	});
 
-    vSettings.vChangeServerToken(oResponse);
-});
+	vHttpServer.listen(oConfig.APP_PORT || 3000, () => {
+		vStartup.vAsciiLogo();
+	});
 
-const nPort = oConfig.APP_PORT;
-
-vHttpServer.listen((nPort || 3000), () => {
-    vStartup.vAsciiLogo();
-});
-
-vElectron.vGenerateWindows();
+	vElectron.vGenerateWindows();
+}
