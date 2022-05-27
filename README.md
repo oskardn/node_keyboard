@@ -11,7 +11,9 @@ Ce projet fonctionne seulement sur Windows, puisque la librairie utilisée pour 
 
 ---
 
-Pour installer ce projet chez vous, clonez d'abord ce dossier sur votre machine.
+Pour installer ce projet chez vous, vous pouvez télécharger la dernière [**release**](https://github.com/oskardn/sikontrol-desktop/releases/tag/v1.0.0).  
+
+Soit vous clonez ce dossier sur votre machine.
 
 ```console
 git clone https://github.com/oskardn/sikontrol.git
@@ -25,15 +27,18 @@ yarn install
 
 Pensez à lire les prérequis en fonction de votre système d'exploitation avant d'installer les librairies.
 
+
 ## Lancement de l'instance
 
 ---
 
-Pour exécuter le programme rendez vous dans le dossier du projet et éxécutez depuis un terminal :
+Pour exécuter le programme, éxécutez le depuis le menu démarrer ou rendez vous dans le dossier du projet et éxécutez depuis un terminal :
 
 ```console
 yarn start
 ```
+
+Par défaut le token vaut **`1234`** et le port vaut **`3000`**
 
 Si vous souhaitez installer le logiciel sur votre ordinateur exécutez la commande suivante :
 
