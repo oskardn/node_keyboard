@@ -1,14 +1,14 @@
-const cSettings = require("./settings");
+const Settings = require("./settings");
 
 const vExpress = require("express");
 const vPath = require("path");
 const vBodyParser = require("body-parser");
 
-const vSettings = new cSettings();
+const vSettings = new Settings();
 
 const vApp = vExpress();
 
-class cExpress {
+class Express {
 	vReturnApp() {
 		return vApp;
 	}
@@ -40,4 +40,4 @@ class cExpress {
 	}
 }
 
-module.exports = cExpress;
+module.exports = Express;

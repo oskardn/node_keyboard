@@ -9,7 +9,7 @@ const vWinAudio = new WinAudio();
 const vSendInput = new SendInput();
 const vNodeAudio = new NodeAudio();
 
-class cSockerIO {
+class SockerIO {
 	vSocketEvents(vSocket, sPassword) {
 		vSocket.emit("ioIsMasterMute", vWinAudio.vIsMasterMute());
 
@@ -45,4 +45,4 @@ class cSockerIO {
 	}
 }
 
-module.exports = cSockerIO;
+module.exports = SockerIO;

@@ -8,7 +8,7 @@ const oConfig = require(`${vConfigPath}\\config.json`);
 
 vAudio.polling(200);
 
-class cWinAudio {
+class WinAudio {
 	vChangeMasterVolume(ioVolumeMaster, sPassword) {
 		const sPasswordJSON = oConfig.APP_TOKEN;
 
@@ -50,4 +50,4 @@ class cWinAudio {
 	}
 }
 
-module.exports = cWinAudio;
+module.exports = WinAudio;

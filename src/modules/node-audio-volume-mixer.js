@@ -6,7 +6,7 @@ const oConfigLocation = app.getAppPath();
 const vConfigPath = path.join(oConfigLocation, "\\..\\..");
 const oConfig = require(`${vConfigPath}\\config.json`);
 
-class cNodeAudio {
+class NodeAudio {
 	vShowProcessList(ioVolumeApps, sPassword) {
 		const sPasswordJSON = oConfig.APP_TOKEN;
 
@@ -82,4 +82,4 @@ class cNodeAudio {
 	}
 }
 
-module.exports = cNodeAudio;
+module.exports = NodeAudio;

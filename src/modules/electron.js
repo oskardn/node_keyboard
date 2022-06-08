@@ -4,7 +4,7 @@ const vOpen = require("open");
 
 let vApp = app;
 
-class cElectron {
+class Electron {
 	vGenerateWindows() {
 		let vTrayInit = null;
 		let vBrowserWindow = BrowserWindow,
@@ -16,6 +16,9 @@ class cElectron {
 				width: 800,
 				height: 600,
 				icon: vPath.join(__dirname, "../global/img/small-icon.png"),
+				webPreferences: {
+					preload: vPath.join(__dirname, "../home/js/preload.js"),
+				},
 			});
 
 			vWin.loadFile("./src/home/vue/index.html");
@@ -116,4 +119,4 @@ class cElectron {
 	}
 }
 
-module.exports = cElectron;
+module.exports = Electron;

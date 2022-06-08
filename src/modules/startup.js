@@ -1,6 +1,6 @@
 const oPackageJSON = require('../../package.json');
 
-class cStartup {
+class Startup {
     vAsciiLogo() {
         console.log("\n");
         console.log("                  @@@@@@@@@@@@@@@");
@@ -34,4 +34,4 @@ class cStartup {
     }
 }
 
-module.exports = cStartup;
+module.exports = Startup;

@@ -11,7 +11,7 @@ const oConfigLocation = app.getAppPath();
 const vConfigPath = path.join(oConfigLocation, "\\..\\..");
 const vFile = vEditJSON(`${vConfigPath}\\config.json`);
 
-class cSettings {
+class Settings {
 	vChangeServerPort(oResponse) {
 		let nPort = oResponse.data;
 
@@ -90,4 +90,4 @@ class cSettings {
 	}
 }
 
-module.exports = cSettings;
+module.exports = Settings;

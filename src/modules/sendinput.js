@@ -6,7 +6,7 @@ const oConfigLocation = app.getAppPath();
 const vConfigPath = path.join(oConfigLocation, "\\..\\..");
 const oConfig = require(`${vConfigPath}\\config.json`);
 
-class cSendInput {
+class SendInput {
 	vInputs(ioActions, sPassword) {
 		const vNext = 176,
 			vPrevious = 177,
@@ -43,4 +43,4 @@ class cSendInput {
 	}
 }
 
-module.exports = cSendInput;
+module.exports = SendInput;
