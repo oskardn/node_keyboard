@@ -3,7 +3,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	color: #ffffff;
 
-    position: absolute;
+	position: absolute;
 	top: 40%;
 	left: 50%;
 
@@ -115,12 +115,13 @@ body {
 }
 
 .control-server {
-    display: flex;
+	display: flex;
 }
 
-.start, .stop {
-    margin-right: 10px;
-    margin-left: 10px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.start,
+.stop {
+	margin-right: 10px;
+	margin-left: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }

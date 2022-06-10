@@ -1,13 +1,7 @@
 const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
-const { app } = require("electron");
-const path = require("path");
-
-const oConfigLocation = app.getAppPath();
-const vConfigPath = path.join(oConfigLocation, "\\..\\..");
-const oConfig = require(`${vConfigPath}\\config.json`);
 
 class NodeAudio {
-	vShowProcessList(ioVolumeApps, sPassword) {
+	vShowProcessList(ioVolumeApps, sPassword, oConfig) {
 		const sPasswordJSON = oConfig.APP_TOKEN;
 
 		const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
@@ -50,7 +44,7 @@ class NodeAudio {
 		});
 	}
 
-	vNodeAppMute(vMuteButton, sPassword) {
+	vNodeAppMute(vMuteButton, sPassword, oConfig) {
 		const sPasswordJSON = oConfig.APP_TOKEN;
 
 		const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();

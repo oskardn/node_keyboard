@@ -1,4 +1,6 @@
-$("button").on("click", function() {
+let bLaunch = false;
+
+$("button").unbind("click").on("click", function () {
 	const vButtonAction = $(this).attr("data-home");
 
 	switch (vButtonAction) {
@@ -6,10 +8,22 @@ $("button").on("click", function() {
 			window.location.href = "../../config/vue/index.html";
 			break;
 		case "start":
-			window.electronAPI.vStartServer();
+			if (bLaunch == false) {
+				bLaunch = true;
+				window.apiSikontrol.vStopServer();
+
+				$(".stop").prop("disabled, false");
+				$(".start").prop("disabled, true");
+			}
 			break;
 		case "stop":
-			window.electronAPI.vStopServer();
+			if (bLaunch == true) {
+				bLaunch = false;
+				indow.apiSikontrol.vStartServer();
+
+				$(".stop").prop("disabled, true");
+				$(".start").prop("disabled, false");
+			}
 			break;
 		default:
 			return;
