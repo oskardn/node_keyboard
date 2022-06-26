@@ -9,8 +9,8 @@ const vWinAudio = new WinAudio();
 const vSendInput = new SendInput();
 const vNodeAudio = new NodeAudio();
 
-class cSockerIO {
-	vSocketEvents(vSocket, sPassword) {
+class SockerIO {
+	vSocketEvents(vSocket, sPassword, oConfig) {
 		vSocket.emit("ioIsMasterMute", vWinAudio.vIsMasterMute());
 
 		vSocket.emit("ioWindowsActualVolume", vAudio.get());
@@ -23,26 +23,26 @@ class cSockerIO {
 		vSocket.emit("aSessions", aSessions);
 
 		vSocket.on("ioActions", (ioActions) => {
-			vSendInput.vInputs(ioActions, sPassword);
+			vSendInput.vInputs(ioActions, sPassword, oConfig);
 		});
 
 		vSocket.on("ioVolumeMaster", (ioVolumeMaster) => {
-			vWinAudio.vChangeMasterVolume(ioVolumeMaster, sPassword);
+			vWinAudio.vChangeMasterVolume(ioVolumeMaster, sPassword, oConfig);
 		});
 
 		vSocket.on("ioMasterMute", (ioMasterMute) => {
-			vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword);
+			vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword, oConfig);
 			vWinAudio.vIsMasterMute();
 		});
 
 		vSocket.on("ioVolumeApps", (ioVolumeApps) => {
-			vNodeAudio.vShowProcessList(ioVolumeApps, sPassword);
+			vNodeAudio.vShowProcessList(ioVolumeApps, sPassword, oConfig);
 		});
 
 		vSocket.on("ioMuteButton", (vMuteButton) => {
-			vNodeAudio.vNodeAppMute(vMuteButton, sPassword);
+			vNodeAudio.vNodeAppMute(vMuteButton, sPassword, oConfig);
 		});
 	}
 }
 
-module.exports = cSockerIO;
+module.exports = SockerIO;

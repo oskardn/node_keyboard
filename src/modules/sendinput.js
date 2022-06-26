@@ -1,13 +1,7 @@
 const vSendInput = require("sendinput");
-const { app } = require("electron");
-const path = require("path");
 
-const oConfigLocation = app.getAppPath();
-const vConfigPath = path.join(oConfigLocation, "\\..\\..");
-const oConfig = require(`${vConfigPath}\\config.json`);
-
-class cSendInput {
-	vInputs(ioActions, sPassword) {
+class SendInput {
+	vInputs(ioActions, sPassword, oConfig) {
 		const vNext = 176,
 			vPrevious = 177,
 			vPlayPause = 179;
@@ -43,4 +37,4 @@ class cSendInput {
 	}
 }
 
-module.exports = cSendInput;
+module.exports = SendInput;

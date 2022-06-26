@@ -1,32 +1,20 @@
-let nPortJSON;
+$("button").unbind("click").on("click", function() {
+	const vButtonAction = $(this).attr("data-config");
+	const nPort = $("#nPort").val();
+	const sToken = $("#sToken").val();
 
-$.ajax({
-    url: "../../../../../config.json",
-    async: false,
-    dataType: "json",
-    success: function (response) {
-        nPortJSON = response.APP_PORT;
-    },
-});
-
-$("button.accueil").on("click", function () {
-    window.location.href = "../../home/vue/index.html";
-});
-
-$("#nPortButton").unbind("click");
-$("#nPortButton").on("click", function () {
-    let nPort = $("#nPort").val();
-
-    $.post(`http://localhost:${nPortJSON}/port`, {
-        data: nPort,
-    });
-});
-
-$("#sTokenButton").unbind("click");
-$("#sTokenButton").on("click", function () {
-    let sToken = $("#sToken").val();
-
-    $.post(`http://localhost:${nPortJSON}/token`, {
-        data: sToken,
-    });
+	switch (vButtonAction) {
+		case "port":
+            window.apiSikontrol.vSendNewPort(nPort);
+			break;
+		case "token":
+            window.apiSikontrol.vSendNewToken(sToken);
+			break;
+		case "accueil":
+            window.location.href = "../../home/vue/index.html";
+			break;
+		default:
+			return;
+			break;
+	}
 });

@@ -1,10 +1,14 @@
-const { app, BrowserWindow, dialog, Menu, Tray } = require("electron");
+const Launch = require("./launch");
+
+const { app, BrowserWindow, ipcMain, dialog, Menu, Tray } = require("electron");
 const vPath = require("path");
 const vOpen = require("open");
 
+const vLaunch = new Launch();
+
 let vApp = app;
 
-class cElectron {
+class Electron {
 	vGenerateWindows() {
 		let vTrayInit = null;
 		let vBrowserWindow = BrowserWindow,
@@ -16,6 +20,9 @@ class cElectron {
 				width: 800,
 				height: 600,
 				icon: vPath.join(__dirname, "../global/img/small-icon.png"),
+				webPreferences: {
+					preload: vPath.join(__dirname, "preload.js"),
+				},
 			});
 
 			vWin.loadFile("./src/home/vue/index.html");
@@ -72,6 +79,8 @@ class cElectron {
 		vApp.whenReady().then(() => {
 			vCreateWindow();
 
+			this.#vIpcMainEvents();
+
 			vApp.on("activate", () => {
 				if (vBrowserWindow.getAllWindows().length === 0) {
 					vCreateWindow();
@@ -86,34 +95,34 @@ class cElectron {
 		});
 	}
 
-	vAlertBox(vType, sTitre, sMessage, sDetail) {
-		let vDialog = dialog;
-
-		const oOptions = {
-			type: vType,
-			buttons: ["OK"],
-			defaultId: 2,
-			title: sTitre,
-			message: sMessage,
-			detail: sDetail,
-			checkboxLabel: "Se souvenir de mon choix",
-			checkboxChecked: false,
-		};
-
-		vDialog.showMessageBox(
-			null,
-			oOptions,
-			(vResponse, vCheckboxChecked) => {
-				console.log(vResponse);
-				console.log(vCheckboxChecked);
-			}
-		);
-	}
-
 	vRelaunchApp() {
 		vApp.relaunch();
 		vApp.exit();
 	}
+
+	#vIpcMainEvents() {
+		const Settings = require("./settings");
+
+		const vSettings = new Settings();
+
+		const vIpcMain = ipcMain;
+
+		vIpcMain.on("start-server", (event, args) => {
+			vLaunch.vInit();
+		});
+
+		vIpcMain.on("stop-server", (event, args) => {
+			vLaunch.vStop();
+		});
+
+		vIpcMain.on("new-port", (event, args) => {
+			vSettings.vChangeServerPort(args);
+		});
+
+		vIpcMain.on("new-token", (event, args) => {
+			vSettings.vChangeServerToken(args);
+		});
+	}
 }
 
-module.exports = cElectron;
+module.exports = Electron;

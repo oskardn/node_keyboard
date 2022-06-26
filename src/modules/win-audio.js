@@ -1,15 +1,9 @@
 const vAudio = require("win-audio").speaker;
-const { app } = require("electron");
-const path = require("path");
-
-const oConfigLocation = app.getAppPath();
-const vConfigPath = path.join(oConfigLocation, "\\..\\..");
-const oConfig = require(`${vConfigPath}\\config.json`);
 
 vAudio.polling(200);
 
-class cWinAudio {
-	vChangeMasterVolume(ioVolumeMaster, sPassword) {
+class WinAudio {
+	vChangeMasterVolume(ioVolumeMaster, sPassword, oConfig) {
 		const sPasswordJSON = oConfig.APP_TOKEN;
 
 		if (sPassword == sPasswordJSON) {
@@ -33,7 +27,7 @@ class cWinAudio {
 		}
 	}
 
-	vMuteMasterVolume(ioMasterMute, sPassword) {
+	vMuteMasterVolume(ioMasterMute, sPassword, oConfig) {
 		const sPasswordJSON = oConfig.APP_TOKEN;
 
 		if (sPassword == sPasswordJSON) {
@@ -50,4 +44,4 @@ class cWinAudio {
 	}
 }
 
-module.exports = cWinAudio;
+module.exports = WinAudio;
