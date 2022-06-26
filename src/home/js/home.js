@@ -8,22 +8,10 @@ $("button").unbind("click").on("click", function () {
 			window.location.href = "../../config/vue/index.html";
 			break;
 		case "start":
-			if (bLaunch == false) {
-				bLaunch = true;
-				window.apiSikontrol.vStopServer();
-
-				$(".stop").prop("disabled, false");
-				$(".start").prop("disabled, true");
-			}
+			window.apiSikontrol.vStartServer();
 			break;
 		case "stop":
-			if (bLaunch == true) {
-				bLaunch = false;
-				indow.apiSikontrol.vStartServer();
-
-				$(".stop").prop("disabled, true");
-				$(".start").prop("disabled, false");
-			}
+			window.apiSikontrol.vStopServer();
 			break;
 		default:
 			return;

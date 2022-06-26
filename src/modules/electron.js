@@ -116,12 +116,10 @@ class Electron {
 		});
 
 		vIpcMain.on("new-port", (event, args) => {
-			console.log(args);
 			vSettings.vChangeServerPort(args);
 		});
 
 		vIpcMain.on("new-token", (event, args) => {
-			console.log(args);
 			vSettings.vChangeServerToken(args);
 		});
 	}

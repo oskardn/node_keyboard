@@ -10,7 +10,7 @@ const vApp = app;
 const oConfigLocation = vApp.getAppPath();
 const vConfigPath = vPath.join(oConfigLocation, "\\..\\..");
 
-if (vFs.existsSync(`${vConfigPath}\\config.json`) == false) {
+if (vFs.existsSync(`${vConfigPath}\\config.json`) === false) {
 	vFs.writeFileSync(
 		`${vConfigPath}\\config.json`,
 		'{"APP_PORT": 3000, "APP_TOKEN": "1234"}',
