@@ -1,33 +1,33 @@
-const vSendInput = require("sendinput");
+const sendInput = require("sendinput");
 
 class SendInput {
-	vInputs(ioActions, sPassword, oConfig) {
-		const vNext = 176,
-			vPrevious = 177,
-			vPlayPause = 179;
-		let vActionCode;
+	inputs(actions, password, config) {
+		const next = 176,
+			previous = 177,
+			playPause = 179;
+		let actionCode;
 
-		const sPasswordJSON = oConfig.APP_TOKEN;
+		const passwordJSON = config.APP_TOKEN;
 
-		if (sPassword == sPasswordJSON) {
-			switch (ioActions.action) {
+		if (password == passwordJSON) {
+			switch (actions.action) {
 				case "vPrevious":
-					vActionCode = vPrevious;
+					actionCode = previous;
 					break;
 				case "vPlayPause":
-					vActionCode = vPlayPause;
+					actionCode = playPause;
 					break;
 				case "vNext":
-					vActionCode = vNext;
+					actionCode = next;
 					break;
 				default:
 					return;
 					break;
 			}
 
-			vSendInput.SendInput([
+			sendInput.SendInput([
 				{
-					val: vActionCode,
+					val: actionCode,
 					type: 0,
 				},
 			]);

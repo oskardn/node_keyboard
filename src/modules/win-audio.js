@@ -1,22 +1,22 @@
-const vAudio = require("win-audio").speaker;
+const audio = require("win-audio").speaker;
 
-vAudio.polling(200);
+audio.polling(200);
 
 class WinAudio {
-	vChangeMasterVolume(ioVolumeMaster, sPassword, oConfig) {
-		const sPasswordJSON = oConfig.APP_TOKEN;
+	changeMasterVolume(volumeMaster, password, config) {
+		const passwordJSON = config.APP_TOKEN;
 
-		if (sPassword == sPasswordJSON) {
-			switch (ioVolumeMaster) {
+		if (password == passwordJSON) {
+			switch (volumeMaster) {
 				case isNaN:
 					return;
 					break;
 				default:
 					if (
-						ioVolumeMaster.volume >= 0 &&
-						ioVolumeMaster.volume <= 100
+						volumeMaster.volume >= 0 &&
+						volumeMaster.volume <= 100
 					) {
-						vAudio.set(parseInt(ioVolumeMaster.volume));
+						audio.set(parseInt(volumeMaster.volume));
 					} else {
 						return;
 					}
@@ -27,20 +27,20 @@ class WinAudio {
 		}
 	}
 
-	vMuteMasterVolume(ioMasterMute, sPassword, oConfig) {
-		const sPasswordJSON = oConfig.APP_TOKEN;
+	muteMasterVolume(ioMasterMute, password, config) {
+		const sPasswordJSON = config.APP_TOKEN;
 
-		if (sPassword == sPasswordJSON) {
-			if (vAudio.isMuted() == false) {
-				vAudio.mute();
-			} else if (vAudio.isMuted() == true) {
-				vAudio.unmute();
+		if (password == sPasswordJSON) {
+			if (audio.isMuted() == false) {
+				audio.mute();
+			} else if (audio.isMuted() == true) {
+				audio.unmute();
 			}
 		}
 	}
 
-	vIsMasterMute() {
-		return vAudio.isMuted();
+	isMasterMute() {
+		return audio.isMuted();
 	}
 }
 

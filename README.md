@@ -5,18 +5,18 @@
 Projet destiné à pouvoir controller l'audio de son pc depuis son téléphone.  
 Ce projet fonctionne seulement sur Windows, puisque la librairie utilisée pour l'envois de macros est utilisatble uniquement par Windows.  
   
-**L'application est déjà disponible ici : [sikontrol-app](https://github.com/oskardn/sikontrol-app)**
+**L'application est déjà disponible ici : [sikontrol-app](https://github.com/sikelio/sikontrol-app)**
 
 ## Installation
 
 ---
 
-Pour installer ce projet chez vous, vous pouvez télécharger la dernière [**release**](https://github.com/oskardn/sikontrol-desktop/releases/tag/v1.0.0).  
+Pour installer ce projet chez vous, vous pouvez télécharger la dernière [**release**](https://github.com/sikelio/sikontrol-desktop/releases/tag/v1.0.0).  
 
 Soit vous clonez ce dossier sur votre machine.
 
 ```console
-git clone https://github.com/oskardn/sikontrol.git
+git clone https://github.com/sikelio/sikontrol.git
 ```
 
 Puis ouvrez un terminal à l'intérieur du dossier que vous venez de cloner et ajoutez y les dépendance avec la commande suivante :
@@ -64,26 +64,8 @@ Vous pouvez choisir entre "App" et "Config"?
 -   Config : Permet de changer les paramètres de connection au serveur comme le mot de passe d'accès ainsi que le port.  
     ![](https://sikelio.s-ul.eu/86X94O1T)
 
-## Type de variables
-
----
-
-Chacune des varibales possède un attribut qui définit le type du contenu :
-
-| Attritut | Type      | Définition          |
-| -------- | --------- | ------------------- |
-| a        | Array     | Tableau             |
-| c        | Class     | Classe              |
-| e        | Element   | Objet DOM           |
-| f        | Float     | Nombre Décimal      |
-| io       | Socket.IO | Requête Socket.IO   |
-| n        | Number    | Nombre              |
-| o        | Object    | JSON                |
-| s        | String    | Chaine de caractère |
-| v        | Void      | Pas de typage       |
-
 ## Contributeurs
 
 ---
 
-[![Sik', AnthoDingo](https://contrib.rocks/image?repo=oskardn/sikontrol-desktop)](https://github.com/oskardn/sikontrol-desktop/graphs/contributors)
+[![Sik', AnthoDingo](https://contrib.rocks/image?repo=sikelio/sikontrol-desktop)](https://github.com/sikelio/sikontrol-desktop/graphs/contributors)

@@ -2,80 +2,75 @@ const NodeAudio = require("../modules/node-audio-volume-mixer");
 const SockerIO = require("../modules/socket.io");
 
 const { app, dialog } = require("electron");
-const vFs = require("fs");
-const vHttp = require("http");
-const vPath = require("path");
+const fs = require("fs");
+const http = require("http");
+const path = require("path");
 const { Server } = require("socket.io");
 
-const vNodeAudio = new NodeAudio();
-const vSocketIO = new SockerIO();
+const nodeAudio = new NodeAudio();
+const socketIO = new SockerIO();
 
-let bLaunch = false;
+let launch = false;
 
-const vHttpServer = vHttp.createServer();
-const vIo = new Server(vHttpServer);
+const httpServer = http.createServer();
+const io = new Server(httpServer);
 
 class Launch {
-    vInit() {
-        if (bLaunch == false) {
-            const vApp = app;
-            const oConfigLocation = vApp.getAppPath();
-            const vConfigPath = vPath.join(oConfigLocation, "\\..\\..");
+    init() {
+        if (launch == false) {
+            const configLocation = app.getAppPath();
+            const configPath = path.join(configLocation, "\\..\\..");
 
-            if (vFs.existsSync(`${vConfigPath}\\config.json`) == true) {
-                const oConfigLocation = vApp.getAppPath();
-                const vConfigPath = vPath.join(oConfigLocation, "\\..\\..");
-                const oConfig = require(`${vConfigPath}\\config.json`);
+            if (fs.existsSync(`${configPath}\\config.json`) == true) {
+                const config = require(`${configPath}\\config.json`);
 
-                vIo.on("connection", (vSocket) => {
-                    const sPassword = vSocket.handshake.auth.token;
+                io.on("connection", (socket) => {
+                    const password = socket.handshake.auth.token;
         
-                    vSocketIO.vSocketEvents(vSocket, sPassword, oConfig);
-                    vNodeAudio.vRefreshSliderValue(vSocket);
+                    socketIO.socketEvents(socket, password, config);
+                    nodeAudio.refreshSliderValue(socket);
                 })
         
-                vHttpServer.listen(oConfig.APP_PORT || 3000, () => {
-                    bLaunch = true;
+                httpServer.listen(config.APP_PORT || 3000, () => {
+                    launch = true;
                 });
             } else {
-                const vType = "error",
-                    sTitre = "Erreur",
-                    sMessage = "Fichier de configuration manquant";
-                const sDetail = `Le fichier de configuration est indisponible, veuillez redémarrer l'application.`;
+                const type = "error",
+                    title = "Erreur",
+                    message = "Fichier de configuration manquant",
+                    detail = `Le fichier de configuration est indisponible, veuillez redémarrer l'application.`;
 
-                this.#vAlertBox(vType, sTitre, sMessage, sDetail);
+                this.#alertBox(type, title, message, detail);
             }
         }
     }
 
-    vStop() {
-        if (bLaunch == true) {
-            vHttpServer.close(() => {
-                bLaunch = false;
+    stop() {
+        if (launch == true) {
+            httpServer.close(() => {
+                launch = false;
             });
         }
     }
 
-    #vAlertBox(vType, sTitre, sMessage, sDetail) {
-		const vDialog = dialog;
-
-		const oOptions = {
-			type: vType,
+    #alertBox(type, title, message, detail) {
+		const options = {
+			type: type,
 			buttons: ["OK"],
 			defaultId: 2,
-			title: sTitre,
-			message: sMessage,
-			detail: sDetail,
+			title: title,
+			message: message,
+			detail: detail,
 			checkboxLabel: "Se souvenir de mon choix",
 			checkboxChecked: false,
 		};
 
-		vDialog.showMessageBox(
+		dialog.showMessageBox(
 			null,
-			oOptions,
-			(vResponse, vCheckboxChecked) => {
-				console.log(vResponse);
-				console.log(vCheckboxChecked);
+			options,
+			(response, checkboxChecked) => {
+				console.log(response);
+				console.log(checkboxChecked);
 			}
 		);
 	}

@@ -1,5 +1,3 @@
-let bLaunch = false;
-
 $("button").unbind("click").on("click", function () {
 	const vButtonAction = $(this).attr("data-home");
 
@@ -8,10 +6,10 @@ $("button").unbind("click").on("click", function () {
 			window.location.href = "../../config/vue/index.html";
 			break;
 		case "start":
-			window.apiSikontrol.vStartServer();
+			window.apiSikontrol.startServer();
 			break;
 		case "stop":
-			window.apiSikontrol.vStopServer();
+			window.apiSikontrol.stopServer();
 			break;
 		default:
 			return;

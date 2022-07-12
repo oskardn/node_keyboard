@@ -1,14 +1,14 @@
 $("button").unbind("click").on("click", function() {
-	const vButtonAction = $(this).attr("data-config");
-	const nPort = $("#nPort").val();
-	const sToken = $("#sToken").val();
+	const buttonAction = $(this).attr("data-config");
+	const port = $("#port").val();
+	const token = $("#token").val();
 
-	switch (vButtonAction) {
+	switch (buttonAction) {
 		case "port":
-            window.apiSikontrol.vSendNewPort(nPort);
+            window.apiSikontrol.sendNewPort(port);
 			break;
 		case "token":
-            window.apiSikontrol.vSendNewToken(sToken);
+            window.apiSikontrol.sendNewToken(token);
 			break;
 		case "accueil":
             window.location.href = "../../home/vue/index.html";

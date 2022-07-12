@@ -1,48 +1,43 @@
 const Launch = require("./launch");
 
 const { app, BrowserWindow, ipcMain, dialog, Menu, Tray } = require("electron");
-const vPath = require("path");
-const vOpen = require("open");
+const path = require("path");
+const open = require("open");
 
-const vLaunch = new Launch();
-
-let vApp = app;
+const launch = new Launch();
 
 class Electron {
-	vGenerateWindows() {
-		let vTrayInit = null;
-		let vBrowserWindow = BrowserWindow,
-			vMenu = Menu,
-			vTray = Tray;
+	generateWindows() {
+		let trayInit = null;
 
-		const vCreateWindow = () => {
-			const vWin = new vBrowserWindow({
+		const createWindow = () => {
+			const win = new BrowserWindow({
 				width: 800,
 				height: 600,
-				icon: vPath.join(__dirname, "../global/img/small-icon.png"),
+				icon: path.join(__dirname, "../global/img/small-icon.png"),
 				webPreferences: {
-					preload: vPath.join(__dirname, "preload.js"),
+					preload: path.join(__dirname, "preload.js"),
 				},
 			});
 
-			vWin.loadFile("./src/home/vue/index.html");
+			win.loadFile("./src/home/vue/index.html");
 
-			vWin.on("minimize", () => {
-				if (vTrayInit) {
-					return vWin.hide();
+			win.on("minimize", () => {
+				if (trayInit) {
+					return win.hide();
 				}
 
-				vTrayInit = new vTray(
-					vPath.join(__dirname, "../global/img/small-icon.png")
+				trayInit = new Tray(
+					path.join(__dirname, "../global/img/small-icon.png")
 				);
 
-				const aTemplate = [
+				const template = [
 					{
 						label: "Sikontrol",
 						click: () => {
-							vOpen("https://github.com/oskardn/sikontrol");
+							open("https://github.com/sikelio/sikontrol");
 						},
-						icon: vPath.join(
+						icon: path.join(
 							__dirname,
 							"../global/img/very-small-icon.png"
 						),
@@ -54,73 +49,71 @@ class Electron {
 					{
 						label: "Afficher l'application",
 						click: () => {
-							vWin.show();
+							win.show();
 						},
-						icon: vPath.join(__dirname, "../global/img/show.png"),
+						icon: path.join(__dirname, "../global/img/show.png"),
 					},
 					{
 						label: "Quitter l'application",
 						click: () => {
-							vWin.close();
+							win.close();
 						},
-						icon: vPath.join(__dirname, "../global/img/quit.png"),
+						icon: path.join(__dirname, "../global/img/quit.png"),
 					},
 				];
 
-				const vContextMenu = vMenu.buildFromTemplate(aTemplate);
+				const contextMenu = Menu.buildFromTemplate(template);
 
-				vTrayInit.setContextMenu(vContextMenu);
-				vTrayInit.setToolTip("Sikontrol");
+				trayInit.setContextMenu(contextMenu);
+				trayInit.setToolTip("Sikontrol");
 
-				vWin.hide();
+				win.hide();
 			});
 		};
 
-		vApp.whenReady().then(() => {
-			vCreateWindow();
+		app.whenReady().then(() => {
+			createWindow();
 
-			this.#vIpcMainEvents();
+			this.#ipcMainEvents();
 
-			vApp.on("activate", () => {
-				if (vBrowserWindow.getAllWindows().length === 0) {
-					vCreateWindow();
+			app.on("activate", () => {
+				if (BrowserWindow.getAllWindows().length === 0) {
+					createWindow();
 				}
 			});
 		});
 
-		vApp.on("window-all-closed", () => {
+		app.on("window-all-closed", () => {
 			if (process.platform !== "darwin") {
-				vApp.quit();
+				app.quit();
 			}
 		});
 	}
 
-	vRelaunchApp() {
-		vApp.relaunch();
-		vApp.exit();
+	relaunchApp() {
+		app.relaunch();
+		app.exit();
 	}
 
-	#vIpcMainEvents() {
+	#ipcMainEvents() {
 		const Settings = require("./settings");
 
-		const vSettings = new Settings();
+		const settings = new Settings();
 
-		const vIpcMain = ipcMain;
-
-		vIpcMain.on("start-server", (event, args) => {
-			vLaunch.vInit();
+		ipcMain.on("start-server", (event, args) => {
+			launch.init();
 		});
 
-		vIpcMain.on("stop-server", (event, args) => {
-			vLaunch.vStop();
+		ipcMain.on("stop-server", (event, args) => {
+			launch.stop();
 		});
 
-		vIpcMain.on("new-port", (event, args) => {
-			vSettings.vChangeServerPort(args);
+		ipcMain.on("new-port", (event, args) => {
+			settings.changeServerPort(args);
 		});
 
-		vIpcMain.on("new-token", (event, args) => {
-			vSettings.vChangeServerToken(args);
+		ipcMain.on("new-token", (event, args) => {
+			settings.changeServerToken(args);
 		});
 	}
 }

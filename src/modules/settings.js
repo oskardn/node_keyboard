@@ -1,118 +1,108 @@
-const vDetectPort = require("detect-port");
+const detectPort = require("detect-port");
 const { app, dialog } = require("electron");
-const vEditJSON = require("edit-json-file");
+const editJSON = require("edit-json-file");
 const path = require("path");
 
-const vApp = app;
-const oConfigLocation = vApp.getAppPath();
-const vConfigPath = path.join(oConfigLocation, "\\..\\..");
-const vFile = vEditJSON(`${vConfigPath}\\config.json`);
+const configLocation = app.getAppPath();
+const configPath = path.join(configLocation, "\\..\\..");
+const file = editJSON(`${configPath}\\config.json`);
 
 class Settings {
-	vChangeServerPort(oResponse) {
-		let nPort = oResponse;
+	changeServerPort(response) {
+		if (!response) {
+			const type = "warning",
+				title = "Avertissement",
+				message = "Port non renseigné",
+				detail = "Vous devez renseinger le port pour pouvoir le changer.";
 
-		if (!nPort) {
-			const vType = "warning",
-				sTitre = "Avertissement",
-				sMessage = "Port non renseigné";
-			const sDetail =
-				"Vous devez renseinger le port pour pouvoir le changer.";
-
-			this.#vAlertBox(vType, sTitre, sMessage, sDetail);
+			this.#alertBox(type, title, message, detail);
 		} else {
-			if (isNaN(nPort)) {
-				const vType = "error",
-					sTitre = "Erreur",
-					sMessage = "Paramètre invalide";
-				const sDetail =
-					"Vous avez renseigné une valeur du port non valide";
+			if (isNaN(response)) {
+				const type = "error",
+					title = "Erreur",
+					message = "Paramètre invalide",
+					detail = "Vous avez renseigné une valeur du port non valide";
 
-				this.#vAlertBox(vType, sTitre, sMessage, sDetail);
+				this.#alertBox(type, title, message, detail);
 			} else {
-				if (nPort >= 1 && nPort <= 65535) {
-					vDetectPort(nPort, (vError, vOtherPort) => {
-						if (vError) {
-							console.log(vError);
+				if (response >= 1 && response <= 65535) {
+					detectPort(response, (error, otherPort) => {
+						if (error) {
+							console.error(error);
 						}
 
-						if (nPort == vOtherPort) {
-							vFile.set("APP_PORT", Number(nPort));
-							vFile.save();
+						if (response == otherPort) {
+							file.set("APP_PORT", Number(response));
+							file.save();
 
-							this.#vRelaunchApp();
+							this.#relaunchApp();
 						} else {
-							const vType = "error",
-								sTitre = "Erreur",
-								sMessage = "Port non disponible";
-							const sDetail = `Vous avez renseigné un port non disponible.\nEssayez le port : ${vOtherPort}`;
+							const type = "error",
+								title = "Erreur",
+								message = "Port non disponible",
+								detail = `Vous avez renseigné un port non disponible.\nEssayez le port : ${otherPort}`;
 
-							this.#vAlertBox(
-								vType,
-								sTitre,
-								sMessage,
-								sDetail
+							this.#alertBox(
+								type,
+								title,
+								message,
+								detail
 							);
 						}
 					});
 				} else {
-					const vType = "error",
-						sTitre = "Erreur",
-						sMessage = "Port non disponible";
-					const sDetail = `Vous avez renseigné un port non disponible. Le port doit être situé entre 0 et 65535.`;
+					const type = "error",
+						title = "Erreur",
+						message = "Port non disponible",
+						detail = `Vous avez renseigné un port non disponible. Le port doit être situé entre 0 et 65535.`;
 
-					this.#vAlertBox(vType, sTitre, sMessage, sDetail);
+					this.#alertBox(type, title, message, detail);
 				}
 			}
 		}
 	}
 
-	vChangeServerToken(oResponse) {
-		let sToken = oResponse;
+	changeServerToken(response) {
+		if (!response) {
+			const type = "warning",
+				title = "Avertissement",
+				message = "Token non renseigné",
+				detail = "Vous devez renseigner le token pour pouvoir le changer.";
 
-		if (!sToken) {
-			const vType = "warning",
-				sTitre = "Avertissement",
-				sMessage = "Token non renseigné";
-			const sDetail =
-				"Vous devez renseigner le token pour pouvoir le changer.";
-
-			this.#vAlertBox(vType, sTitre, sMessage, sDetail);
+			this.#alertBox(type, title, message, detail);
 		} else {
-			vFile.set("APP_TOKEN", sToken);
-			vFile.save();
+			file.set("APP_TOKEN", response);
+			file.save();
 
-			this.#vRelaunchApp();
+			this.#relaunchApp();
 		}
 	}
 
-	#vAlertBox(vType, sTitre, sMessage, sDetail) {
-		const vDialog = dialog;
-
-		const oOptions = {
-			type: vType,
+	#alertBox(type, title, message, detail) {
+		const options = {
+			type: type,
 			buttons: ["OK"],
 			defaultId: 2,
-			title: sTitre,
-			message: sMessage,
-			detail: sDetail,
+			title: title,
+			message: message,
+			detail: detail,
 			checkboxLabel: "Se souvenir de mon choix",
 			checkboxChecked: false,
 		};
 
-		vDialog.showMessageBox(
+		dialog.showMessageBox(
 			null,
-			oOptions,
-			(vResponse, vCheckboxChecked) => {
-				console.log(vResponse);
-				console.log(vCheckboxChecked);
+			options,
+			(response, checkboxChecked) => {
+				console.log(response);
+				console.log(checkboxChecked);
 			}
 		);
 	}
 
-	#vRelaunchApp() {
-		vApp.relaunch();
-		vApp.exit();
+	#relaunchApp() {
+		app.relaunch();
+		app.exit();
 	}
 }
 

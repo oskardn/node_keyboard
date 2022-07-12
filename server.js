@@ -1,27 +1,26 @@
 const Electron = require("./src/modules/electron");
 
-const vFs = require("fs");
+const fs = require("fs");
 const { app } = require("electron");
-const vPath = require("path");
+const path = require("path");
 
-const vElectron = new Electron();
+const electron = new Electron();
 
-const vApp = app;
-const oConfigLocation = vApp.getAppPath();
-const vConfigPath = vPath.join(oConfigLocation, "\\..\\..");
+const configLocation = app.getAppPath();
+const configPath = path.join(configLocation, "\\..\\..");
 
-if (vFs.existsSync(`${vConfigPath}\\config.json`) === false) {
-	vFs.writeFileSync(
-		`${vConfigPath}\\config.json`,
+if (fs.existsSync(`${configPath}\\config.json`) === false) {
+	fs.writeFileSync(
+		`${configPath}\\config.json`,
 		'{"APP_PORT": 3000, "APP_TOKEN": "1234"}',
-		(vErr) => {
-			if (vErr) {
-				console.error(vErr);
+		(err) => {
+			if (err) {
+				console.error(err);
 			}
 		}
 	);
 
-	vElectron.vRelaunchApp();
+	electron.relaunchApp();
 } else {
-	vElectron.vGenerateWindows();
+	electron.generateWindows();
 }

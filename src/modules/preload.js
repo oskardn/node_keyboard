@@ -1,8 +1,8 @@
 const { contextBridge, ipcRenderer } = require('electron')
 
 contextBridge.exposeInMainWorld("apiSikontrol", {
-	vStartServer: () => ipcRenderer.send("start-server"),
-	vStopServer: () => ipcRenderer.send("stop-server"),
-	vSendNewPort: (nPort) => ipcRenderer.send("new-port", nPort),
-	vSendNewToken: (sToken) => ipcRenderer.send("new-token", sToken)
+	startServer: () => ipcRenderer.send("start-server"),
+	stopServer: () => ipcRenderer.send("stop-server"),
+	sendNewPort: (port) => ipcRenderer.send("new-port", port),
+	sendNewToken: (token) => ipcRenderer.send("new-token", token)
 });

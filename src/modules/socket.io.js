@@ -2,45 +2,45 @@ const WinAudio = require("./win-audio");
 const SendInput = require("./sendinput");
 const NodeAudio = require("./node-audio-volume-mixer");
 
-const vAudio = require("win-audio").speaker;
+const audio = require("win-audio").speaker;
 const { NodeAudioVolumeMixer } = require("node-audio-volume-mixer");
 
-const vWinAudio = new WinAudio();
-const vSendInput = new SendInput();
-const vNodeAudio = new NodeAudio();
+const winAudio = new WinAudio();
+const sendInput = new SendInput();
+const nodeAudio = new NodeAudio();
 
 class SockerIO {
-	vSocketEvents(vSocket, sPassword, oConfig) {
-		vSocket.emit("ioIsMasterMute", vWinAudio.vIsMasterMute());
+	socketEvents(socket, password, config) {
+		socket.emit("ioIsMasterMute", winAudio.isMasterMute());
 
-		vSocket.emit("ioWindowsActualVolume", vAudio.get());
+		socket.emit("ioWindowsActualVolume", audio.get());
 
-		vAudio.events.on("change", (vVal) => {
-			vSocket.emit("ioWindowsVolumeChange", vVal.new);
+		audio.events.on("change", (value) => {
+			socket.emit("ioWindowsVolumeChange", value.new);
 		});
 
-		const aSessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
-		vSocket.emit("aSessions", aSessions);
+		const sessions = NodeAudioVolumeMixer.getAudioSessionProcesses();
+		socket.emit("aSessions", sessions);
 
-		vSocket.on("ioActions", (ioActions) => {
-			vSendInput.vInputs(ioActions, sPassword, oConfig);
+		socket.on("ioActions", (actions) => {
+			sendInput.inputs(actions, password, config);
 		});
 
-		vSocket.on("ioVolumeMaster", (ioVolumeMaster) => {
-			vWinAudio.vChangeMasterVolume(ioVolumeMaster, sPassword, oConfig);
+		socket.on("ioVolumeMaster", (volumeMaster) => {
+			winAudio.changeMasterVolume(volumeMaster, password, config);
 		});
 
-		vSocket.on("ioMasterMute", (ioMasterMute) => {
-			vWinAudio.vMuteMasterVolume(ioMasterMute, sPassword, oConfig);
-			vWinAudio.vIsMasterMute();
+		socket.on("ioMasterMute", (masterMute) => {
+			winAudio.muteMasterVolume(masterMute, password, config);
+			winAudio.isMasterMute();
 		});
 
-		vSocket.on("ioVolumeApps", (ioVolumeApps) => {
-			vNodeAudio.vShowProcessList(ioVolumeApps, sPassword, oConfig);
+		socket.on("ioVolumeApps", (volumeApps) => {
+			nodeAudio.showProcessList(volumeApps, password, config);
 		});
 
-		vSocket.on("ioMuteButton", (vMuteButton) => {
-			vNodeAudio.vNodeAppMute(vMuteButton, sPassword, oConfig);
+		socket.on("ioMuteButton", (muteButton) => {
+			nodeAudio.vNodeAppMute(muteButton, password, config);
 		});
 	}
 }
